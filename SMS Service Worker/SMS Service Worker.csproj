@@ -9,4 +9,24 @@
     <Folder Include="API\gRPC\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.24" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.24" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CheckDBWorkers\CheckDBWorkers.csproj" />
+    <ProjectReference Include="..\CheckProxyWorker\CheckProxyWorker.csproj" />
+    <ProjectReference Include="..\Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\DBInfrastructure\DBInfrastructure.csproj" />
+    <ProjectReference Include="..\Implemantation\Implemantation.csproj" />
+    <ProjectReference Include="..\SMSWorker\SMSWorker.csproj" />
+    <ProjectReference Include="..\TarantoolDB\TarantoolDB.csproj" />
+  </ItemGroup>
+
 </Project>
