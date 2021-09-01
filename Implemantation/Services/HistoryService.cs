@@ -3,14 +3,15 @@ using DBInfrastructure.DTOModels;
 using Implemantation.IServices;
 using System;
 using System.Threading.Tasks;
+using TarantoolDB.Repositories;
 
 namespace Implemantation.Services
 {
     public class HistoryService : IHistoryService
     {
-        public TRepository<HistoryModel> historyRepository;
+        public HistoryRepository historyRepository;
 
-        public HistoryService(TRepository<HistoryModel> historyRepository)
+        public HistoryService(HistoryRepository historyRepository)
         {
             this.historyRepository = historyRepository;
         }

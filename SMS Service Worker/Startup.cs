@@ -34,53 +34,8 @@ namespace SMS_Service_Worker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var msgPackContext = new MsgPackContext();
-            msgPackContext.GenerateAndRegisterArrayConverter<UserModel>();
-            msgPackContext.GenerateAndRegisterArrayConverter<OrderModel>();
-            msgPackContext.GenerateAndRegisterArrayConverter<HistoryModel>();
-            msgPackContext.GenerateAndRegisterArrayConverter<ServiceModel>();
-            msgPackContext.GenerateAndRegisterArrayConverter<AccountModel>();
-            msgPackContext.GenerateAndRegisterArrayConverter<ProxyModel>();
-            var clientOptions = new ClientOptions(Configuration.GetSection("Tarantool:ConnectionCredential").Value, context: msgPackContext);
-            var box = new Box(clientOptions);
-            box.Connect().ConfigureAwait(false).GetAwaiter().GetResult();
-            services.AddSingleton(box);
-
-            services.Configure<ConfigurationClass>(Configuration);
-            services.AddHangfire(configuration => configuration
-        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-        .UseSimpleAssemblyNameTypeSerializer()
-        .UseRecommendedSerializerSettings()
-        .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"), new SqlServerStorageOptions
-        {
-            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-            QueuePollInterval = TimeSpan.Zero,
-            UseRecommendedIsolationLevel = true,
-            DisableGlobalLocks = true
-        }));
-            services.AddHangfireServer();
-            services.AddControllersWithViews();
-            // reg reposities
-            services.AddTransient<OrderRepository>();
-            services.AddTransient<UserRepository>();
-            services.AddTransient<HistoryRepository>();
-            services.AddTransient<ServiceRepository>();
-            services.AddTransient<AccountRepository>();
-            services.AddTransient<ProxyRepository>();
-
-            services.AddTransient<IOrderService, OrderService>();
-            /*services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IServicePricesService, ServicePricesService>();
-            services.AddTransient<IHistoryService, HistoryService>();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IProxyService, ProxyService>();
-            services.AddTransient<IHandlerConveyor, HandlerConveyor>();
-
-            services.AddTransient<SMSWorker>();
-            services.AddTransient<CheckAccountValidWorker>();
-            services.AddTransient<CheckProxyValidWorker>();
-            services.AddTransient<CheckDBWorker>();*/
+            DependencyInjectionConf.ConfigureTarantool(services, Configuration);
+            DependencyInjectionConf.Configure(services, Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

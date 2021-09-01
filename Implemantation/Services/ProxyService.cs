@@ -6,14 +6,15 @@ using Implemantation.Models.Enums;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using TarantoolDB.Repositories;
 
 namespace Implemantation.Services
 {
     public class ProxyService : IProxyService
     {
-        private readonly TRepository<ProxyModel> proxyRepository;
+        private readonly ProxyRepository proxyRepository;
         private readonly Random randomizer = new();
-        public ProxyService(TRepository<ProxyModel> proxyRepository)
+        public ProxyService(ProxyRepository proxyRepository)
         {
             this.proxyRepository = proxyRepository;
         }

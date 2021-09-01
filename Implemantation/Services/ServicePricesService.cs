@@ -5,16 +5,17 @@ using Implemantation.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TarantoolDB.Repositories;
 
 namespace Implemantation.Services
 {
     public class ServicePricesService : IServicePricesService
     {
-        public ServicePricesService(TRepository<ServiceModel> serviceRepository)
+        public ServicePricesService(ServiceRepository serviceRepository)
         {
             this.serviceRepository = serviceRepository;
         }
-        private readonly TRepository<ServiceModel> serviceRepository;
+        private readonly ServiceRepository serviceRepository;
 
         public double GetServicePriceByServiceId(long serviceId)
         {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS Service Worker", "SMS Service Worker\SMS Service Worker.csproj", "{7B0373F1-6D0D-4146-9CDB-F3F87F0EE9F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMSService", "SMS Service Worker\SMSService.csproj", "{7B0373F1-6D0D-4146-9CDB-F3F87F0EE9F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1BC4BF7-FECA-4656-AC98-EA704449F137}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,21 +11,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		StatusCodes.txt = StatusCodes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBInfrastructure", "DBInfrastructure\DBInfrastructure.csproj", "{60408A62-15D5-4028-A296-A56150CD9A21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBInfrastructure", "DBInfrastructure\DBInfrastructure.csproj", "{60408A62-15D5-4028-A296-A56150CD9A21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TarantoolDB", "TarantoolDB\TarantoolDB.csproj", "{5E5CAD31-8A13-45F9-9D78-560E775BEBF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TarantoolDB", "TarantoolDB\TarantoolDB.csproj", "{5E5CAD31-8A13-45F9-9D78-560E775BEBF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Implemantation", "Implemantation\Implemantation.csproj", "{96D3C46B-2D68-49EA-8BD2-EF7CDE976811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Implemantation", "Implemantation\Implemantation.csproj", "{96D3C46B-2D68-49EA-8BD2-EF7CDE976811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSWorker", "SMSWorker\SMSWorker.csproj", "{B197998F-69EB-4F1F-A0C8-BF462A76ABE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMSWorker", "SMSWorker\SMSWorker.csproj", "{B197998F-69EB-4F1F-A0C8-BF462A76ABE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckDBWorkers", "CheckDBWorkers\CheckDBWorkers.csproj", "{76D9383E-5377-4BCC-B27A-7269FF024C01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckDBWorkers", "CheckDBWorkers\CheckDBWorkers.csproj", "{76D9383E-5377-4BCC-B27A-7269FF024C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckProxyWorker", "CheckProxyWorker\CheckProxyWorker.csproj", "{97FBB28E-D8BA-4525-82E0-A0B18BE3DE8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckProxyWorker", "CheckProxyWorker\CheckProxyWorker.csproj", "{97FBB28E-D8BA-4525-82E0-A0B18BE3DE8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workers", "Workers", "{1444F015-92F4-4174-B1A7-45F19463653D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{63613ACF-E341-4264-8BC3-379222F0E14F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration", "Configuration\Configuration.csproj", "{63613ACF-E341-4264-8BC3-379222F0E14F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcService", "GrpcService1\GrpcService.csproj", "{9A07C19D-4C43-4A62-AEB7-7819AD63E976}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WEB API", "..\SMS Service Angular\SMSServiceAngular.web\WEB API.csproj", "{C13E2016-C822-4DA9-9CBF-88D4DE7E941B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{2AD283CE-7925-4ED5-957C-C5B139432CA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +71,14 @@ Global
 		{63613ACF-E341-4264-8BC3-379222F0E14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63613ACF-E341-4264-8BC3-379222F0E14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63613ACF-E341-4264-8BC3-379222F0E14F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A07C19D-4C43-4A62-AEB7-7819AD63E976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A07C19D-4C43-4A62-AEB7-7819AD63E976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A07C19D-4C43-4A62-AEB7-7819AD63E976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A07C19D-4C43-4A62-AEB7-7819AD63E976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13E2016-C822-4DA9-9CBF-88D4DE7E941B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13E2016-C822-4DA9-9CBF-88D4DE7E941B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13E2016-C822-4DA9-9CBF-88D4DE7E941B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13E2016-C822-4DA9-9CBF-88D4DE7E941B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +87,7 @@ Global
 		{B197998F-69EB-4F1F-A0C8-BF462A76ABE6} = {1444F015-92F4-4174-B1A7-45F19463653D}
 		{76D9383E-5377-4BCC-B27A-7269FF024C01} = {1444F015-92F4-4174-B1A7-45F19463653D}
 		{97FBB28E-D8BA-4525-82E0-A0B18BE3DE8E} = {1444F015-92F4-4174-B1A7-45F19463653D}
+		{C13E2016-C822-4DA9-9CBF-88D4DE7E941B} = {2AD283CE-7925-4ED5-957C-C5B139432CA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C44CD384-CC4A-4A76-B359-6A3CE0A9A772}

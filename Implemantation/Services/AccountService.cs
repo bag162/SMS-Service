@@ -3,14 +3,15 @@ using DBInfrastructure.DTOModels;
 using Implemantation.IServices;
 using System.Linq;
 using System.Threading.Tasks;
+using TarantoolDB.Repositories;
 
 namespace Implemantation.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly TRepository<AccountModel> accountRepository;
+        private readonly AccountRepository accountRepository;
 
-        public AccountService(TRepository<AccountModel> accountRepository)
+        public AccountService(AccountRepository accountRepository)
         {
             this.accountRepository = accountRepository;
         }

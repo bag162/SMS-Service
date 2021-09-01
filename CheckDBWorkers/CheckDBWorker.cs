@@ -13,7 +13,9 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
         private readonly IOrderService orderService;
         private readonly IServicePricesService serviceEntity;
 
-        public CheckDBWorker(IAccountService accountService, IOrderService orderService, IServicePricesService serviceEntity)
+        public CheckDBWorker(IAccountService accountService, 
+            IOrderService orderService, 
+            IServicePricesService serviceEntity)
         {
             this.accountService = accountService;
             this.orderService = orderService;

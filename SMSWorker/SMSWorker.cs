@@ -26,8 +26,6 @@ namespace SMS_Service_Worker.Workers.SMSWorker
         private readonly IHandlerConveyor handlerConveer;
         private readonly IOptions<ConfigurationClass> Config;
 
-
-
         public SMSWorker(IOrderService orderService,
             IHistoryService historyService,
             IAccountService accountService,

@@ -3,19 +3,20 @@ using DBInfrastructure.DTOModels;
 using Implemantation.IServices;
 using System.Linq;
 using System.Threading.Tasks;
+using TarantoolDB.Repositories;
 
 namespace Implemantation.Services
 {
     public class UserService : IUserService
     {
         public UserService(IServicePricesService pricesService, 
-            TRepository<UserModel> userRepository)
+            UserRepository userRepository)
         {
             this.pricesService = pricesService;
             this.userRepository = userRepository;
         }
 
-        private readonly TRepository<UserModel> userRepository;
+        private readonly UserRepository userRepository;
         private readonly IServicePricesService pricesService;
 
 

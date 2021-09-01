@@ -16,17 +16,20 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetNumber.Controllers
         private readonly IOrderService orderService;
         private readonly IHistoryService historyService;
         private readonly IServicePricesService servicePricesService;
+        private readonly SMSWorker smsWorker;
 
         public GetNumberController(
             IUserService userService,
             IOrderService orderService, 
             IHistoryService historyService,
-            IServicePricesService servicePricesService)
+            IServicePricesService servicePricesService,
+            SMSWorker smsWorker)
         {
             this.userService = userService;
             this.orderService = orderService;
             this.historyService = historyService;
             this.servicePricesService = servicePricesService;
+            this.smsWorker = smsWorker;
         }
 
 
@@ -60,6 +63,7 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetNumber.Controllers
             } // если возникла ошибка во время получения номера, респонсим ответ
 
             await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.GetNumber);
+            // Task.Factory.StartNew(() => smsWorker.StartSMSWorker(order))
             BackgroundJob.Enqueue<SMSWorker>(x => x.StartSMSWorker(order));
             return new ContentResult { Content = "ACCESS_NUMBER:" + order.OrderId + ":" + order.Number, StatusCode = 200 }; // ACCESS_NUMBER:123456:375299154283
         }

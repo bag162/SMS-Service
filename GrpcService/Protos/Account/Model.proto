@@ -1,0 +1,22 @@
+syntax = "proto3";
+option csharp_namespace = "GrpcService";
+package Account;
+
+message AccountList{
+	repeated AccountModel accounts = 1;
+	}
+
+message AccountModel {
+	string Id = 1;
+	string Login = 2;
+	string Password = 3;
+	string Number = 4; 
+	string Cookie = 5;
+	Status Status = 6;
+	}
+
+enum Status{
+	Active = 1;
+	Inactive = 2;
+	NoNumber = 3;
+	}

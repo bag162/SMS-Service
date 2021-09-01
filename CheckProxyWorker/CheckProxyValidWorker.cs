@@ -17,9 +17,12 @@ namespace SMS_Service_Worker.Workers.CheckProxyValid
 
         public CheckProxyValidWorker(
             IProxyService proxyService,
-            IOptions<ConfigurationClass> Config) {
+            IOptions<ConfigurationClass> Config,
+            IHandlerConveyor handlerConveyor) 
+        {
             this.proxyService = proxyService;
             this.Config = Config;
+            this.handlerConveyor = handlerConveyor;
         }
 
         public async Task CheckProxyValid()

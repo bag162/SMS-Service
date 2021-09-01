@@ -39,21 +39,21 @@ namespace SMS_Service_Worker
             services.AddHangfireServer();
             services.AddControllersWithViews();
             // reg reposities
-            services.AddTransient<TRepository<UserModel>, UserRepository>();
-            services.AddTransient<TRepository<OrderModel>, OrderRepository>();
-            services.AddTransient<TRepository<HistoryModel>, HistoryRepository>();
-            services.AddTransient<TRepository<ServiceModel>, ServiceRepository>();
-            services.AddTransient<TRepository<AccountModel>, AccountRepository>();
-            services.AddTransient<TRepository<ProxyModel>, ProxyRepository>();
-            //reg services
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<OrderRepository>();
+            services.AddTransient<UserRepository>();
+            services.AddTransient<HistoryRepository>();
+            services.AddTransient<ServiceRepository>();
+            services.AddTransient<AccountRepository>();
+            services.AddTransient<ProxyRepository>();
+
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IServicePricesService, ServicePricesService>();
             services.AddTransient<IHistoryService, HistoryService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IProxyService, ProxyService>();
             services.AddTransient<IHandlerConveyor, HandlerConveyor>();
-            // worker services
+
             services.AddTransient<SMSWorker>();
             services.AddTransient<CheckAccountValidWorker>();
             services.AddTransient<CheckProxyValidWorker>();
