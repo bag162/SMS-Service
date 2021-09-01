@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SMS_Service_Angular.Areas.Authorization.Models
+{
+    public class RegistrationUserModel
+    {
+        public string login { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public string telegram { get; set; }
+        public string name { get; set; }
+    }
+}
