@@ -1,4 +1,4 @@
-﻿using DBInfrastructure.DTOModels;
+﻿using Models.DTO.DTOModels;
 using Hangfire;
 using Hangfire.SqlServer;
 using Implemantation.IServices;

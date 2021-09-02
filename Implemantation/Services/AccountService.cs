@@ -1,5 +1,5 @@
 ﻿using DBInfrastructure;
-using DBInfrastructure.DTOModels;
+using Models.DTO.DTOModels;
 using Implemantation.IServices;
 using System.Linq;
 using System.Threading.Tasks;

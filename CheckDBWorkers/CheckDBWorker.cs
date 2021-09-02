@@ -1,4 +1,4 @@
-﻿using DBInfrastructure.DTOModels;
+﻿using Models.DTO.DTOModels;
 using Implemantation.IServices;
 using Implemantation.Models.Enums;
 using System;

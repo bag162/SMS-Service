@@ -1,5 +1,6 @@
-﻿using DBInfrastructure.DTOModels;
+﻿using Models.DTO.DTOModels;
 using Implemantation.Models;
+using Models.DTO.DTOModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

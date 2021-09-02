@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CheckDBWorkers\CheckDBWorkers.csproj" />
+    <ProjectReference Include="..\CheckProxyWorker\CheckProxyWorker.csproj" />
+    <ProjectReference Include="..\Configuration\Configuration.csproj" />
     <ProjectReference Include="..\Implemantation\Implemantation.csproj" />
+    <ProjectReference Include="..\SMSWorker\SMSWorker.csproj" />
   </ItemGroup>
 
 </Project>

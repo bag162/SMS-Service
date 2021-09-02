@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Grpc.Core;
-using GrpcService1;
+using GrpcAccount;
 using Implemantation.IServices;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -26,6 +26,7 @@ namespace GrpcService.Services
         public override Task<AccountList> GetAccounts(GetAccountsRequest requestData, ServerCallContext context)
         {
             var accounts = accountService.GetAllAccounts().OrderBy(x => x.Id).Take(requestData.Count);
+
             var accountModels = new List<AccountModel>();
             foreach (var account in accounts)
             {
@@ -34,6 +35,7 @@ namespace GrpcService.Services
 
             var returnedAccounts = new AccountList();
             returnedAccounts.Accounts.AddRange(accountModels);
+
             return Task.FromResult(returnedAccounts);
         }
     }

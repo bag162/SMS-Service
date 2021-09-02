@@ -1,4 +1,4 @@
-﻿using DBInfrastructure.DTOModels;
+﻿using Models.DTO.DTOModels;
 using ProGaudi.Tarantool.Client;
 
 namespace TarantoolDB.Repositories

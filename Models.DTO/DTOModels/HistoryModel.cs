@@ -4,21 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DBInfrastructure.DTOModels
+namespace Models.DTO.DTOModels
 {
-    public class AccountModel
+    public class HistoryModel
     {
         [MsgPackArrayElement(0)]
         public string Id { get; set; }
         [MsgPackArrayElement(1)]
-        public string Login { get; set; }
+        public int TypeRequest { get; set; }
         [MsgPackArrayElement(2)]
-        public string Password { get; set; }
+        public string UserId { get; set; }
         [MsgPackArrayElement(3)]
-        public string Number { get; set; }
+        public string RequestTime { get; set; }
         [MsgPackArrayElement(4)]
-        public string Cookie { get; set; }
-        [MsgPackArrayElement(5)]
-        public int Status { get; set; }
+        public string Message { get; set; }
     }
 }

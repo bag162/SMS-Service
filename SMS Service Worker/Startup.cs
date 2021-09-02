@@ -4,21 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProGaudi.MsgPack.Light;
 using SMS_Service_Worker.Workers.CheckerDBWorker;
 using SMS_Service_Worker.Workers.CheckProxyValid;
 using SMS_Service_Worker.Workers.CheckValidWorker;
-using DBInfrastructure.DTOModels;
-using Hangfire.SqlServer;
-using Implemantation.IServices;
-using Implemantation.Services;
-using ProGaudi.Tarantool.Client;
-using ProGaudi.Tarantool.Client.Model;
-using SMS_Service_Worker.Common.Services.Configuration;
-using SMS_Service_Worker.Workers.SMSWorker;
-using System;
-using TarantoolDB;
-using TarantoolDB.Repositories;
 
 namespace SMS_Service_Worker
 {

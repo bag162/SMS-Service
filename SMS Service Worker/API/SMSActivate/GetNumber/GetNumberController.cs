@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using DBInfrastructure.DTOModels;
+using Models.DTO.DTOModels;
 using Hangfire;
 using Implemantation.IServices;
 using Implemantation.Models;

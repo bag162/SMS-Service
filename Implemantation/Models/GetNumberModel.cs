@@ -1,4 +1,6 @@
-﻿using DBInfrastructure.DTOModels;
+﻿
+
+using Models.DTO.DTOModels;
 
 namespace Implemantation.Models
 {

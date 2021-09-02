@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GrpcAccount;
 
 namespace GrpcService
 {
@@ -6,10 +7,8 @@ namespace GrpcService
     {
         public AutoMapperConfig()
         {
-            CreateMap<DBInfrastructure.DTOModels.AccountModel, AccountModel>();
-            CreateMap<AccountModel, DBInfrastructure.DTOModels.AccountModel>();
-
-
+            CreateMap<Models.DTO.DTOModels.AccountModel, AccountModel>();
+            CreateMap<AccountModel, Models.DTO.DTOModels.AccountModel>();
         }
     }
 }

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DBInfrastructure\DBInfrastructure.csproj" />
+    <ProjectReference Include="..\Models.DTO\Models.DTO.csproj" />
   </ItemGroup>
 
 </Project>

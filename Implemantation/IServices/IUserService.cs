@@ -1,4 +1,4 @@
-﻿using DBInfrastructure.DTOModels;
+﻿using Models.DTO.DTOModels;
 using System.Threading.Tasks;
 
 namespace Implemantation.IServices

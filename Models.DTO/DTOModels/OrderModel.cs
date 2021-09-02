@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DBInfrastructure.DTOModels
+namespace Models.DTO.DTOModels
 {
     public class OrderModel
     {
