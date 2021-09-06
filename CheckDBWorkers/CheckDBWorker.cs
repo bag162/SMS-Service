@@ -1,9 +1,9 @@
 ﻿using Models.DTO.DTOModels;
 using Implemantation.IServices;
-using Implemantation.Models.Enums;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Models.ImplementationModels.Enums;
 
 namespace SMS_Service_Worker.Workers.CheckerDBWorker
 {

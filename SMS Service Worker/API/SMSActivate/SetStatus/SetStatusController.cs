@@ -1,7 +1,7 @@
 ﻿using Models.DTO.DTOModels;
 using Implemantation.IServices;
-using Implemantation.Models;
-using Implemantation.Models.Enums;
+using Models.ImplementationModels;
+using Models.ImplementationModels.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

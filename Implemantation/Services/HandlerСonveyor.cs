@@ -1,13 +1,13 @@
 ﻿using Models.DTO.DTOModels;
 using Implemantation.IServices;
-using Implemantation.Models;
-using Implemantation.Models.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using static Implemantation.Models.JsonModels.Cookie;
+using Models.ImplementationModels;
+using Models.ImplementationModels.Enums;
+using static Models.ImplementationModels.JsonModels.Cookie;
 
 namespace Implemantation.Services
 {

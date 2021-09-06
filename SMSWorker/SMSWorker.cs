@@ -1,6 +1,6 @@
 ﻿using Implemantation.IServices;
-using Implemantation.Models;
-using Implemantation.Models.Enums;
+using Models.ImplementationModels;
+using Models.ImplementationModels.Enums;
 using Implemantation.Services;
 using Microsoft.Extensions.Options;
 using Models.DTO.DTOModels;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static Implemantation.Models.JsonModels.TNMessages;
+using static Models.ImplementationModels.JsonModels.TNMessages;
 
 namespace SMS_Service_Worker.Workers.SMSWorker
 {

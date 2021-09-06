@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Client.Configuration\Client.Configuration.csproj" />
-    <ProjectReference Include="..\Models.DTO\Models.DTO.csproj" />
+    <ProjectReference Include="..\Models.DTO\Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

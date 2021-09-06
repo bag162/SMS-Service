@@ -1,6 +1,5 @@
-﻿using Implemantation.Models;
-using Implemantation.Models.Enums;
-using Models.DTO.DTOModels;
+﻿using Models.DTO.DTOModels;
+using Models.ImplementationModels.Enums;
 using System.Threading.Tasks;
 
 namespace Implemantation.IServices

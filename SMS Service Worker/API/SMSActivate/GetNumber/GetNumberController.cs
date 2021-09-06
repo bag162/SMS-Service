@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Models.DTO.DTOModels;
 using Hangfire;
 using Implemantation.IServices;
-using Implemantation.Models;
-using Implemantation.Models.Enums;
+using Models.ImplementationModels;
+using Models.ImplementationModels.Enums;
 using Microsoft.AspNetCore.Mvc;
 using SMS_Service_Worker.Workers.SMSWorker;
 

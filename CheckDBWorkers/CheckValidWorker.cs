@@ -1,8 +1,8 @@
 ﻿using Models.DTO.DTOModels;
 using Implemantation.IServices;
-using Implemantation.Models;
-using Implemantation.Models.Enums;
-using Implemantation.Models.JsonModels;
+using Models.ImplementationModels;
+using Models.ImplementationModels.Enums;
+using Models.ImplementationModels.JsonModels;
 using Implemantation.Services;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;

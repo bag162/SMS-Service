@@ -1,12 +1,12 @@
 ﻿using DBInfrastructure;
 using Models.DTO.DTOModels;
 using Implemantation.IServices;
-using Implemantation.Models;
-using Implemantation.Models.Enums;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TarantoolDB.Repositories;
+using Models.ImplementationModels;
+using Models.ImplementationModels.Enums;
 
 namespace Implemantation.Services
 {

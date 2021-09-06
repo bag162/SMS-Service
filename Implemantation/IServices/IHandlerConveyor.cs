@@ -1,5 +1,5 @@
-﻿using Implemantation.Models;
-using Models.DTO.DTOModels;
+﻿using Models.DTO.DTOModels;
+using Models.ImplementationModels;
 using System.Net.Http;
 using System.Threading.Tasks;
 
