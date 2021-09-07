@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Configuration\Configuration.csproj" />
-    <ProjectReference Include="..\Implemantation\Implemantation.csproj" />
+    <ProjectReference Include="..\Configuration\Backend.Configuration.csproj" />
+    <ProjectReference Include="..\Implemantation\Backend.Implemantation.csproj" />
   </ItemGroup>
 
 </Project>

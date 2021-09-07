@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\Configuration\Backend.Configuration.csproj" />
     <ProjectReference Include="..\Implemantation\Implemantation.csproj" />
   </ItemGroup>
 

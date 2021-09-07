@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -22,13 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CheckDBWorkers\CheckDBWorkers.csproj" />
-    <ProjectReference Include="..\CheckProxyWorker\CheckProxyWorker.csproj" />
-    <ProjectReference Include="..\Configuration\Configuration.csproj" />
-    <ProjectReference Include="..\DBInfrastructure\DBInfrastructure.csproj" />
-    <ProjectReference Include="..\Implemantation\Implemantation.csproj" />
-    <ProjectReference Include="..\SMSWorker\SMSWorker.csproj" />
-    <ProjectReference Include="..\TarantoolDB\TarantoolDB.csproj" />
+    <ProjectReference Include="..\CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
+    <ProjectReference Include="..\CheckProxyWorker\Backend.CheckProxyWorker.csproj" />
+    <ProjectReference Include="..\Configuration\Backend.Configuration.csproj" />
+    <ProjectReference Include="..\DBInfrastructure\Backend.DBInfrastructure.csproj" />
+    <ProjectReference Include="..\Implemantation\Backend.Implemantation.csproj" />
+    <ProjectReference Include="..\SMSWorker\Backend.SMSWorker.csproj" />
+    <ProjectReference Include="..\TarantoolDB\Backend.TarantoolDB.csproj" />
   </ItemGroup>
 
 </Project>
