@@ -1,0 +1,18 @@
+.forms
+{
+    margin-top: 5%;
+    margin-left: 35%;
+}
+
+.updateUserInfo
+{
+    margin-bottom: 2%;
+    display: inline-block;
+    width: 100%;
+}
+#passwordText{
+    margin-left: 11%;
+}
+#accountText{
+    margin-left: 16%;
+}

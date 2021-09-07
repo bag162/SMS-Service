@@ -1,0 +1,13 @@
+<form class="form-login-center my-3" id="formLogin">
+  <div class="form-group pb-2">
+    <label for="InputLogin" class="required">Login</label>
+    <input type="text" name="login_login" class="form-control" aria-describedby="emailHelp" placeholder="Login" [(ngModel)]="userLogin.login" #login_login="ngModel" required="" pattern="([a-zA-Z0-9-]{6,100})">
+      <alert-fail [hidden]="login_login.valid || login_login.untouched" class="py-1 my-1" [message]="'Incorrect login. Minimum characters: 6'"></alert-fail>
+  </div>
+  <div class="form-password">
+    <label for="InputPassword" class="required">Password</label>
+    <input type="password" name="password_login" class="form-control" [(ngModel)]="userLogin.password" placeholder="Password" #password_login="ngModel" required="" pattern="([\s\S]{6,100})">
+      <alert-fail [hidden]="password_login.valid || password_login.untouched" [message]="'Incorrect password'"></alert-fail>
+  </div>
+  <button type="submit" class="btn btn-primary my-2" id="submitLoginButton" (click)=(loginUser()) [disabled]="login_login.invalid || password_login.invalid">Login</button>
+</form>

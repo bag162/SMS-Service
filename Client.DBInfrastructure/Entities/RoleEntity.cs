@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SMS_Service_Angular.DataBase.Data.Entities
+namespace Client.DataBase.Data.Entities
 {
     public class RoleEntity
     {

@@ -1,0 +1,11 @@
+<div class="form-autorization">
+  <!-- выбор формы -->
+  <div class="btn-group" role="group" aria-label="Basic " id="select-type">
+    <button type="button" class="btn btn-dark" (click)="changeHideOnLogin()">login</button>
+    <button type="button" class="btn btn-dark" (click)="changeHideOnRegistration()">Registration</button>
+  </div>
+  <!-- форма для логина -->
+  <login-form id="loginForm"></login-form>
+  <!-- форма для регистрации -->
+  <registration-form id="registrationForm" hidden></registration-form>
+</div>

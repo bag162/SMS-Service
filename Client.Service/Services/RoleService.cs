@@ -1,9 +1,9 @@
-﻿using SMS_Service_Angular.DataBase.Data.Contexts;
-using SMS_Service_Angular.DataBase.Data.IServices;
+﻿using Client.DataBase.Data.Contexts;
+using Client.DataBase.Data.IServices;
 using System;
 using System.Linq;
 
-namespace SMS_Service_Angular.DataBase.Data.Services
+namespace Client.DataBase.Data.Services
 {
     public class RoleService : IRoleService
     {

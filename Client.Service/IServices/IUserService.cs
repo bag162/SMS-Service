@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SMS_Service_Angular.Areas.Authorization.Models;
-using SMS_Service_Angular.DataBase.Contexts;
+using Client.Areas.Authorization.Models;
+using Client.DataBase.Contexts;
 
-namespace SMS_Service_Angular.Database.Data.Repository
+namespace Client.Database.Data.Repository
 {
     public interface IUserService
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SMS_Service_Angular.DataBase.Contexts;
+using Client.DataBase.Contexts;
 
-namespace SMS_Service_Angular.DataBase.Data.Contexts
+namespace Client.DataBase.Data.Contexts
 {
     public class UserContext : DbContext
     {

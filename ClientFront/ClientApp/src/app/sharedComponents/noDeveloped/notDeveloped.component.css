@@ -1,0 +1,9 @@
+
+  .container {
+    width: auto;
+    top: 20%;
+    position: absolute;
+    transform: translate(0, -20%);
+    left: 30%;
+  }
+  

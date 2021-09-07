@@ -1,0 +1,40 @@
+<form class="form-registration-center my-3" id="formRegistration">
+  <div class="form-group pb-2">
+    <label for="InputLogin" class="required">Login</label>
+    <input type="text" name="login_register" class="form-control" aria-describedby="loginHelp" placeholder="Enter login" [(ngModel)]="userRegistration.login" #login_register="ngModel" required="" pattern="([a-zA-Z0-9-]{6,100})">
+    <alert-fail [hidden]="login_register.valid || login_register.untouched" [message]="'Incorrect login. Minimum characters: 6'"></alert-fail>
+  </div>
+  <div class="form-group pb-2">
+    <label for="InputEmail" class="required">Email address</label>
+    <input type="email" name="email_register" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="userRegistration.email" #email_register="ngModel" required=""  pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+    <alert-fail [hidden]="email_register.valid || email_register.empty || email_register.untouched" [message]="'Incorrect email'"></alert-fail>
+  </div>
+  <div class="form-group">
+    <label for="InputPassword" class="required">Password</label>
+    <input type="password" name="password_register" class="form-control" [(ngModel)]="userRegistration.password" placeholder="Password" #password_register="ngModel" required="" pattern="([\s\S]{6,100})">
+    <alert-fail [hidden]="password_register.valid || password_register.untouched" [message]="'Incorrect password'"></alert-fail>
+    <input type="password" name="confirmPassword_register" class="form-control my-1" [(ngModel)]="confirmPassword" placeholder="Repeat password" #confirmPassword_register="ngModel" required="">
+      <alert-fail [hidden]="((confirmPassword_register.value == password_register.value) || confirmPassword_register.untouched)" [message]="'Password mismatch'"></alert-fail>
+      <alert-fail [hidden]="(confirmPassword_register.value != null || confirmPassword_register.untouched)" [message]="'Password repeat required'"></alert-fail>
+  </div>
+  <div class="form-group pt-1">
+    <label>Telegram</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">@</div>
+      </div>
+      <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter your telegram Login" [(ngModel)]="userRegistration.telegram">
+    </div>
+  </div>
+  <div class="form-group pb-2">
+    <label for="InputName">Name</label>
+    <input type="text" name="name_register" class="form-control" aria-describedby="nameHelp" placeholder="Enter your Name" [(ngModel)]="userRegistration.name" #name_register="ngModel">
+  </div>
+  <button type="submit" class="btn btn-primary my-2" id="submitRegisterButton" (click)="registerUser()" 
+  [disabled]="
+  email_register.invalid || 
+  password_register.invalid || 
+  password_register.value != confirmPassword_register.value ||
+  confirmPassword_register.empty
+  ">Registration</button>
+</form>

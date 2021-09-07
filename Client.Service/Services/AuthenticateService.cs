@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using SMS_Service_Angular.Database.Data.Repository;
+using Client.Database.Data.Repository;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace SMS_Service_Angular.Database.Data.Services
+namespace Client.Database.Data.Services
 {
     public class AuthenticateService : IAuthenticateService
     {

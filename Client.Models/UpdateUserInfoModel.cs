@@ -1,4 +1,4 @@
-﻿namespace SMS_Service_Angular.Areas.Settings.Models
+﻿namespace Client.Areas.Settings.Models
 {
     public class UpdateUserInfoModel
     {

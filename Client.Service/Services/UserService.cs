@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using SMS_Service_Angular.Areas.Authorization.Models;
-using SMS_Service_Angular.Database.Data.Repository;
-using SMS_Service_Angular.DataBase.Contexts;
-using SMS_Service_Angular.DataBase.Data.Contexts;
-using SMS_Service_Angular.Infrastructure;
+using Client.Areas.Authorization.Models;
+using Client.Database.Data.Repository;
+using Client.DataBase.Contexts;
+using Client.DataBase.Data.Contexts;
+using Client.Infrastructure;
 using System.Linq;
 using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
 
-namespace SMS_Service_Angular.DataBase.Data.Services
+namespace Client.DataBase.Data.Services
 {
     public class UserService : IUserService
     {

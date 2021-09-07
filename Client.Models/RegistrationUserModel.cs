@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SMS_Service_Angular.Areas.Authorization.Models
+namespace Client.Areas.Authorization.Models
 {
     public class RegistrationUserModel
     {
