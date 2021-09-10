@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Backend.Models.DTO\Backend.Models.csproj" />
     <ProjectReference Include="..\Client.Configuration\Client.Configuration.csproj" />
     <ProjectReference Include="..\Client.DBInfrastructure\Client.DBInfrastructure.csproj" />
     <ProjectReference Include="..\Client.DBMigrations\Client.DBMigrations.csproj" />

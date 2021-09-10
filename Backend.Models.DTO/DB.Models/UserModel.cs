@@ -16,5 +16,7 @@ namespace Models.DTO.DTOModels
         public double Balance { get; set; }
         [MsgPackArrayElement(3)]
         public string ApiKey { get; set; }
+        [MsgPackArrayElement(4)]
+        public string Bucket { get; set; }
     }
 }

@@ -30,14 +30,13 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetStatus
             if (order == null || order.UserId != user.Id)
             {
                 await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.GetStatus_Fail);
-
                 return new ContentResult { Content = "NO_ACTIVATION", StatusCode = 405 };
-            }   // если нет ордера или id юзера на ордере не совпадает с id юзера на api ключе то отдать ошибку
+            }
 
             await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.GetStatus);
             if (order.Status == 6)
             {
-                return new ContentResult { Content = Enum.GetName(typeof(OrderStatuses), order.Status) + ":" + order.SMSCode }; // если смс получено, то выдать его
+                return new ContentResult { Content = Enum.GetName(typeof(OrderStatuses), order.Status) + ":" + order.SMSCode };
             }
             return new ContentResult { Content = Enum.GetName(typeof(OrderStatuses), order.Status) };
         }

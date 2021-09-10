@@ -19,11 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
-    <ProjectReference Include="..\CheckProxyWorker\Backend.CheckProxyWorker.csproj" />
-    <ProjectReference Include="..\Configuration\Backend.Configuration.csproj" />
-    <ProjectReference Include="..\Implemantation\Backend.Implemantation.csproj" />
-    <ProjectReference Include="..\SMSWorker\Backend.SMSWorker.csproj" />
+    <ProjectReference Include="..\Backend.CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
+    <ProjectReference Include="..\Backend.CheckProxyWorker\Backend.CheckProxyWorker.csproj" />
+    <ProjectReference Include="..\Backend.Configuration\Backend.Configuration.csproj" />
+    <ProjectReference Include="..\Backend.Implemantation\Backend.Implemantation.csproj" />
+    <ProjectReference Include="..\Backend.SMSWorker\Backend.SMSWorker.csproj" />
   </ItemGroup>
-
 </Project>

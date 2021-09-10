@@ -18,5 +18,7 @@ namespace Models.DTO.DTOModels
         public string RequestTime { get; set; }
         [MsgPackArrayElement(4)]
         public string Message { get; set; }
+        [MsgPackArrayElement(5)]
+        public string Bucket { get; set; }
     }
 }

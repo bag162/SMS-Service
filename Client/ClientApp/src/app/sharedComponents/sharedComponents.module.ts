@@ -1,14 +1,18 @@
 import { NgModule } from "@angular/core";
 import { AlertsModule } from "./alerts/alerts.module";
 import { NotDeveloped } from "./noDeveloped/notDeveloped.component";
+import { GoBackButtonComponent } from "./goBackButton/goback.component"
+
 @NgModule({
     imports: [
-        AlertsModule
+        AlertsModule,
     ],
     declarations: [
+        GoBackButtonComponent
     ],
     exports: [
-        AlertsModule
+        AlertsModule,
+        GoBackButtonComponent
     ]
 
 })

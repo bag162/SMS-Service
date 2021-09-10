@@ -2,7 +2,6 @@
 using ProGaudi.Tarantool.Client;
 using ProGaudi.Tarantool.Client.Model;
 using ProGaudi.Tarantool.Client.Model.Enums;
-using ProGaudi.Tarantool.Client.Model.Responses;
 using ProGaudi.Tarantool.Client.Model.UpdateOperations;
 using System;
 using System.Collections.Generic;
@@ -35,10 +34,21 @@ namespace TarantoolDB
         {
             return index.Select<TarantoolTuple<Y>, T>(TarantoolTuple.Create(value), new SelectOptions { Iterator = Iterator.Eq }).Result.Data;
         }
+
         public IEnumerable<T> FindAll()
         {
             T[] data;
-            try // исправить костыль typeof(T) возможно решение
+
+            if (typeof(T) == typeof(string)) // протестить
+            {
+                var s = 1;
+            }
+            else
+            {
+                var s = 2;
+            }
+
+            try
             {
                 data = PrimaryIndex.Select<TarantoolTuple<string>, T>(TarantoolTuple.Create(String.Empty), new SelectOptions { Iterator = Iterator.All }).Result.Data;
             }

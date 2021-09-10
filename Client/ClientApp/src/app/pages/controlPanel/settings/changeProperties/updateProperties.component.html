@@ -1,5 +1,5 @@
 <form action="properties">
-  <div class="col-md-5">
+  <div class="mb-2">
     <label for="inputEmail4">Email Address</label>
     <input [(ngModel)]="updatedUserInfo.EmailAddress" #updatedEmail="ngModel" type="email" class="form-control"
       id="inputEmail4" placeholder="Email" name="EmailAddress" required=""
@@ -7,17 +7,17 @@
     <alert-fail [hidden]="updatedEmail.valid || updatedEmail.empty || updatedEmail.untouched"
       [message]="'Incorrect email'"></alert-fail>
   </div>
-  <div class="col-md-5">
+  <div class="mb-2">
     <label for="telegram">Telegram</label>
     <input [(ngModel)]="updatedUserInfo.Telegram" type="text" class="form-control" placeholder="Telegram login"
       name="Telegram">
   </div>
-  <div class="col-md-5">
+  <div class="mb-2">
     <label for="name">Name</label>
     <input [(ngModel)]="updatedUserInfo.Username" #updatedUsername="ngModel" type="text" class="form-control"
       placeholder="Name" name="Username">
   </div>
-  <button (click)="updateUserInfo()" type="button" class="btn btn-primary mt-2">Save</button>
-  <div class="col-md-5" id="propertyServerAlerts">
+  <button (click)="updateUserInfo()" type="button center" class="btn btn-primary mt-2 mb-1">Save</button>
+  <div id="propertyServerAlerts">
   </div>
 </form>

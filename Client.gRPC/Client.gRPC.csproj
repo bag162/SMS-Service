@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Backend.Models.DTO\Backend.Models.csproj" />
     <ProjectReference Include="..\Client.Configuration\Client.Configuration.csproj" />
-    <ProjectReference Include="..\Models.DTO\Backend.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

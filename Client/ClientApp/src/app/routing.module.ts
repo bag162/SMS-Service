@@ -2,13 +2,11 @@ import { Router, RouterModule, Routes } from "@angular/router";
 import { AuthenticateGuard } from './services/authenticate.guardService';
 import { NotFoundComponent } from "./pages/notFound/notfound.component";
 import { PublicLayoutComponent } from "./pages/layout/public-layout/layout.component";
-import { PrivateLayoutComponent } from "./pages/layout/private-layout/layout.component";
 import { NgModule } from "@angular/core";
 
 const appRoutes: Routes = [
   {
     path: 'controlpanel',
-    component: PrivateLayoutComponent,
     children: [
       { path: "", loadChildren: () => import('./pages/controlPanel/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthenticateGuard] },
       { path: "settings", loadChildren: () => import('./pages/controlPanel/settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthenticateGuard] },
@@ -17,6 +15,7 @@ const appRoutes: Routes = [
       { path: "analytics", loadChildren: () => import('./pages/controlPanel/analytics/analytics.module').then(m => m.AnalyticsModule), canActivate: [AuthenticateGuard] },
     ]
   },
+  
   {
     path: '',
     component: PublicLayoutComponent,

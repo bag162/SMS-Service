@@ -15,4 +15,8 @@ export class DashboardPanelComponent {
         public dataService: DataHomeService,
         public router: Router){}
         
+        public redirect(link: string)
+        {
+            this.router.navigate([link]);
+        }
 }

@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ProGaudi.Tarantool.Client;
+using Tarantool.Net.IProto;
+using System.Runtime.CompilerServices;
+using ProGaudi.Tarantool.Client.Model.Responses;
 
 namespace SMS_Service_Worker.API.PrivateWEB
 {
@@ -16,12 +20,14 @@ namespace SMS_Service_Worker.API.PrivateWEB
         private readonly IServicePricesService servicePricesService;
         private readonly IHistoryService historyService;
         private readonly Random randomizer = new();
+        private readonly Box box;
         public tests(IAccountService accountService,
             IUserService userService,
             IProxyService proxyService,
             IOrderService orderService,
             IServicePricesService servicePricesService,
-            IHistoryService historyService)
+            IHistoryService historyService,
+            Box box)
         {
             this.accountService = accountService;
             this.userService = userService;
@@ -29,6 +35,7 @@ namespace SMS_Service_Worker.API.PrivateWEB
             this.orderService = orderService;
             this.servicePricesService = servicePricesService;
             this.historyService = historyService;
+            this.box = box;
         }
 
         // delete in prod
@@ -38,14 +45,6 @@ namespace SMS_Service_Worker.API.PrivateWEB
         {
             return new ContentResult { Content = JsonSerializer.Serialize(orderService.GetAllOrders()) };
         }
-
-       /* // delete in prod
-        [HttpGet]
-        [Route("getallhistory")]
-        public async Task<ContentResult> getallhostiry()
-        {
-            return new ContentResult { Content = JsonSerializer.Serialize(historyEntity.FindAllString().Result.Data) };
-        }*/
 
         // delete in prod
         [HttpGet]
@@ -72,12 +71,5 @@ namespace SMS_Service_Worker.API.PrivateWEB
         {
             return new ContentResult { Content = JsonSerializer.Serialize(proxyService.GetAllProxy()) };
         }
-
-       /* [HttpGet]
-        [Route("getallusers")]
-        public async Task<ContentResult> getallusers()
-        {
-            return new ContentResult { Content = JsonSerializer.Serialize(userService.getallusers) };
-        }*/
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBInfrastructure\DBInfrastructure.csproj" />
-    <ProjectReference Include="..\TarantoolDB\TarantoolDB.csproj" />
+    <ProjectReference Include="..\Backend.Models.DTO\Backend.Models.csproj" />
+    <ProjectReference Include="..\Backend.TarantoolDB\Backend.TarantoolDB.csproj" />
   </ItemGroup>
 
 </Project>

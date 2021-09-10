@@ -24,20 +24,21 @@ namespace Implemantation.Services
             this.proxyService = proxyService;
         }
 
-        public async Task<HandlerConveerModel> GetHandler(AccountModel account, bool setProxy = true, bool setcookie = true)
+        public async Task<HandlerConveerModel> GetHandler(AccountModel account, ProxyModel proxy = null, bool setcookie = true)
         {
             HttpClientHandler handler = new();
 
-            if (setProxy)
+            if (proxy == null)
             {
-                ProxyModel proxy = proxyService.GetRandomProxy();
-                if (proxy == null)
-                {
-                    await historyService.InputNewHistoryAsync("0", (int)TypeRequests.NoProxy);
-                    return new HandlerConveerModel { status = HandlerConveerStatus.NoProxy };
-                }
-                handler = SetProxy(handler, proxy);
+                proxy = proxyService.GetRandomProxy();
             }
+            if (proxy == null)
+            {
+                await historyService.InputNewHistoryAsync("0", (int)TypeRequests.NoProxy);
+                return new HandlerConveerModel { status = HandlerConveerStatus.NoProxy };
+            }
+
+            handler = SetProxy(handler, proxy);
 
             if (setcookie)
             {

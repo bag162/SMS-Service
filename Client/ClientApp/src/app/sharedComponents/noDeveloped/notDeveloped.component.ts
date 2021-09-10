@@ -5,4 +5,5 @@ import { Component} from '@angular/core';
     templateUrl: 'notDeveloped.component.html',
     styleUrls: ["notDeveloped.component.css"]
 })
+
 export class NotDeveloped {}

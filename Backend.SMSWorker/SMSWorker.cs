@@ -43,91 +43,56 @@ namespace SMS_Service_Worker.Workers.SMSWorker
             this.Config = Сonfig;
         }
 
-        public async Task StartSMSWorker(GetNumberModel numberModel)
+        public async Task StartSMSWorker(OrderModel order, UserModel user, AccountModel account, ProxyModel proxy, string firstMessgae = null)
         {
-            OrderModel order = orderService.GetOrderByOrderIdAsync(numberModel.OrderId).Result;
-            if (order == null)
-            {
-                return;
-            }
-            AccountModel account = await accountService.GetAccountByNumberAsync(order.Number);
-            HttpClientHandler handler = handlerConveer.GetHandler(account).Result.handler;
-
+            // get handler
+            HttpClientHandler handler = handlerConveer.GetHandler(account, proxy, true).Result.handler;
             if (handler == null)
             {
                 await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_CANCEL);
                 return;
             }
 
+            // request first message
             HttpClient client = new(handler);
+            string response = GetMessage(client);
 
-            var firstRequest = client.GetAsync(Config.Value.TextNowRoutes.GetMessageURI).Result.Content;
-            var oldMessageString = firstRequest.ReadAsStringAsync().Result;
-
-            ErrorCode errorResponse;
+            // check account on valid
+            ErrorCode errorResponse = new ErrorCode() { error_code = "not" };
             try
             {
-                errorResponse = JsonConvert.DeserializeObject<ErrorCode>(oldMessageString);
+                errorResponse = JsonConvert.DeserializeObject<ErrorCode>(response);
             }
             catch
             {
-                errorResponse = new ErrorCode { error_code = "not" };
+
             }
-            
             if (errorResponse.error_code == Config.Value.Common.ErrorResponse)
             {
-                await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_CANCEL);
-                await accountService.DeactivateAccountAsync(account);
-                await historyService.InputNewHistoryAsync("0", (int)TypeRequests.CookieInactive, "Inactive cookie");
+                DeactivateAccount(order, account);
                 return;
             }
-
-            var serializeOldMessage = JsonConvert.DeserializeObject<JsonMessages>(oldMessageString).result.FirstOrDefault();
-            JsonExpression ExpressionList = pricesService.GetAllExpressionByServiceId(order.Service);
-
-            DateTime orderDateTime = DateTime.Parse(order.StartDateTime);
-            orderDateTime = orderDateTime.AddMinutes(Config.Value.SMSWorkerSettings.SMSWaitTime);
-
-            while(true)
+            if (firstMessgae == null)
             {
-                if (orderService.GetOrderByOrderIdAsync(order.OrderId).Result.Status != (int)OrderStatuses.STATUS_WAIT_CODE)
-                {
-                    return;
-                }
-
-                await Task.Delay(Config.Value.SMSWorkerSettings.TimeBetweenRequests);
-
-                var messageRequest = client.GetAsync(Config.Value.TextNowRoutes.GetMessageURI).Result.Content;
-                var serializeNewMessage = JsonConvert.DeserializeObject<JsonMessages>(messageRequest.ReadAsStringAsync().Result).result.FirstOrDefault();
-
-                if (serializeNewMessage.preview.message != serializeOldMessage.preview.message)
-                {
-                    string smsCode = CheckForRegularExpressions(ExpressionList.Expressions, serializeNewMessage.preview.message);
-                    if (smsCode != null)
-                    {
-                        await orderService.SetSMSAndSMSCodeAsync(order, serializeNewMessage.preview.message, smsCode);
-                        await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_OK);
-                        await userService.TakePaymentAsync(numberModel.User.Id, pricesService.GetServicePriceByServiceId(order.Service));
-                        return;
-                    }
-                    else
-                    {
-                        await historyService.InputNewHistoryAsync(numberModel.User.Id, (int)TypeRequests.InvalidExpressions, $"service: {order.Service} - all regexes failed, message: ${serializeNewMessage.preview.message}");
-                        await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_FREE);
-                        return;
-                    }
-                    
-                }
-
-                if (DateTime.Now > orderDateTime)
-                {
-                    await historyService.InputNewHistoryAsync(numberModel.User.Id, (int)TypeRequests.NotComSMS, $"Service: {order.Service}, number: {order.Number}");
-                    await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_CANCEL);
-                    return;
-                }
+                // TODO
             }
 
+            // get sms code
+            var message = JsonConvert.DeserializeObject<JsonMessages>(response).result.FirstOrDefault();
+            JsonExpression ExpressionList = pricesService.GetAllExpressionByServiceId(order.Service);
+            string smsCode = CheckForRegularExpressions(ExpressionList.Expressions, message.preview.message);
             
+            // set result
+            if (smsCode != null)
+            {
+                SetSMS(order, message, smsCode, user);
+                return;
+            }
+            if (response != firstMessgae)
+            {
+                ResetOrder(order, user, message);
+                return;
+            }
         }
 
         private static string CheckForRegularExpressions(List<Expression> expressions, string message)
@@ -143,6 +108,36 @@ namespace SMS_Service_Worker.Workers.SMSWorker
                 return matches.FirstOrDefault().Value;
             }
             return null;
+        }
+
+        public string GetMessage(HttpClient client)
+        {
+            var request = client.GetAsync(Config.Value.TextNowRoutes.GetMessageURI).Result.Content;
+            var response = request.ReadAsStringAsync().Result;
+
+            return response;
+        }
+
+        public async Task DeactivateAccount(OrderModel order, AccountModel account)
+        {
+            await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_CANCEL);
+            await accountService.DeactivateAccountAsync(account);
+            await historyService.InputNewHistoryAsync("0", (int)TypeRequests.CookieInactive, "Inactive cookie");
+            return;
+        }
+
+        public async Task SetSMS(OrderModel order, Result message, string smsCode, UserModel user)
+        {
+            await orderService.SetSMSAndSMSCodeAsync(order, message.preview.message, smsCode);
+            await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_OK);
+            await userService.TakePaymentAsync(user.Id, pricesService.GetServicePriceByServiceId(order.Service));
+            return;
+        }
+
+        public async Task ResetOrder(OrderModel order, UserModel user, Result message)
+        {
+            historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.InvalidExpressions, $"service: {order.Service} - all regexes failed, message: ${message.preview.message}");
+            orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_FREE);
         }
 
     }

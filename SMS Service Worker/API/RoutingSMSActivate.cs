@@ -17,12 +17,11 @@ namespace SMS_Service_Worker.API.PrivateWEB
         [Route("stubs/handler_api.php")]
         public RedirectToRouteResult RoutingController(string api_key, [FromQuery] string action, string service, int id, int status)
         {
-            UserModel user = userService.GetUserByApiKeyAsync(api_key).Result; // получение юзера из базы по апи ключу
-
+            UserModel user = userService.GetUserByApiKeyAsync(api_key).Result;
             if (user == null)
             {
                 return RedirectToRoute(new { controller = "ErrorResponse", action = "BadKey" });
-            } // если такого юзера нет, то отдать ошибку bad key
+            }
 
             switch (action)
             {

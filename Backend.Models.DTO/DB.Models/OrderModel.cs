@@ -26,5 +26,7 @@ namespace Models.DTO.DTOModels
         public string SMSCode { get; set; }
         [MsgPackArrayElement(8)]
         public string StartDateTime { get; set; }
+        [MsgPackArrayElement(9)]
+        public string Bucket { get; set; }
     }
 }
