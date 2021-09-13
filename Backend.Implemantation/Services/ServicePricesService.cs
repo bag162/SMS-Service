@@ -19,17 +19,19 @@ namespace Implemantation.Services
 
         public double GetServicePriceByServiceId(long serviceId)
         {
-            return serviceRepository.FindById(serviceId).Price;
+            /*return serviceRepository.FindById(serviceId).Price;*/ // TODO
+            return 1.1;
         }
 
         public IEnumerable<ServiceModel> GetAllServices()
         {
-            return serviceRepository.FindAll();
+            return serviceRepository.FindAll().Result;
         }
 
         public ServiceModel GetServiceByServiceId(long serviceId)
         {
-            return serviceRepository.FindById(serviceId);
+            /*return serviceRepository.FindById(serviceId);*/
+            return null; // TODO
         }
 
         public JsonExpression GetAllExpressionByServiceId(long serviceId)

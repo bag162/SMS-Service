@@ -20,5 +20,7 @@ namespace Models.DTO.DTOModels
         public string Cookie { get; set; }
         [MsgPackArrayElement(5)]
         public int Status { get; set; }
+        [MsgPackArrayElement(6)]
+        public string Bucket { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.DTO.DTOModels
 {
+    [MsgPackArray]
     public class ServiceModel
     {
         [MsgPackArrayElement(0)]
@@ -16,5 +17,7 @@ namespace Models.DTO.DTOModels
         public string RegularExpressions { get; set; }
         [MsgPackArrayElement(3)]
         public string ServicePrefix { get; set; }
+        [MsgPackArrayElement(4)]
+        public string Bucket { get; set; }
     }
 }

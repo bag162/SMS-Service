@@ -83,7 +83,6 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetNumber.Controllers
 
             await orderService.UpdateOrderAsync(updatedOrder);
             await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.GetNumber);
-            BackgroundJob.Enqueue<SMSWorker>(x => x.StartSMSWorker(order, user, accountService.GetAccountByNumberAsync(order.Number).Result));
             return new ContentResult { Content = "ACCESS_NUMBER:" + order.OrderId + ":" + order.Number, StatusCode = 200 };
         }
     }

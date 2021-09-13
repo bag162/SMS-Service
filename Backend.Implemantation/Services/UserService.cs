@@ -32,15 +32,16 @@ namespace Implemantation.Services
         public async Task<UserModel> GetUserByApiKeyAsync(string apiKey)
         {
             var iindex = await userRepository.Space.GetIndex("secondary_apikey");
-            return userRepository.Find(iindex, apiKey).FirstOrDefault();
+            /*return userRepository.Find(iindex, apiKey).FirstOrDefault();*/ // TODO
+            return null;
         }
 
         public async Task TakePaymentAsync(string userId, double price)
         {
-            UserModel user = userRepository.FindById(userId);
+            /*UserModel user = userRepository.FindById(userId);
             user.Balance += price;
-            await userRepository.Update(user);
-            return;
+            await userRepository.Update(user);*/
+            return; // TODO
         }
     }
 }

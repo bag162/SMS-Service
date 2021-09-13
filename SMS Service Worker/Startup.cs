@@ -44,11 +44,6 @@ namespace SMS_Service_Worker
 
             app.UseAuthorization();
 
-            RecurringJob.AddOrUpdate<CheckDBWorker>(x => x.CheckDBInsert(), Configuration.GetSection("WorkersTimes:CheckDBInsertCron").Value);
-            RecurringJob.AddOrUpdate<CheckDBWorker>(x => x.CheckDBDelete(), Configuration.GetSection("WorkersTimes:CheckDBDeleteCron").Value);
-            RecurringJob.AddOrUpdate<CheckAccountValidWorker>(x => x.CheckAccountsOnValid(), Configuration.GetSection("WorkersTimes:CheckAccountsOnValidCron").Value);
-            RecurringJob.AddOrUpdate<CheckProxyValidWorker>(x => x.CheckProxyValid(), Configuration.GetSection("WorkersTimes:CheckProxyValid").Value);
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

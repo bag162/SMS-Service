@@ -24,18 +24,21 @@ namespace Implemantation.Services
 
         public async Task<OrderModel> GetOrderByOrderIdAsync(int orderId)
         {
-            return orderRepository.Find(await orderRepository.Space.GetIndex("secondary_orderid"), orderId).FirstOrDefault();
+            /*return orderRepository.Find(await orderRepository.Space.GetIndex("secondary_orderid"), orderId).FirstOrDefault();*/ // TODO
+            return null;
         }
 
         public async Task SetStatusAsync(OrderModel order, int status)
         {
-            await orderRepository.UpdateArgument(order.Id, 1, status);
+            var updatedOrder = order;
+            updatedOrder.Status = status;
+            await orderRepository.Update(updatedOrder);
             return;
         }
          
         public OrderModel[] GetAllOrders()
         {
-            return orderRepository.FindAll().ToArray();
+            return orderRepository.FindAll().Result.ToArray();
         }
 
         public async Task InsertOrderAsync(OrderModel order)
@@ -52,19 +55,29 @@ namespace Implemantation.Services
 
         public async Task SetSMSAndSMSCodeAsync(OrderModel order, string sms, string smsCode)
         {
-            await orderRepository.UpdateArgument(order.Id, 6, sms);
-            await orderRepository.UpdateArgument(order.Id, 7, smsCode);
+            var updatedOrder = order;
+
+            updatedOrder.SMS = sms;
+            updatedOrder.SMSCode = smsCode;
+
+            await orderRepository.Update(updatedOrder);
             return;
         }
 
         public async Task<OrderModel[]> GetAllOrdersByServiceAsync(long serviceId)
         {
-            return orderRepository.Find(await orderRepository.Space.GetIndex("secondary_service"), serviceId);
+            /*return orderRepository.Find(await orderRepository.Space.GetIndex("secondary_service"), serviceId);*/ // TODO
+            return null;
         }
 
         public async Task UpdateOrderAsync(OrderModel order)
         {
             await orderRepository.Update(order);
+        }
+
+        public Task<OrderModel[]> GetActiveOrdersAsync()
+        {
+            throw new NotImplementedException(); // TODO
         }
     }
 }

@@ -24,5 +24,7 @@ namespace Models.DTO.DTOModels
         public string LasteTimeActive { get; set; }
         [MsgPackArrayElement(7)]
         public string ExternalIp { get; set; }
+        [MsgPackArrayElement(8)]
+        public string Bucket { get; set; }
     }
 }

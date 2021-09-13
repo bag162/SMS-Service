@@ -1,5 +1,6 @@
 ﻿using Models.DTO.DTOModels;
 using ProGaudi.Tarantool.Client;
+using System.Threading.Tasks;
 
 namespace TarantoolDB.Repositories
 {
@@ -7,7 +8,7 @@ namespace TarantoolDB.Repositories
     {
         public ServiceRepository(Box box) : base(box, vspace, viindex) { }
 
-        private readonly static string vspace = "service";
-        private readonly static string viindex = "primary_index";
+        public readonly static string vspace = "service";
+        public readonly static string viindex = "primary_index";
     }
 }

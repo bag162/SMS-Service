@@ -16,6 +16,9 @@ using SMS_Service_Worker.Workers.SMSWorker;
 using System;
 using TarantoolDB;
 using TarantoolDB.Repositories;
+using Backend.Models.DB.Models;
+using Backend.TarantoolDB.Repositories;
+using Backend.Models.Implementation.Models.MsgPackModels;
 
 namespace SMS_Service_Worker
 {
@@ -45,6 +48,7 @@ namespace SMS_Service_Worker
             services.AddTransient<ServiceRepository>();
             services.AddTransient<AccountRepository>();
             services.AddTransient<ProxyRepository>();
+            services.AddTransient<QueueRepository>();
 
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IUserService, UserService>();
@@ -63,6 +67,8 @@ namespace SMS_Service_Worker
         public static void ConfigureTarantool(IServiceCollection services, IConfiguration Configuration)
         {
             var msgPackContext = new MsgPackContext();
+            msgPackContext.GenerateAndRegisterArrayConverter<JSONRequest>();
+            msgPackContext.GenerateAndRegisterArrayConverter<QueueModel>();
             msgPackContext.GenerateAndRegisterArrayConverter<UserModel>();
             msgPackContext.GenerateAndRegisterArrayConverter<OrderModel>();
             msgPackContext.GenerateAndRegisterArrayConverter<HistoryModel>();

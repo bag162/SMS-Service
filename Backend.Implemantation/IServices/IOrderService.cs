@@ -10,7 +10,7 @@ namespace Implemantation.IServices
         public OrderModel[] GetAllOrders();
         public Task<OrderModel[]> GetAllOrdersByServiceAsync(long serviceId);
         public Task<OrderModel> GetOrderByOrderIdAsync(int orderId);
-
+        public Task<OrderModel[]> GetActiveOrdersAsync();
         public Task SetStatusAsync(OrderModel order, int status);
 
         public Task InsertOrderAsync(OrderModel order);

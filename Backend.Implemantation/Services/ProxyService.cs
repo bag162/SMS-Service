@@ -20,18 +20,20 @@ namespace Implemantation.Services
 
         public ProxyModel[] GetAllProxy()
         {
-            return proxyRepository.FindAll().ToArray();
+            return proxyRepository.FindAll().Result.ToArray();
         } // int
 
         public ProxyModel GetRandomProxy()
         {
             var proxyList = proxyRepository.FindAll();
-            return proxyList.ToArray()[randomizer.Next(proxyList.Count())];
+            return proxyList.Result.ToArray()[randomizer.Next(proxyList.Result.Count())];
         }
 
         public async Task SetInvalidProxyAsync(ProxyModel proxy)
         {
-            await proxyRepository.UpdateArgument(proxy.Id, 5, (int)ProxyStatus.InActive);
+            var updatedProxy = proxy;
+            updatedProxy.Status = (int)ProxyStatus.InActive;
+            await proxyRepository.Update(updatedProxy);
             return;
         }
 

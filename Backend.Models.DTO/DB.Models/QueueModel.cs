@@ -2,7 +2,7 @@
 
 namespace Backend.Models.DB.Models
 {
-    class QueueModel
+    public class QueueModel
     {
         [MsgPackArrayElement(0)]
         public string Id { get; set; }
@@ -13,6 +13,10 @@ namespace Backend.Models.DB.Models
         [MsgPackArrayElement(3)]
         public int Priority { get; set; }
         [MsgPackArrayElement(4)]
-        public string bucketId { get; set; }
+        public string StartTime { get; set; }
+        [MsgPackArrayElement(5)]
+        public string LastCheck { get; set; }
+        [MsgPackArrayElement(6)]
+        public string Bucket { get; set; }
     }
 }

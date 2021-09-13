@@ -18,18 +18,21 @@ namespace Implemantation.Services
 
         public async Task DeactivateAccountAsync(AccountModel account, int status)
         {
-            await accountRepository.UpdateArgument(account.Id, 5, status);
+            var updatedAccount = account;
+            updatedAccount.Status = status;
+            await accountRepository.Update(updatedAccount);
             return;
         }
 
         public async Task<AccountModel> GetAccountByNumberAsync(string number)
         {
-            return accountRepository.Find(await accountRepository.Space.GetIndex("secondary_number"), number).FirstOrDefault();
+            /*return accountRepository.Find(await accountRepository.Space.GetIndex("secondary_number"), number).FirstOrDefault();*/ // TODO
+            return null;
         }
 
         public AccountModel[] GetAllAccounts()
         {
-            return accountRepository.FindAll().ToArray();
+            return accountRepository.FindAll().Result.ToArray();
         }
     }
 }
