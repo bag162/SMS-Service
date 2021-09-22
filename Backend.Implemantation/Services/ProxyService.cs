@@ -18,25 +18,28 @@ namespace Implemantation.Services
             this.proxyRepository = proxyRepository;
         }
 
-        public ProxyModel[] GetAllProxy()
+        public async Task<ProxyModel[]> GetAllProxyAsync(int bucket = 5500)
         {
-            return proxyRepository.FindAll().Result.ToArray();
-        } // int
-
-        public ProxyModel GetRandomProxy()
+            var allProxy = await proxyRepository.FindAll(bucket);
+            return allProxy.ToArray();
+        }
+        public async Task<ProxyModel> GetRandomProxyAsync(int bucket = 5500)
         {
-            var proxyList = proxyRepository.FindAll();
-            return proxyList.Result.ToArray()[randomizer.Next(proxyList.Result.Count())];
+            var proxyList = await proxyRepository.FindAll(bucket);
+            if (proxyList.Count() == 0)
+            {
+                return null;
+            }
+            return proxyList.ToArray()[randomizer.Next(proxyList.Count())];
         }
 
         public async Task SetInvalidProxyAsync(ProxyModel proxy)
         {
             var updatedProxy = proxy;
             updatedProxy.Status = (int)ProxyStatus.InActive;
-            await proxyRepository.Update(updatedProxy);
+            proxyRepository.Update(updatedProxy, (int)proxy.Bucket);
             return;
         }
-
         public async Task SetValidProxyAsync(ProxyModel proxy, string externalIp)
         {
             ProxyModel newProxy = proxy;
@@ -46,7 +49,7 @@ namespace Implemantation.Services
             }
             newProxy.LasteTimeActive = DateTime.Now.ToString();
             newProxy.ExternalIp = externalIp;
-            await proxyRepository.Update(newProxy);
+            proxyRepository.Update(newProxy, (int)proxy.Bucket);
             return;
         }
     }

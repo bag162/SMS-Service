@@ -1,0 +1,9 @@
+Table - bucket
+
+Queue - 1000-2000
+User - 2000-3000
+Account - 3000-4000
+Order - 4000-5000
+Service - 5000-5500
+Proxy = 5500-6000
+History - 6000-7000

@@ -7,7 +7,14 @@ using System.Threading.Tasks;
 using ProGaudi.Tarantool.Client;
 using Backend.TarantoolDB.Repositories;
 using System.Collections.Generic;
-using Backend.Models.Implementation.Models.MsgPackModels;
+using Backend.DBInfrastructure;
+using Backend.DBInfrastructure.Models;
+using TarantoolDB.Repositories;
+using System.Linq;
+using static TarantoolDB.Repositories.ServiceRepository;
+using Backend.Models.DB.Models;
+using Backend.Models.Implementation.Models.Enums;
+using static Backend.TarantoolDB.Repositories.QueueRepository;
 
 namespace SMS_Service_Worker.API.PrivateWEB
 {
@@ -22,6 +29,9 @@ namespace SMS_Service_Worker.API.PrivateWEB
         private readonly Random randomizer = new();
         private readonly Box box;
         private readonly QueueRepository queueRepository;
+        private readonly ServiceRepository serviceRepository;
+        private readonly OrderRepository orderRepository;
+
         public tests(IAccountService accountService,
             IUserService userService,
             IProxyService proxyService,
@@ -29,7 +39,9 @@ namespace SMS_Service_Worker.API.PrivateWEB
             IServicePricesService servicePricesService,
             IHistoryService historyService,
             Box box,
-             QueueRepository queueRepository)
+            QueueRepository queueRepository,
+            ServiceRepository serviceRepository,
+            OrderRepository orderRepository)
         {
             this.accountService = accountService;
             this.userService = userService;
@@ -39,6 +51,8 @@ namespace SMS_Service_Worker.API.PrivateWEB
             this.historyService = historyService;
             this.box = box;
             this.queueRepository = queueRepository;
+            this.serviceRepository = serviceRepository;
+            this.orderRepository = orderRepository;
         }
 
         // delete in prod
@@ -72,75 +86,38 @@ namespace SMS_Service_Worker.API.PrivateWEB
         [Route("getallproxy")]
         public async Task<ContentResult> getallproxy()
         {
-            return new ContentResult { Content = JsonSerializer.Serialize(proxyService.GetAllProxy()) };
-        }
-
-        class JsonRequest
-        {
-            public ServiceModel service { get; set; }
-            public Dictionary<int,string> numeric { get; set; }
+            return new ContentResult { Content = JsonSerializer.Serialize(proxyService.GetAllProxyAsync().Result) };
         }
 
         [HttpGet]
         [Route("testRouter")]
         public async Task testRouter()
         {
-            var service = new ServiceModel() { Id = randomizer.Next(100, 2000), Price = 5, RegularExpressions = "asd", ServicePrefix = randomizer.Next(100,1000).ToString(), Bucket = Guid.NewGuid().ToString() };
-            var jsonData = GenerateJsonData(service);
-            var jsonRequest = new JSONRequest() { JSON = jsonData };
-
-            // create
-            var result = await box.Call<JSONRequest, ServiceModel>("Insert", jsonRequest);
-
-            // getAll
-            var result4 = await box.Call<JSONRequest, ServiceModel[]>("GetAll", jsonRequest);
-
-            // update
-            service.Price = 600;
-            jsonRequest = new JSONRequest() { JSON = GenerateJsonData(service) };
-            var result1 = await box.Call<JSONRequest, ServiceModel[]>("Update", jsonRequest);
-
-            // getAll
-            var result3 = await box.Call<JSONRequest, ServiceModel[]>("GetAll", jsonRequest);
-
-            // delete
-            var result2 = await box.Call<JSONRequest, ServiceModel>("Delete", jsonRequest);
-
-            // getAll
-            var result5 = await box.Call<JSONRequest, ServiceModel[]>("GetAll", jsonRequest);
-
-            return;
-        }
-
-        private string GenerateJsonData(ServiceModel model = null)
-        {
-            var jsonPropertyes = new Dictionary<int, string>();
-            if (model != null)
+            var insertedQueue = new QueueModel()
             {
-                var propertyes = model.GetType().GetProperties();
+                Id = randomizer.Next(500, 5000).ToString(),
+                Type = (int)QueueType.Order,
+                Data = randomizer.Next(500, 5000).ToString(),
+                Bucket = 50, Priority = randomizer.Next(1, 10)};
 
-                for (int i = 0; i < propertyes.Length; i++)
-                {
-                    jsonPropertyes.Add(i + 1, propertyes[i].Name);
-                }
-            }
 
-            var jsonModel = new JsonRequestModel() { numeric = jsonPropertyes, model = model, space_name = "service" };
-            return JsonSerializer.Serialize<JsonRequestModel>(jsonModel);
-        }
-        private class JsonRequestModel
-        {
-            public string space_name { get; set; }
-            public ServiceModel model { get; set; }
-            public Dictionary<int, string> numeric { get; set; }
-        }
-        private enum CRUDOperations
-        {
-            GetAll = 1,
-            Get = 2,
-            Insert = 3,
-            Update = 4,
-            Delete = 5
+
+            var insertedOrder = new OrderModel()
+            {
+                Bucket = 49,
+                Id = Guid.NewGuid().ToString(),
+                Number = "asdasdasdasd",
+                OrderId = randomizer.Next(5,50000),
+                Service = randomizer.Next(50,5000),
+                StartDateTime = DateTime.Now.ToString(),
+                Status = 1,
+                UserId = Guid.NewGuid().ToString(),
+            };
+
+            var queues = await queueRepository.FindAll();
+
+            await orderRepository.Create(insertedOrder);
+            return;
         }
     }
 }

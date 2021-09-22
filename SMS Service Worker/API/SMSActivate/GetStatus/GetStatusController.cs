@@ -1,6 +1,5 @@
 ﻿using Models.DTO.DTOModels;
 using Implemantation.IServices;
-using Models.ImplementationModels;
 using Models.ImplementationModels.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,21 +23,21 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetStatus
         [HttpGet]
         public async Task<ContentResult> GetStatus(string api_key, int id)
         {
-            UserModel user = await userService.GetUserByApiKeyAsync(api_key);
+            UserModel user = userService.GetUserByApiKey(api_key);
             OrderModel order = await orderService.GetOrderByOrderIdAsync(id);
 
             if (order == null || order.UserId != user.Id)
             {
-                await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.GetStatus_Fail);
+                await historyService.InputNewHistoryAsync(user.Id, HistoryType.GetStatus_Fail);
                 return new ContentResult { Content = "NO_ACTIVATION", StatusCode = 405 };
             }
 
-            await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.GetStatus);
+            await historyService.InputNewHistoryAsync(user.Id, HistoryType.GetStatus);
             if (order.Status == 6)
             {
-                return new ContentResult { Content = Enum.GetName(typeof(OrderStatuses), order.Status) + ":" + order.SMSCode };
+                return new ContentResult { Content = Enum.GetName(typeof(OrderStatus), order.Status) + ":" + order.SMSCode };
             }
-            return new ContentResult { Content = Enum.GetName(typeof(OrderStatuses), order.Status) };
+            return new ContentResult { Content = Enum.GetName(typeof(OrderStatus), order.Status) };
         }
     }
 }

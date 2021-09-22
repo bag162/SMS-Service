@@ -17,7 +17,7 @@ namespace Models.ImplementationModels.JsonModels
             public string message { get; set; }
             public bool read { get; set; }
             public bool deleted { get; set; }
-            public DateTime date { get; set; }
+            public string date { get; set; }
         }
 
         public class Ringtones
@@ -39,7 +39,7 @@ namespace Models.ImplementationModels.JsonModels
             public string name { get; set; }
             public string contact_proxy_number { get; set; }
             public Ringtones ringtones { get; set; }
-            public DateTime updated_at { get; set; }
+            public string updated_at { get; set; }
             public Avatar avatar { get; set; }
             public int contact_type { get; set; }
         }
@@ -52,9 +52,9 @@ namespace Models.ImplementationModels.JsonModels
             public bool has_read { get; set; }
             public string last_deleted_Id { get; set; }
             public string archived_message_id { get; set; }
-            public DateTime archived_message_time { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime updated_at { get; set; }
+            public string archived_message_time { get; set; }
+            public string created_at { get; set; }
+            public string updated_at { get; set; }
             public Preview preview { get; set; }
             public List<Member> members { get; set; }
             public string name { get; set; }

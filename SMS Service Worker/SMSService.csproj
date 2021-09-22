@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>SMS_Service_Worker</RootNamespace>
+    <UserSecretsId>29ce61ef-fc91-459f-a923-42396b044469</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>1</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DalSoft.Hosting.BackgroundQueue" Version="1.0.4" />
     <PackageReference Include="Google.Protobuf" Version="3.17.3" />
     <PackageReference Include="Grpc.Net.Client" Version="2.39.0" />
     <PackageReference Include="Grpc.Tools" Version="2.39.1">
@@ -19,17 +26,18 @@
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.24" />
     <PackageReference Include="Hangfire.Core" Version="1.7.24" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.24" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Backend.CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
-    <ProjectReference Include="..\Backend.CheckProxyWorker\Backend.CheckProxyWorker.csproj" />
     <ProjectReference Include="..\Backend.Configuration\Backend.Configuration.csproj" />
     <ProjectReference Include="..\Backend.DBInfrastructure\Backend.DBInfrastructure.csproj" />
     <ProjectReference Include="..\Backend.Implemantation\Backend.Implemantation.csproj" />
     <ProjectReference Include="..\Backend.Models.DTO\Backend.Models.csproj" />
     <ProjectReference Include="..\Backend.SMSWorker\Backend.SMSWorker.csproj" />
     <ProjectReference Include="..\Backend.TarantoolDB\Backend.TarantoolDB.csproj" />
+    <ProjectReference Include="..\Backend.TaskMonitor\Backend.TaskMonitor.csproj" />
   </ItemGroup>
 
 </Project>

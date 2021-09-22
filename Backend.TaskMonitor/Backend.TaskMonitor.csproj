@@ -1,11 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DalSoft.Hosting.BackgroundQueue" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
     <ProjectReference Include="..\Backend.Implemantation\Backend.Implemantation.csproj" />
     <ProjectReference Include="..\Backend.SMSWorker\Backend.SMSWorker.csproj" />
   </ItemGroup>

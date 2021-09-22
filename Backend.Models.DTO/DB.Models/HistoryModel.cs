@@ -19,6 +19,6 @@ namespace Models.DTO.DTOModels
         [MsgPackArrayElement(4)]
         public string Message { get; set; }
         [MsgPackArrayElement(5)]
-        public string Bucket { get; set; }
+        public long Bucket { get; set; }
     }
 }

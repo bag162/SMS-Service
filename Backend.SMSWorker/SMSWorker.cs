@@ -4,7 +4,6 @@ using Models.ImplementationModels.Enums;
 using Implemantation.Services;
 using Microsoft.Extensions.Options;
 using Models.DTO.DTOModels;
-using Newtonsoft.Json;
 using SMS_Service_Worker.Common.Services.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,6 +12,9 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Models.ImplementationModels.JsonModels.TNMessages;
+using Backend.Models.Implementation.Models.JsonModels;
+using System.Text.Json;
+using Backend.Models.Implementation.Models.HistoryInputModels;
 
 namespace SMS_Service_Worker.Workers.SMSWorker
 {
@@ -46,60 +48,101 @@ namespace SMS_Service_Worker.Workers.SMSWorker
         public async Task StartSMSWorker(OrderModel order, UserModel user, AccountModel account, ProxyModel proxy, string firstMessgae = null)
         {
             // get handler
-            HttpClientHandler handler = handlerConveer.GetHandler(account, proxy, true).Result.handler;
-            if (handler == null)
+            var handlerResponse = handlerConveer.GetHandlerAsync(account, proxy, true).Result;
+            if (handlerResponse.handler == null)
             {
-                await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_CANCEL);
-                return;
+                if (handlerResponse.status == HandlerConveerStatus.IncorrectCookie)
+                {
+                    DeactivateAccountAndOrder(order, account);
+                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                    historyService.InputNewHistoryAsync("0", HistoryType.CookieIncorrect, newHistory);
+                    return;
+                }
+                if (handlerResponse.status == HandlerConveerStatus.NoCookie)
+                {
+                    DeactivateAccountAndOrder(order, account);
+                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                    historyService.InputNewHistoryAsync("0", HistoryType.NoCookie, newHistory);
+                    return;
+                }
+                if (handlerResponse.status == HandlerConveerStatus.NoProxy)
+                {
+                    historyService.InputNewHistoryAsync("0", HistoryType.NoProxy);
+                    return;
+                }
             }
+            var handler = handlerResponse.handler;
 
             // request first message
             HttpClient client = new(handler);
-            string response = GetMessage(client);
+            string response = await GetMessage(client);
+            if (response == "")
+            {
+                var newHestory = new HistoryJsonModel() { Proxy = proxy, TimeIncident = DateTime.Now.ToString(), Message = "Proxy not have access to TextNow. Cloudfare blocked session" };
+                historyService.InputNewHistoryAsync("0", HistoryType.ProxyNotHaveAccessToTN, newHestory);
+                return;
+            }
 
             // check account on valid
-            ErrorCode errorResponse = new ErrorCode() { error_code = "not" };
+            ErrorCode errorResponse = null;
             try
             {
-                errorResponse = JsonConvert.DeserializeObject<ErrorCode>(response);
+                errorResponse = JsonSerializer.Deserialize<ErrorCode>(response);
             }
             catch
             {
-
+                errorResponse.error_code = "not";
             }
             if (errorResponse.error_code == Config.Value.Common.ErrorResponse)
             {
-                DeactivateAccount(order, account);
+                DeactivateAccountAndOrder(order, account);
+                var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                historyService.InputNewHistoryAsync("0", HistoryType.CookieInactive, newHistory);
                 return;
             }
+
+            // parse message string
+            string responseMessage = JsonSerializer.Deserialize<JsonMessages>(response).result.FirstOrDefault().preview.message;
             if (firstMessgae == null)
             {
-                // TODO
+                var updatedOrder = order;
+                var jsonData = new TaskModel()
+                {
+                    Account = account,
+                    FirstMessage = responseMessage,
+                    Order = order,
+                    Proxy = proxy,
+                    User = user
+                };
+                updatedOrder.JsonData = JsonSerializer.Serialize(jsonData);
+                orderService.UpdateOrderAsync(updatedOrder);
+                historyService.InputNewHistoryAsync(user.Id, HistoryType.InsertFirstMessage, DateTime.Now.ToString());
+                return;
             }
 
+            if (firstMessgae == responseMessage)
+                return;
+
             // get sms code
-            var message = JsonConvert.DeserializeObject<JsonMessages>(response).result.FirstOrDefault();
             JsonExpression ExpressionList = pricesService.GetAllExpressionByServiceId(order.Service);
-            string smsCode = CheckForRegularExpressions(ExpressionList.Expressions, message.preview.message);
-            
+            string smsCode = CheckForRegularExpressions(ExpressionList.Expressions, responseMessage);
+
             // set result
             if (smsCode != null)
             {
-                SetSMS(order, message, smsCode, user);
+                SetSMS(order, responseMessage, smsCode, user);
                 return;
             }
-            if (response != firstMessgae)
-            {
-                ResetOrder(order, user, message);
-                return;
-            }
+
+            ResetOrder(order, user, responseMessage);
+            return;
         }
 
         private static string CheckForRegularExpressions(List<Expression> expressions, string message)
         {
             foreach (var expression in expressions)
             {
-                Regex regex = new($@"${expression.RegularExpression}");
+                Regex regex = new(expression.RegularExpression);
                 MatchCollection matches = regex.Matches(message);
                 if (matches.Count == 0)
                 {
@@ -107,10 +150,11 @@ namespace SMS_Service_Worker.Workers.SMSWorker
                 }
                 return matches.FirstOrDefault().Value;
             }
+            
             return null;
         }
 
-        public string GetMessage(HttpClient client)
+        public async Task<string> GetMessage(HttpClient client)
         {
             var request = client.GetAsync(Config.Value.TextNowRoutes.GetMessageURI).Result.Content;
             var response = request.ReadAsStringAsync().Result;
@@ -118,26 +162,24 @@ namespace SMS_Service_Worker.Workers.SMSWorker
             return response;
         }
 
-        public async Task DeactivateAccount(OrderModel order, AccountModel account)
+        public async Task DeactivateAccountAndOrder(OrderModel order, AccountModel account)
         {
-            await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_CANCEL);
-            await accountService.DeactivateAccountAsync(account);
-            await historyService.InputNewHistoryAsync("0", (int)TypeRequests.CookieInactive, "Inactive cookie");
+            orderService.SetStatusAsync(order, OrderStatus.STATUS_CANCEL);
+            accountService.DeactivateAccountAsync(account);
             return;
         }
 
-        public async Task SetSMS(OrderModel order, Result message, string smsCode, UserModel user)
+        public async Task SetSMS(OrderModel order, string message, string smsCode, UserModel user)
         {
-            await orderService.SetSMSAndSMSCodeAsync(order, message.preview.message, smsCode);
-            await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_OK);
-            await userService.TakePaymentAsync(user.Id, pricesService.GetServicePriceByServiceId(order.Service));
-            return;
+            orderService.SetSMSAndSMSCodeAsync(order, message, smsCode);
+            orderService.SetStatusAsync(order, OrderStatus.STATUS_OK);
+            userService.TakePaymentAsync(user.Id, pricesService.GetServicePriceByServiceId(order.Service));
         }
 
-        public async Task ResetOrder(OrderModel order, UserModel user, Result message)
+        public async Task ResetOrder(OrderModel order, UserModel user, string message)
         {
-            historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.InvalidExpressions, $"service: {order.Service} - all regexes failed, message: ${message.preview.message}");
-            orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_FREE);
+            historyService.InputNewHistoryAsync(user.Id, HistoryType.InvalidExpressions, $"service: {order.Service} - all regexes failed, message: ${message}");
+            orderService.SetStatusAsync(order, OrderStatus.STATUS_FREE);
         }
 
     }

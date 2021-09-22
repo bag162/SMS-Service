@@ -1,11 +1,7 @@
+using Backend.TaskMonitor;
+using Hangfire;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SMS_Service_Worker
 {
@@ -14,6 +10,8 @@ namespace SMS_Service_Worker
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            RecurringJob.AddOrUpdate<TaskMonitorWorker>(x => x.StartTaskMonitor(), Cron.Minutely);
+            RecurringJob.AddOrUpdate<TaskCreatorWorker>(x => x.CheckTaskForCreateQueue(), Cron.Minutely);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

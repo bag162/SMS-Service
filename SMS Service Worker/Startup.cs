@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SMS_Service_Worker.Workers.CheckerDBWorker;
-using SMS_Service_Worker.Workers.CheckProxyValid;
-using SMS_Service_Worker.Workers.CheckValidWorker;
 
 namespace SMS_Service_Worker
 {
@@ -25,7 +22,7 @@ namespace SMS_Service_Worker
             DependencyInjectionConf.ConfigureTarantool(services, Configuration);
             DependencyInjectionConf.Configure(services, Configuration);
         }
-
+         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

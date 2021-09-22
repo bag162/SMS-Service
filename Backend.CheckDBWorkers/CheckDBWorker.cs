@@ -42,7 +42,14 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
                     {
                         if (!OrdersByAccNumber.Contains((int)service.Id))
                         {
-                            await orderService.InsertOrderAsync(new OrderModel() { Id = Guid.NewGuid().ToString(), Number = account.Number, OrderId = 0, Service = (int)service.Id, SMS = "", SMSCode = "", StartDateTime = "", Status = 1, UserId = "" });
+                            orderService.InsertOrderAsync(new OrderModel() 
+                            { 
+                                Id = Guid.NewGuid().ToString(), 
+                                Number = account.Number, 
+                                OrderId = 0, 
+                                Service = (int)service.Id,
+                                Status = (int)OrderStatus.STATUS_FREE,
+                                Bucket = 4000});
                         }
                     }
                 }
@@ -59,6 +66,7 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
             var inactiveAccounts = allAccounts
                     .AsQueryable()
                     .Where(x => x.Status == (int)AccountStatus.Inactive);
+
             foreach (var account in inactiveAccounts) // проверям есть ли в базе ордеров, номера аккаунтов у которых статус (int)AccountStatus.Inactive
             {
                 var deletedOrders = allOrders
@@ -69,12 +77,12 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
                 {
                     foreach (var deletedOrder in deletedOrders)
                     {
-                        await orderService.DeleteOrderByIdAsync(deletedOrder.Id);
+                        orderService.SetStatusAsync(deletedOrder, OrderStatus.RESERVE);
                     }
                 }
             }
 
-            foreach (var order in allOrders) // проверяем есть ли в базе аккаунтов номер, с таким же номером как и у текущего ордера
+            foreach (var order in allOrders) // проверяем есть ли в базе аккаунт, с таким же номером как в оредере. Если такого аккаунта нет, то ордер не может быть обслужен, и его необходимо удалить.
             {
                 var ordersInAccBase = allAccounts
                     .AsQueryable()
@@ -82,7 +90,7 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
 
                 if (!ordersInAccBase.Any())
                 {
-                    await orderService.DeleteOrderByIdAsync(order.Id);
+                    orderService.DeleteOrderByIdAsync(order.Id);
                 }
             }
 

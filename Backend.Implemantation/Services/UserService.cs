@@ -4,6 +4,7 @@ using Implemantation.IServices;
 using System.Linq;
 using System.Threading.Tasks;
 using TarantoolDB.Repositories;
+using static TarantoolDB.Repositories.UserRepository;
 
 namespace Implemantation.Services
 {
@@ -19,7 +20,6 @@ namespace Implemantation.Services
         private readonly UserRepository userRepository;
         private readonly IServicePricesService pricesService;
 
-
         public bool CheckBalanceUser(UserModel user, long serviceIndex)
         {
             double price = pricesService.GetServicePriceByServiceId(serviceIndex);
@@ -29,19 +29,18 @@ namespace Implemantation.Services
             }
             return true;
         }
-        public async Task<UserModel> GetUserByApiKeyAsync(string apiKey)
+
+        public UserModel GetUserByApiKey(string apiKey, int bucket = 2000)
         {
-            var iindex = await userRepository.Space.GetIndex("secondary_apikey");
-            /*return userRepository.Find(iindex, apiKey).FirstOrDefault();*/ // TODO
-            return null;
+            return userRepository.Find(apiKey, (int)UserTFields.apikey, bucket).Result.FirstOrDefault();
         }
 
-        public async Task TakePaymentAsync(string userId, double price)
+        public async Task TakePaymentAsync(string userId, double price, int bucket = 2000)
         {
-            /*UserModel user = userRepository.FindById(userId);
+            UserModel user = userRepository.Find(userId, 1, bucket).Result.FirstOrDefault();
             user.Balance += price;
-            await userRepository.Update(user);*/
-            return; // TODO
+            userRepository.Update(user);
+            return;
         }
     }
 }

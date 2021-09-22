@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Backend.CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
-    <ProjectReference Include="..\Backend.CheckProxyWorker\Backend.CheckProxyWorker.csproj" />
     <ProjectReference Include="..\Backend.Configuration\Backend.Configuration.csproj" />
     <ProjectReference Include="..\Backend.Implemantation\Backend.Implemantation.csproj" />
     <ProjectReference Include="..\Backend.SMSWorker\Backend.SMSWorker.csproj" />

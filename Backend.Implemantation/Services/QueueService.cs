@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Backend.Implemantation.Services
@@ -19,24 +20,34 @@ namespace Backend.Implemantation.Services
             this.queueRepository = queueRepository;
         }
 
-        public Task CreateQueue(QueueModel task)
+        public async Task CreateQueueAsync(QueueModel task)
         {
-            throw new NotImplementedException();
+            queueRepository.Create(task, (int)task.Bucket);
+            return;
+        }
+        public async Task CreateQueuesAsync(List<QueueModel> tasks)
+        {
+            foreach (var task in tasks)
+            {
+                queueRepository.Create(task, (int)task.Bucket);
+            }
+
+            return;
         }
 
-        public Task DeleteQueue(QueueModel task)
+        public async Task DeleteQueueAsync(QueueModel task)
         {
-            throw new NotImplementedException();
+            queueRepository.Delete(task, (int)task.Bucket);
+            return;
         }
 
-        public Task<TaskModel> GetTask()
+        public async Task<QueueModel[]> GetAllQueueAsync(int bucket = 1000)
         {
-            throw new NotImplementedException();
+            return queueRepository.FindAll(bucket).Result.ToArray();
         }
-
-        public Task UpdateDataQueue(TaskModel data)
+        public async Task<QueueModel[]> GetTaskAsync(int count, int bucket = 1000)
         {
-            throw new NotImplementedException();
+            return queueRepository.GetTasks(count, bucket).Result.ToArray();
         }
     }
 }

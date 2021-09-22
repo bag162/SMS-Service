@@ -6,8 +6,9 @@ namespace Implemantation.IServices
 {
     public interface IAccountService
     {
-        public AccountModel[] GetAllAccounts();
-        public Task<AccountModel> GetAccountByNumberAsync(string number);
-        public Task DeactivateAccountAsync(AccountModel account, int status = (int)AccountStatus.Inactive);
+        public AccountModel[] GetAllActiveAccounts(int bucket = 3000);
+        public AccountModel[] GetAllAccounts(int bucket = 3000);
+        public Task<AccountModel> GetAccountByNumberAsync(string number, int bucket = 3000);
+        public Task DeactivateAccountAsync(AccountModel account, AccountStatus status = AccountStatus.Inactive);
     }
 }

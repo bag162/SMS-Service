@@ -1,6 +1,5 @@
 ﻿using Models.DTO.DTOModels;
 using Implemantation.IServices;
-using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using Models.ImplementationModels;
 using Models.ImplementationModels.Enums;
 using static Models.ImplementationModels.JsonModels.Cookie;
+using System.Text.Json;
 
 namespace Implemantation.Services
 {
@@ -24,53 +24,58 @@ namespace Implemantation.Services
             this.proxyService = proxyService;
         }
 
-        public async Task<HandlerConveerModel> GetHandler(AccountModel account, ProxyModel proxy = null, bool setcookie = true)
+        public async Task<HandlerConveerModel> GetHandlerAsync(AccountModel account, ProxyModel proxy = null, bool setcookie = true)
         {
             HttpClientHandler handler = new();
+            var usedProxy = proxy;
 
             if (proxy == null)
-            {
-                proxy = proxyService.GetRandomProxy();
-            }
-            if (proxy == null)
-            {
-                await historyService.InputNewHistoryAsync("0", (int)TypeRequests.NoProxy);
+                usedProxy = proxyService.GetRandomProxyAsync().Result;
+
+            if (usedProxy == null)
                 return new HandlerConveerModel { status = HandlerConveerStatus.NoProxy };
-            }
 
-            handler = SetProxy(handler, proxy);
+            /*handler = SetProxy(handler, usedProxy);*/ // TODO
 
             if (setcookie)
             {
                 if (account.Cookie == null)
-                {
-                    await historyService.InputNewHistoryAsync("0", (int)TypeRequests.NoCookie, "Cookie invalid");
-                    return new HandlerConveerModel { status = HandlerConveerStatus.InvalidCookie };
-                }
-                handler = Setcookie(handler, account.Cookie);
+                    return new HandlerConveerModel { status = HandlerConveerStatus.NoCookie };
+
+                handler = SetCookie(handler, account.Cookie);
+
+                if (handler == null)
+                    return new HandlerConveerModel { status = HandlerConveerStatus.IncorrectCookie };
             }
 
             return new HandlerConveerModel { handler = handler, status = HandlerConveerStatus.Success };
         }
 
-        public HttpClientHandler Setcookie(HttpClientHandler handler, string cookie)
+        public HttpClientHandler SetCookie(HttpClientHandler handler, string cookie)
         {
+            CoockieRootModel deserializedcookie;
             CookieContainer cookieContainer = new();
-            CookieRootModel deserializedcookie = JsonConvert.DeserializeObject<CookieRootModel>(cookie);
-
-            foreach (var cookieItem in deserializedcookie.cookies)
+            try
             {
-                if (cookieItem.domain == "www.textnow.com")
+                deserializedcookie = JsonSerializer.Deserialize<CoockieRootModel>(cookie);
+            }
+            catch
+            {
+                return null;
+            }
+
+            foreach (var cookieItem in deserializedcookie.Cookies)
+            {
+                if (cookieItem.Domain == "www.textnow.com")
                 {
                     var baseAddress = new Uri("http://www.textnow.com");
-                    cookieContainer.Add(baseAddress, new Cookie(cookieItem.name, cookieItem.value));
+                    cookieContainer.Add(baseAddress, new Cookie(cookieItem.Name, cookieItem.Value));
                 }
 
             }
             handler.CookieContainer = cookieContainer;
             return handler;
         }
-
         public HttpClientHandler SetProxy(HttpClientHandler handler, ProxyModel proxy)
         {
             WebProxy requestProxy = new()

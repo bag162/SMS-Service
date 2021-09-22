@@ -4,6 +4,8 @@ using Implemantation.IServices;
 using System.Linq;
 using System.Threading.Tasks;
 using TarantoolDB.Repositories;
+using static TarantoolDB.Repositories.AccountRepository;
+using Models.ImplementationModels.Enums;
 
 namespace Implemantation.Services
 {
@@ -16,23 +18,25 @@ namespace Implemantation.Services
             this.accountRepository = accountRepository;
         }
 
-        public async Task DeactivateAccountAsync(AccountModel account, int status)
+        public async Task DeactivateAccountAsync(AccountModel account, AccountStatus status)
         {
             var updatedAccount = account;
-            updatedAccount.Status = status;
-            await accountRepository.Update(updatedAccount);
+            updatedAccount.Status = (int)status;
+            accountRepository.Update(updatedAccount, (int)updatedAccount.Bucket);
             return;
         }
 
-        public async Task<AccountModel> GetAccountByNumberAsync(string number)
+        public async Task<AccountModel> GetAccountByNumberAsync(string number, int bucket = 3000)
         {
-            /*return accountRepository.Find(await accountRepository.Space.GetIndex("secondary_number"), number).FirstOrDefault();*/ // TODO
-            return null;
+            return accountRepository.Find(number, (int)AccountTFields.number, bucket).Result.FirstOrDefault();
         }
-
-        public AccountModel[] GetAllAccounts()
+        public AccountModel[] GetAllAccounts(int bucket = 3000)
         {
-            return accountRepository.FindAll().Result.ToArray();
+            return accountRepository.FindAll(bucket).Result.ToArray();
+        }
+        public AccountModel[] GetAllActiveAccounts(int bucket = 3000)
+        {
+            return accountRepository.Find((int)AccountStatus.Active, (int)AccountTFields.status, bucket).Result.ToArray();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TarantoolDB.Repositories;
 using Models.ImplementationModels;
+using System.Linq;
 
 namespace Implemantation.Services
 {
@@ -17,46 +18,42 @@ namespace Implemantation.Services
         }
         private readonly ServiceRepository serviceRepository;
 
-        public double GetServicePriceByServiceId(long serviceId)
+        public double GetServicePriceByServiceId(long serviceId, int bucket = 5000)
         {
-            /*return serviceRepository.FindById(serviceId).Price;*/ // TODO
-            return 1.1;
+            return serviceRepository.Find(serviceId, 1, bucket).Result.FirstOrDefault().Price;
         }
-
-        public IEnumerable<ServiceModel> GetAllServices()
+        public IEnumerable<ServiceModel> GetAllServices(int bucket = 5000)
         {
-            return serviceRepository.FindAll().Result;
+            return serviceRepository.FindAll(bucket).Result;
         }
-
-        public ServiceModel GetServiceByServiceId(long serviceId)
+        public ServiceModel GetServiceByServiceId(long serviceId, int bucket = 5000)
         {
-            /*return serviceRepository.FindById(serviceId);*/
-            return null; // TODO
+            return serviceRepository.Find(serviceId, 1, bucket).Result.FirstOrDefault();
         }
-
-        public JsonExpression GetAllExpressionByServiceId(long serviceId)
+        public JsonExpression GetAllExpressionByServiceId(long serviceId, int bucket = 5000)
         {
-            return JsonConvert.DeserializeObject<JsonExpression>(GetServiceByServiceId(serviceId).RegularExpressions);
+            return JsonConvert.DeserializeObject<JsonExpression>(GetServiceByServiceId(serviceId, bucket).RegularExpressions);
         }
 
         public async Task UpdateServiceAsync(ServiceModel service)
         {
-            await serviceRepository.Update(service);
+            serviceRepository.Update(service, (int)service.Bucket);
             return;
         }
 
         public async Task CreateServiceAsync(ServiceModel service)
         {
-            await serviceRepository.Create(service);
+            serviceRepository.Create(service, (int)service.Bucket);
             return;
         }
 
         public async Task DeleteServiceAsync(ServiceModel service)
         {
-            await serviceRepository.Delete(service);
+            serviceRepository.Delete(service, (int)service.Bucket);
             return;
         }
     }
+
     public class Root
     {
         public string RegularExpression { get; set; }

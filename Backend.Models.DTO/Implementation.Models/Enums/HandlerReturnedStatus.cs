@@ -9,6 +9,7 @@ namespace Models.ImplementationModels.Enums
     {
         Success = 1,
         NoProxy = 2,
-        InvalidCookie = 3
+        IncorrectCookie = 3,
+        NoCookie = 4
     }
 }

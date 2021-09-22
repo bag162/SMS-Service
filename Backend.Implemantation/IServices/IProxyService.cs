@@ -5,8 +5,9 @@ namespace Implemantation.IServices
 {
     public interface IProxyService
     {
-        public ProxyModel GetRandomProxy();
-        public ProxyModel[] GetAllProxy();
+        public Task<ProxyModel> GetRandomProxyAsync(int bucket = 5500);
+        public Task<ProxyModel[]> GetAllProxyAsync(int bucket = 5500);
+
         public Task SetInvalidProxyAsync(ProxyModel proxy);
         public Task SetValidProxyAsync(ProxyModel proxy, string externalIp);
     }

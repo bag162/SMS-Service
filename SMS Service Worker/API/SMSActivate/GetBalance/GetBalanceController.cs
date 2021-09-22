@@ -18,7 +18,7 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetBalance
         [HttpGet]
         public async Task<ContentResult> GetBalance(string api_key)
         {
-            UserModel user = await userService.GetUserByApiKeyAsync(api_key);
+            UserModel user = userService.GetUserByApiKey(api_key);
             return new ContentResult { Content = "ACCESS_BALANCE:" + user.Balance };
         }
     }

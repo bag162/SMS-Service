@@ -17,6 +17,6 @@ namespace Models.DTO.DTOModels
         [MsgPackArrayElement(3)]
         public string ApiKey { get; set; }
         [MsgPackArrayElement(4)]
-        public string Bucket { get; set; }
+        public long Bucket { get; set; }
     }
 }

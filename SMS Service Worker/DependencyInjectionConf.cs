@@ -11,14 +11,16 @@ using ProGaudi.Tarantool.Client.Model;
 using SMS_Service_Worker.Common.Services.Configuration;
 using SMS_Service_Worker.Workers.CheckerDBWorker;
 using SMS_Service_Worker.Workers.CheckProxyValid;
-using SMS_Service_Worker.Workers.CheckValidWorker;
 using SMS_Service_Worker.Workers.SMSWorker;
 using System;
 using TarantoolDB;
 using TarantoolDB.Repositories;
 using Backend.Models.DB.Models;
 using Backend.TarantoolDB.Repositories;
-using Backend.Models.Implementation.Models.MsgPackModels;
+using Backend.DBInfrastructure.Models;
+using DalSoft.Hosting.BackgroundQueue.DependencyInjection;
+using Backend.Implemantation.IServices;
+using Backend.Implemantation.Services;
 
 namespace SMS_Service_Worker
 {
@@ -39,7 +41,12 @@ namespace SMS_Service_Worker
             UseRecommendedIsolationLevel = true,
             DisableGlobalLocks = true
         }));
-            services.AddHangfireServer();
+
+            services.AddBackgroundQueue(onException: exception =>
+            {
+
+            });
+            services.AddHangfireServer(options => options.WorkerCount = 2);
             services.AddControllersWithViews();
             // reg reposities
             services.AddTransient<OrderRepository>();
@@ -57,6 +64,7 @@ namespace SMS_Service_Worker
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IProxyService, ProxyService>();
             services.AddTransient<IHandlerConveyor, HandlerConveyor>();
+            services.AddTransient<IQueueService, QueueService>();
 
             services.AddTransient<SMSWorker>();
             services.AddTransient<CheckAccountValidWorker>();
@@ -67,7 +75,7 @@ namespace SMS_Service_Worker
         public static void ConfigureTarantool(IServiceCollection services, IConfiguration Configuration)
         {
             var msgPackContext = new MsgPackContext();
-            msgPackContext.GenerateAndRegisterArrayConverter<JSONRequest>();
+            msgPackContext.GenerateAndRegisterArrayConverter<JsonRequestOneField>();
             msgPackContext.GenerateAndRegisterArrayConverter<QueueModel>();
             msgPackContext.GenerateAndRegisterArrayConverter<UserModel>();
             msgPackContext.GenerateAndRegisterArrayConverter<OrderModel>();

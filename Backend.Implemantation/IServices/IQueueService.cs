@@ -10,12 +10,12 @@ namespace Backend.Implemantation.IServices
 {
     public interface IQueueService
     {
-        public Task<TaskModel> GetTask();
+        public Task<QueueModel[]> GetAllQueueAsync(int bucket = 1000);
+        public Task<QueueModel[]> GetTaskAsync(int count, int bucket = 1000);
 
-        public Task DeleteQueue(QueueModel task);
+        public Task DeleteQueueAsync(QueueModel task);
 
-        public Task CreateQueue(QueueModel task);
-
-        public Task UpdateDataQueue(TaskModel data);
+        public Task CreateQueueAsync(QueueModel task);
+        public Task CreateQueuesAsync(List<QueueModel> tasks);
     }
 }

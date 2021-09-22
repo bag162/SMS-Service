@@ -7,8 +7,8 @@ namespace Implemantation.Services
 {
     public interface IHandlerConveyor
     {
-        public Task<HandlerConveerModel> GetHandler(AccountModel account, ProxyModel pruxy = null, bool setcookie = true);
-        public HttpClientHandler Setcookie(HttpClientHandler handler, string cookie);
+        public Task<HandlerConveerModel> GetHandlerAsync(AccountModel account, ProxyModel proxy = null, bool setcookie = true);
+        public HttpClientHandler SetCookie(HttpClientHandler handler, string cookie);
         public HttpClientHandler SetProxy(HttpClientHandler handler, ProxyModel proxy);
     }
 }

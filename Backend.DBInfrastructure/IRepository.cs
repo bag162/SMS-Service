@@ -7,9 +7,11 @@ namespace DBInfrastructure
 {
     public interface IRepository<T> : IDisposable where T: class
     {
-        public Task<IEnumerable<T>> FindAll(string bucket_id = null);
-        public Task Create(T model, string bucket_id = null);
-        public Task Delete(T model, string bucket_id = null);
-        public Task Update(T moodel, string bucket_id = null);
+        public Task<IEnumerable<T>> FindAll(int bucket_id = 50);
+        public Task<T> Create(T model, int bucket_id = 50);
+        public Task<T> Delete(T model, int bucket_id = 50);
+        public Task<T> Update(T moodel, int bucket_id = 50);
+
+        public Task<IEnumerable<T>> Find<Y>(Y value, int indexId = 1, int bucket = 50);
     }
 }

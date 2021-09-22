@@ -9,6 +9,7 @@ using Models.ImplementationModels;
 using Models.ImplementationModels.Enums;
 using System.Collections.Generic;
 using ProGaudi.Tarantool.Client;
+using static TarantoolDB.Repositories.OrderRepository;
 
 namespace Implemantation.Services
 {
@@ -22,62 +23,60 @@ namespace Implemantation.Services
             this.orderRepository = orderRepository;
         }
 
-        public async Task<OrderModel> GetOrderByOrderIdAsync(int orderId)
+        public async Task<OrderModel> GetOrderByOrderIdAsync(int orderId, int bucket = 4000)
         {
-            /*return orderRepository.Find(await orderRepository.Space.GetIndex("secondary_orderid"), orderId).FirstOrDefault();*/ // TODO
-            return null;
+            return orderRepository.Find(orderId, (int)OrderTFields.order_id, bucket).Result.FirstOrDefault();
+        }
+        public async Task<OrderModel[]> GetActiveOrdersAsync(int bucket = 4000)
+        {
+            return orderRepository.Find((int)OrderStatus.STATUS_WAIT_CODE, (int)OrderTFields.status, bucket).Result.ToArray();
+        }
+        public OrderModel[] GetAllOrders(int bucket = 4000)
+        {
+            return orderRepository.FindAll(bucket).Result.ToArray();
+        }
+        public async Task<OrderModel[]> GetAllOrdersByServiceAsync(long serviceId, int bucket = 4000)
+        {
+            return orderRepository.Find(serviceId, (int)OrderTFields.service, bucket).Result.ToArray();
         }
 
-        public async Task SetStatusAsync(OrderModel order, int status)
+        public async Task SetStatusAsync(OrderModel order, OrderStatus status)
         {
             var updatedOrder = order;
-            updatedOrder.Status = status;
-            await orderRepository.Update(updatedOrder);
+            updatedOrder.Status = (int)status;
+            orderRepository.Update(updatedOrder, (int)order.Bucket);
             return;
         }
-         
-        public OrderModel[] GetAllOrders()
+        public async Task SetSMSAndSMSCodeAsync(OrderModel order, string sms, string smsCode)
         {
-            return orderRepository.FindAll().Result.ToArray();
+            var updatedOrder = order;
+            updatedOrder.SMS = sms;
+            updatedOrder.SMSCode = smsCode;
+            orderRepository.Update(updatedOrder, (int)order.Bucket);
+            return;
         }
 
         public async Task InsertOrderAsync(OrderModel order)
         {
-            await orderRepository.Create(order);
+            orderRepository.Create(order, (int)order.Bucket);
             return;
         }
 
-        public async Task DeleteOrderByIdAsync(string id)
+        public async Task DeleteOrderByIdAsync(string id, int bucket = 4000)
         {
-            await orderRepository.Delete(new OrderModel { Id = id});
+            orderRepository.Delete(new OrderModel { Id = id}, bucket);
             return;
-        }
-
-        public async Task SetSMSAndSMSCodeAsync(OrderModel order, string sms, string smsCode)
-        {
-            var updatedOrder = order;
-
-            updatedOrder.SMS = sms;
-            updatedOrder.SMSCode = smsCode;
-
-            await orderRepository.Update(updatedOrder);
-            return;
-        }
-
-        public async Task<OrderModel[]> GetAllOrdersByServiceAsync(long serviceId)
-        {
-            /*return orderRepository.Find(await orderRepository.Space.GetIndex("secondary_service"), serviceId);*/ // TODO
-            return null;
         }
 
         public async Task UpdateOrderAsync(OrderModel order)
         {
-            await orderRepository.Update(order);
+            orderRepository.Update(order, (int)order.Bucket);
+            return;
         }
 
-        public Task<OrderModel[]> GetActiveOrdersAsync()
+        public async Task<OrderModel> GetNumberAsync(int serviceId, int bucket = 4000)
         {
-            throw new NotImplementedException(); // TODO
+            return await orderRepository.GetNumber(serviceId, bucket);
         }
     }
 }

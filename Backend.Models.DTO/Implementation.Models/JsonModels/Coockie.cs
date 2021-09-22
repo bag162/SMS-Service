@@ -1,27 +1,50 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Models.ImplementationModels.JsonModels
 {
     public class Cookie
     {
-        public class CookieModel
+        public class CoockieModel
         {
-            public string domain { get; set; }
-            public double expires { get; set; }
-            public bool httpOnly { get; set; }
-            public string name { get; set; }
-            public string path { get; set; }
-            public string priority { get; set; }
-            public bool secure { get; set; }
-            public bool session { get; set; }
-            public int size { get; set; }
-            public string value { get; set; }
-            public string sameSite { get; set; }
+            [JsonPropertyName("domain")]
+            public string Domain { get; set; }
+
+            [JsonPropertyName("expires")]
+            public float Expires { get; set; }
+
+            [JsonPropertyName("httpOnly")]
+            public bool HttpOnly { get; set; }
+
+            [JsonPropertyName("name")]
+            public string Name { get; set; }
+
+            [JsonPropertyName("path")]
+            public string Path { get; set; }
+
+            [JsonPropertyName("priority")]
+            public string Priority { get; set; }
+
+            [JsonPropertyName("secure")]
+            public bool Secure { get; set; }
+
+            [JsonPropertyName("session")]
+            public bool Session { get; set; }
+
+            [JsonPropertyName("size")]
+            public int Size { get; set; }
+
+            [JsonPropertyName("value")]
+            public string Value { get; set; }
+
+            [JsonPropertyName("sameSite")]
+            public string SameSite { get; set; }
         }
 
-        public class CookieRootModel
+        public class CoockieRootModel
         {
-            public List<CookieModel> cookies { get; set; }
+            [JsonPropertyName("cookies")]
+            public List<CoockieModel> Cookies { get; set; }
         }
     }
 }

@@ -13,10 +13,6 @@ namespace Backend.Models.DB.Models
         [MsgPackArrayElement(3)]
         public int Priority { get; set; }
         [MsgPackArrayElement(4)]
-        public string StartTime { get; set; }
-        [MsgPackArrayElement(5)]
-        public string LastCheck { get; set; }
-        [MsgPackArrayElement(6)]
-        public string Bucket { get; set; }
+        public long Bucket { get; set; }
     }
 }

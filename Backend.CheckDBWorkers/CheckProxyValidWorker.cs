@@ -27,7 +27,7 @@ namespace SMS_Service_Worker.Workers.CheckProxyValid
 
         public async Task CheckProxyValid()
         {
-            ProxyModel[] allProxy = proxyService.GetAllProxy();
+            ProxyModel[] allProxy = await proxyService.GetAllProxyAsync();
             foreach (var proxy in allProxy)
             {
                 HttpClientHandler handler = handlerConveyor.SetProxy(new HttpClientHandler(), proxy);
@@ -35,14 +35,15 @@ namespace SMS_Service_Worker.Workers.CheckProxyValid
                 HttpContent accountProfileRequest;
                 try
                 {
+                    
                     accountProfileRequest = client.GetAsync(Config.Value.OtherRoutes.CheckIpURI).Result.Content;
                 }
                 catch
                 {
-                    await proxyService.SetInvalidProxyAsync(proxy);
+                    proxyService.SetInvalidProxyAsync(proxy);
                     continue;
                 }
-                await proxyService.SetValidProxyAsync(proxy, accountProfileRequest.ReadAsStringAsync().Result);
+                proxyService.SetValidProxyAsync(proxy, accountProfileRequest.ReadAsStringAsync().Result);
             }
             return;
         }

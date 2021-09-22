@@ -25,39 +25,41 @@ namespace SMS_Service_Worker.API.PrivateWEB.SetStatus
         [HttpGet]
         public async Task<ContentResult> SetStatus(string api_key, int id, int status)
         {
-            UserModel user = await userService.GetUserByApiKeyAsync(api_key);
+            UserModel user = userService.GetUserByApiKey(api_key);
             OrderModel order = await orderService.GetOrderByOrderIdAsync(id);
-
+            // если такого ордера нет
             if (order == null)
             {
-                await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.SetStatus_Fail);
+                await historyService.InputNewHistoryAsync(user.Id, HistoryType.SetStatus_Fail);
                 return new ContentResult { Content = "NO_ACTIVATION", StatusCode = 405 };
             }
-            if (order.Status != 1 && order.Status != 6)
+            // если ордер взят другим пользователем
+            if (order.UserId != user.Id)
             {
-                return new ContentResult { Content = "BAD_STATUS", StatusCode = 406 };
+                await historyService.InputNewHistoryAsync(user.Id, HistoryType.SetStatus_Fail);
+                return new ContentResult { Content = "NO_ACTIVATION", StatusCode = 405 };
             }
+            // если невозможно установить статус в связи с текущим
+            if (order.Status != 1)
+                return new ContentResult { Content = "BAD_STATUS", StatusCode = 406 };
+
+            // загрушки на неподдерживаемые запросы
             switch (status)
             {
                 case 1:
-                    return new ContentResult { Content = "ACCESS_READY " }; // если статус 1, то ответ всегда один и тот же, т.к. в этой системе этот запрос не нужен, и он вставлен как заглушка
+                    return new ContentResult { Content = "ACCESS_READY" }; // если статус 1, то ответ всегда один и тот же, т.к. в этой системе этот запрос не нужен, и он вставлен как заглушка
                 case 3:
                     return new ContentResult { Content = "BAD_STATUS", StatusCode = 406 }; // если статус 3, то выдаём неверный статус, т.к. в этой системе этот запрос ПОКА ЧТО не работает
             }
-            if (order.UserId != user.Id)
+            if (order.SMS == null || order.SMS == "" || order.SMS == "null")
             {
-                await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.SetStatus_Fail);
-                return new ContentResult { Content = "NO_ACTIVATION", StatusCode = 405 };
-            }
-            if (order.SMS == null || order.SMS == "")
-            {
-                await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.Setstatus_8);
-                await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_CANCEL);
+                await historyService.InputNewHistoryAsync(user.Id, HistoryType.SetStatus_8);
+                await orderService.SetStatusAsync(order, OrderStatus.STATUS_CANCEL);
             }
             else
             {
-                await historyService.InputNewHistoryAsync(user.Id, (int)TypeRequests.SetStatus_6);
-                await orderService.SetStatusAsync(order, (int)OrderStatuses.STATUS_OK);
+                await historyService.InputNewHistoryAsync(user.Id, HistoryType.SetStatus_6);
+                await orderService.SetStatusAsync(order, OrderStatus.STATUS_OK);
             }
 
             return new ContentResult { Content = "ACCESS_CANCEL" };

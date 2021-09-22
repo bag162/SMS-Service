@@ -27,6 +27,10 @@ namespace Models.DTO.DTOModels
         [MsgPackArrayElement(8)]
         public string StartDateTime { get; set; }
         [MsgPackArrayElement(9)]
-        public string Bucket { get; set; }
+        public string LastCheckTime { get; set; }
+        [MsgPackArrayElement(10)]
+        public string JsonData { get; set; }
+        [MsgPackArrayElement(11)]
+        public long Bucket { get; set; }
     }
 }
