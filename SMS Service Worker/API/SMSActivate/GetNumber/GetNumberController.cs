@@ -88,8 +88,8 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetNumber.Controllers
             };
             updatedOrder.JsonData = JsonSerializer.Serialize(data);
 
-            orderService.UpdateOrderAsync(updatedOrder);
-            historyService.InputNewHistoryAsync(user.Id, HistoryType.GetNumber);
+            await orderService.UpdateOrderAsync(updatedOrder);
+            await historyService.InputNewHistoryAsync(user.Id, HistoryType.GetNumber);
             return new ContentResult { Content = "ACCESS_NUMBER:" + updatedOrder.OrderId + ":" + order.Number, StatusCode = 200 };
         }
     }
