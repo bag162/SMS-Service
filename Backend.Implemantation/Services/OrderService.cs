@@ -70,7 +70,7 @@ namespace Implemantation.Services
 
         public async Task UpdateOrderAsync(OrderModel order)
         {
-            await orderRepository.Update(order, (int)order.Bucket);
+            orderRepository.Update(order, (int)order.Bucket);
             return;
         }
 
