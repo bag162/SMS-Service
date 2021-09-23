@@ -27,7 +27,7 @@ namespace Implemantation.Services
                 TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds
             };
 
-            historyRepository.Create(new HistoryModel() {
+            await historyRepository.Create(new HistoryModel() {
                 Id = Guid.NewGuid().ToString(),
                 TypeRequest = (int)typeRequest, 
                 RequestTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds, 
