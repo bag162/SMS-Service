@@ -1,3 +1,4 @@
+using Backend.TaskMonitor;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,8 @@ namespace SMS_Service_Worker
          
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            RecurringJob.AddOrUpdate<TaskMonitorWorker>(x => x.StartTaskMonitor(), Cron.Minutely);
+            RecurringJob.AddOrUpdate<TaskCreatorWorker>(x => x.CheckTaskForCreateQueue(), Cron.Minutely);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

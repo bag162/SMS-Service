@@ -40,4 +40,6 @@
     <ProjectReference Include="..\Backend.TaskMonitor\Backend.TaskMonitor.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
