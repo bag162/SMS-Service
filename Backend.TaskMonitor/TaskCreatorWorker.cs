@@ -57,8 +57,7 @@ namespace Backend.TaskMonitor
                     var data = JsonSerializer.Deserialize<TaskModel>(order.JsonData);
                     if (!dataQueues.Select(x => x.Order.Id).Contains(data.Order.Id))
                     {
-                        double orderTime = Convert.ToDouble(order.StartDateTime);
-                        if ((currentTime - orderTime) / 60 > Config.Value.SMSWorkerSettings.SMSWaitTime && orderTime != 0)
+                        if ((currentTime - order.StartDateTime) / 60 > Config.Value.SMSWorkerSettings.SMSWaitTime && order.StartDateTime != 0)
                         {
                             var newHistory = new HistoryJsonModel() { Account = data.Account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                             historyService.InputNewHistoryAsync(data.User.Id, HistoryType.NotComSMS, newHistory);
@@ -72,7 +71,7 @@ namespace Backend.TaskMonitor
                         }
                         else
                         {
-                            double interval = (DateTime.Now.TimeOfDay.TotalSeconds - Convert.ToDouble(order.LastCheckTime));
+                            double interval = ((int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds - Convert.ToDouble(order.LastCheckTime));
                             if (interval < Config.Value.SMSWorkerSettings.TimeBetweenRequests)
                                 continue;
                         }
