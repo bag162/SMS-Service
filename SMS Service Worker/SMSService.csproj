@@ -23,9 +23,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.24" />
-    <PackageReference Include="Hangfire.Core" Version="1.7.24" />
-    <PackageReference Include="Hangfire.SqlServer" Version="1.7.24" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.25" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.25" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.25" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
   </ItemGroup>
 
@@ -33,6 +33,7 @@
     <ProjectReference Include="..\Backend.CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
     <ProjectReference Include="..\Backend.Configuration\Backend.Configuration.csproj" />
     <ProjectReference Include="..\Backend.DBInfrastructure\Backend.DBInfrastructure.csproj" />
+    <ProjectReference Include="..\Backend.DI\Backend.DI.csproj" />
     <ProjectReference Include="..\Backend.Implemantation\Backend.Implemantation.csproj" />
     <ProjectReference Include="..\Backend.Models.DTO\Backend.Models.csproj" />
     <ProjectReference Include="..\Backend.SMSWorker\Backend.SMSWorker.csproj" />

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DalSoft.Hosting.BackgroundQueue" Version="1.0.4" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.25" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.25" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.CheckDBWorkers\Backend.CheckDBWorkers.csproj" />
+    <ProjectReference Include="..\Backend.Configuration\Backend.Configuration.csproj" />
+    <ProjectReference Include="..\Backend.Implemantation\Backend.Implemantation.csproj" />
+    <ProjectReference Include="..\Backend.SMSWorker\Backend.SMSWorker.csproj" />
+    <ProjectReference Include="..\Backend.TarantoolDB\Backend.TarantoolDB.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -21,7 +21,7 @@ namespace Models.DTO.DTOModels
         [MsgPackArrayElement(5)]
         public int Status { get; set; }
         [MsgPackArrayElement(6)]
-        public string LasteTimeActive { get; set; }
+        public int LasteTimeActive { get; set; }
         [MsgPackArrayElement(7)]
         public string ExternalIp { get; set; }
         [MsgPackArrayElement(8)]

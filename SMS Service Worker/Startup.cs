@@ -12,7 +12,10 @@ namespace SMS_Service_Worker
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddConfiguration(configuration);
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }

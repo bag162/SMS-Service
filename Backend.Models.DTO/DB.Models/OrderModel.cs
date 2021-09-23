@@ -25,9 +25,9 @@ namespace Models.DTO.DTOModels
         [MsgPackArrayElement(7)]
         public string SMSCode { get; set; }
         [MsgPackArrayElement(8)]
-        public string StartDateTime { get; set; }
+        public int StartDateTime { get; set; }
         [MsgPackArrayElement(9)]
-        public string LastCheckTime { get; set; }
+        public int LastCheckTime { get; set; }
         [MsgPackArrayElement(10)]
         public string JsonData { get; set; }
         [MsgPackArrayElement(11)]

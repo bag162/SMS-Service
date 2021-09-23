@@ -7,7 +7,7 @@ namespace Backend.Models.Implementation.Models.HistoryInputModels
     {
         // main data
         public string Message { get; set; }
-        public string TimeIncident { get; set; }
+        public int TimeIncident { get; set; }
 
         public ProxyModel Proxy { get; set; }
         public AccountModel Account { get; set; }

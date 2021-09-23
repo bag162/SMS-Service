@@ -77,7 +77,7 @@ namespace SMS_Service_Worker.API.PrivateWEB
         [Route("insertorder")]
         public async Task<ContentResult> insertorder()
         {
-            await orderService.InsertOrderAsync(new OrderModel() { Id = Guid.NewGuid().ToString(), Number = randomizer.Next(1000).ToString(), OrderId = randomizer.Next(1000), Service = 2, SMS = "asd", SMSCode = "132", StartDateTime = "", Status = 0, UserId = "userid" });
+            await orderService.InsertOrderAsync(new OrderModel() { Id = Guid.NewGuid().ToString(), Number = randomizer.Next(1000).ToString(), OrderId = randomizer.Next(1000), Service = 2, SMS = "asd", SMSCode = "132", StartDateTime = 0, Status = 0, UserId = "userid" });
             return new ContentResult { Content = "ok" };
         }
 
@@ -109,7 +109,7 @@ namespace SMS_Service_Worker.API.PrivateWEB
                 Number = "asdasdasdasd",
                 OrderId = randomizer.Next(5,50000),
                 Service = randomizer.Next(50,5000),
-                StartDateTime = DateTime.Now.ToString(),
+                StartDateTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds,
                 Status = 1,
                 UserId = Guid.NewGuid().ToString(),
             };

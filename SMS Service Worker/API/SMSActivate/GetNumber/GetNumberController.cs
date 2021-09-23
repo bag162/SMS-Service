@@ -75,7 +75,7 @@ namespace SMS_Service_Worker.API.PrivateWEB.GetNumber.Controllers
                 Number = order.Number,
                 OrderId = orderId,
                 Service = order.Service,
-                StartDateTime = DateTime.Now.ToString(),
+                StartDateTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds,
                 UserId = user.Id,
                 Bucket = 4000
             };

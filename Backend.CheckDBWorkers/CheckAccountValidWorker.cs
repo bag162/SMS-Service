@@ -45,14 +45,14 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
                 {
                     if (handlerReponse.status == HandlerConveerStatus.IncorrectCookie)
                     {
-                        var newHistory = new HistoryJsonModel(){ Account = account, TimeIncident = DateTime.Now.ToString() };
+                        var newHistory = new HistoryJsonModel(){ Account = account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                         accountService.DeactivateAccountAsync(account);
                         historyService.InputNewHistoryAsync("0", HistoryType.CookieIncorrect, newHistory);
                         continue;
                     }
                     if (handlerReponse.status == HandlerConveerStatus.NoCookie)
                     {
-                        var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                        var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                         accountService.DeactivateAccountAsync(account);
                         historyService.InputNewHistoryAsync("0", HistoryType.NoCookie, newHistory);
                         continue;
@@ -88,7 +88,7 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
                 if (errorResponse.error_code == Config.Value.Common.ErrorResponse)
                 {
                     accountService.DeactivateAccountAsync(account);
-                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                     historyService.InputNewHistoryAsync("0", HistoryType.CookieInactive, newHistory);
                     continue;
                 }
@@ -104,7 +104,7 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
                 }
                 if (serializeUser.phone_number == null)
                 {
-                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                     historyService.InputNewHistoryAsync("0", HistoryType.AccountNoNumber, newHistory);
                     accountService.DeactivateAccountAsync(account, AccountStatus.NoNumber);
                     continue;

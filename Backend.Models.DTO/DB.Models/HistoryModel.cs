@@ -15,7 +15,7 @@ namespace Models.DTO.DTOModels
         [MsgPackArrayElement(2)]
         public string UserId { get; set; }
         [MsgPackArrayElement(3)]
-        public string RequestTime { get; set; }
+        public int RequestTime { get; set; }
         [MsgPackArrayElement(4)]
         public string Message { get; set; }
         [MsgPackArrayElement(5)]

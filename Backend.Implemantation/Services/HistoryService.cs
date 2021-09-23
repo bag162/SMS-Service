@@ -24,13 +24,13 @@ namespace Implemantation.Services
             var insertedMessage = new HistoryJsonModel() 
             {
                 Message = message,
-                TimeIncident = DateTime.Now.ToString()
+                TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds
             };
 
             historyRepository.Create(new HistoryModel() {
                 Id = Guid.NewGuid().ToString(),
                 TypeRequest = (int)typeRequest, 
-                RequestTime = DateTime.Now.ToString(), 
+                RequestTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds, 
                 UserId = userID, 
                 Message = JsonSerializer.Serialize(insertedMessage),
                 Bucket = bucket });
@@ -43,7 +43,7 @@ namespace Implemantation.Services
             {
                 Id = Guid.NewGuid().ToString(),
                 TypeRequest = (int)typeRequest,
-                RequestTime = DateTime.Now.ToString(),
+                RequestTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds,
                 UserId = userID,
                 Message = JsonSerializer.Serialize(messages),
                 Bucket = bucket

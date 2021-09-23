@@ -54,14 +54,14 @@ namespace SMS_Service_Worker.Workers.SMSWorker
                 if (handlerResponse.status == HandlerConveerStatus.IncorrectCookie)
                 {
                     DeactivateAccountAndOrder(order, account);
-                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                     historyService.InputNewHistoryAsync("0", HistoryType.CookieIncorrect, newHistory);
                     return;
                 }
                 if (handlerResponse.status == HandlerConveerStatus.NoCookie)
                 {
                     DeactivateAccountAndOrder(order, account);
-                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                    var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                     historyService.InputNewHistoryAsync("0", HistoryType.NoCookie, newHistory);
                     return;
                 }
@@ -78,7 +78,7 @@ namespace SMS_Service_Worker.Workers.SMSWorker
             string response = await GetMessage(client);
             if (response == "")
             {
-                var newHestory = new HistoryJsonModel() { Proxy = proxy, TimeIncident = DateTime.Now.ToString(), Message = "Proxy not have access to TextNow. Cloudfare blocked session" };
+                var newHestory = new HistoryJsonModel() { Proxy = proxy, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds, Message = "Proxy not have access to TextNow. Cloudfare blocked session" };
                 historyService.InputNewHistoryAsync("0", HistoryType.ProxyNotHaveAccessToTN, newHestory);
                 return;
             }
@@ -96,7 +96,7 @@ namespace SMS_Service_Worker.Workers.SMSWorker
             if (errorResponse.error_code == Config.Value.Common.ErrorResponse)
             {
                 DeactivateAccountAndOrder(order, account);
-                var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = DateTime.Now.ToString() };
+                var newHistory = new HistoryJsonModel() { Account = account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                 historyService.InputNewHistoryAsync("0", HistoryType.CookieInactive, newHistory);
                 return;
             }
@@ -116,7 +116,7 @@ namespace SMS_Service_Worker.Workers.SMSWorker
                 };
                 updatedOrder.JsonData = JsonSerializer.Serialize(jsonData);
                 orderService.UpdateOrderAsync(updatedOrder);
-                historyService.InputNewHistoryAsync(user.Id, HistoryType.InsertFirstMessage, DateTime.Now.ToString());
+                historyService.InputNewHistoryAsync(user.Id, HistoryType.InsertFirstMessage);
                 return;
             }
 

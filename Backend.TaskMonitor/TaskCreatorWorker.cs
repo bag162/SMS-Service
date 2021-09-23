@@ -41,7 +41,7 @@ namespace Backend.TaskMonitor
                 var allOrders = await orderService.GetActiveOrdersAsync();
                 var allQueue = await queueService.GetAllQueueAsync();
                 var dataQueues = new List<TaskModel>();
-                DateTime currentTime = DateTime.Now;
+                double currentTime = DateTime.Now.TimeOfDay.TotalSeconds;
                 var addedQueues = new List<QueueModel>();
 
                 foreach (var queue in allQueue)
@@ -57,22 +57,22 @@ namespace Backend.TaskMonitor
                     var data = JsonSerializer.Deserialize<TaskModel>(order.JsonData);
                     if (!dataQueues.Select(x => x.Order.Id).Contains(data.Order.Id))
                     {
-                        DateTime orderTime = DateTime.Parse(order.StartDateTime);
-                        if ((currentTime - orderTime).TotalMinutes > Config.Value.SMSWorkerSettings.SMSWaitTime && orderTime != DateTime.MinValue)
+                        double orderTime = Convert.ToDouble(order.StartDateTime);
+                        if ((currentTime - orderTime) / 60 > Config.Value.SMSWorkerSettings.SMSWaitTime && orderTime != 0)
                         {
-                            var newHistory = new HistoryJsonModel() { Account = data.Account, TimeIncident = DateTime.Now.ToString() };
+                            var newHistory = new HistoryJsonModel() { Account = data.Account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                             historyService.InputNewHistoryAsync(data.User.Id, HistoryType.NotComSMS, newHistory);
                             orderService.SetStatusAsync(data.Order, OrderStatus.STATUS_CANCEL);
                             continue;
                         }
 
-                        if (order.LastCheckTime == "null")
+                        if (order.LastCheckTime == 0)
                         {
-                            order.LastCheckTime = DateTime.Now.ToString();
+                            order.LastCheckTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
                         }
                         else
                         {
-                            double interval = (DateTime.Now - DateTime.Parse(order.LastCheckTime)).TotalSeconds;
+                            double interval = (DateTime.Now.TimeOfDay.TotalSeconds - Convert.ToDouble(order.LastCheckTime));
                             if (interval < Config.Value.SMSWorkerSettings.TimeBetweenRequests)
                                 continue;
                         }
@@ -88,7 +88,7 @@ namespace Backend.TaskMonitor
                             Bucket = 1000
                         };
                         var updatedOrder = order;
-                        updatedOrder.LastCheckTime = DateTime.Now.ToString();
+                        updatedOrder.LastCheckTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
                         orderService.UpdateOrderAsync(updatedOrder);
                         addedQueues.Add(addedQueue);
                     }

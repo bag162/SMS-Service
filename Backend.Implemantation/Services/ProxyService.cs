@@ -47,7 +47,7 @@ namespace Implemantation.Services
             {
                 newProxy.Status = (int)ProxyStatus.Active;
             }
-            newProxy.LasteTimeActive = DateTime.Now.ToString();
+            newProxy.LasteTimeActive = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             newProxy.ExternalIp = externalIp;
             proxyRepository.Update(newProxy, (int)proxy.Bucket);
             return;
