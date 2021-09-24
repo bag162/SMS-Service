@@ -100,6 +100,10 @@ namespace TarantoolDB
 
         protected string GenerateJsonDataForFindByIndex<Y>(Y index_value, T model = null, string index_name = null)
         {
+            while (Space == null)
+            {
+                Task.Delay(50);
+            }
             var jsonPropertyes = new Dictionary<int, string>();
             if (model != null)
             {
@@ -122,6 +126,10 @@ namespace TarantoolDB
         }
         protected string GenerateJsonData(T model = null)
         {
+            while (Space == null)
+            {
+                Task.Delay(50);
+            }
             var jsonPropertyes = new Dictionary<int, string>();
             if (model != null)
             {
