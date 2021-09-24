@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		BucketsInfo.txt = BucketsInfo.txt
-		StatusCodes.txt = StatusCodes.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.DBInfrastructure", "Backend.DBInfrastructure\Backend.DBInfrastructure.csproj", "{60408A62-15D5-4028-A296-A56150CD9A21}"
@@ -50,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.TaskMonitor", "Backend.TaskMonitor\Backend.TaskMonitor.csproj", "{04501F1C-AE6D-4E50-9067-4D46A7223D11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.DI", "Backend.DI\Backend.DI.csproj", "{D10C2B64-6F23-4E82-9F30-F08E5007C16B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.DI", "Backend.DI\Backend.DI.csproj", "{D10C2B64-6F23-4E82-9F30-F08E5007C16B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

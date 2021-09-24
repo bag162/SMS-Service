@@ -41,7 +41,7 @@ namespace Backend.TaskMonitor
                 var allOrders = await orderService.GetActiveOrdersAsync();
                 var allQueue = await queueService.GetAllQueueAsync();
                 var dataQueues = new List<TaskModel>();
-                double currentTime = DateTime.Now.TimeOfDay.TotalSeconds;
+                double currentTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
                 var addedQueues = new List<QueueModel>();
 
                 foreach (var queue in allQueue)
@@ -61,7 +61,7 @@ namespace Backend.TaskMonitor
                         {
                             var newHistory = new HistoryJsonModel() { Account = data.Account, TimeIncident = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds };
                             historyService.InputNewHistoryAsync(data.User.Id, HistoryType.NotComSMS, newHistory);
-                            orderService.SetStatusAsync(data.Order, OrderStatus.STATUS_CANCEL);
+                            orderService.SetStatusAsync(data.Order, OrderStatus.STATUS_FREE);
                             continue;
                         }
 
