@@ -35,7 +35,7 @@ namespace Implemantation.Services
             if (usedProxy == null)
                 return new HandlerConveerModel { status = HandlerConveerStatus.NoProxy };
 
-            /*handler = SetProxy(handler, usedProxy);*/ // TODO
+            handler = SetProxy(handler, usedProxy);
 
             if (setcookie)
             {

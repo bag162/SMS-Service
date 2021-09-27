@@ -70,8 +70,7 @@ namespace SMS_Service_Worker.Workers.CheckerDBWorker
 
                 if (accountProfileResponse == "")
                 {
-                    historyService.InputNewHistoryAsync("0", HistoryType.ProxyNotHaveAccessToTN, "Cloudfare. No access to TextNow"); 
-                    // TODO: добавить сюда вывод данных прокси который не доступен
+                    historyService.InputNewHistoryAsync("0", HistoryType.ProxyNotHaveAccessToTN, "Cloudfare. No access to TextNow");
                     continue;
                 }
 
