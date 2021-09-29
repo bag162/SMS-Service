@@ -1,6 +1,6 @@
-﻿using Backend.Implemantation.IServices;
+﻿using Backend.Backend.Implemantation.IServices;
 using Backend.Models.DB.Models;
-using Backend.Models.Implementation.Models.JsonModels;
+using Backend.Models.Implementation.JsonModels;
 using Backend.TarantoolDB.Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Backend.Implemantation.Services
+namespace Backend.Backend.Implemantation.Services
 {
     public class QueueService : IQueueService
     {

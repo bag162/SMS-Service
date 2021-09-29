@@ -1,15 +1,15 @@
-﻿using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Models.ImplementationModels;
-using Models.ImplementationModels.Enums;
-using static Models.ImplementationModels.JsonModels.Cookie;
+using Backend.Models.Implementation;
+using Backend.Models.Implementation.Enums;
+using static Backend.Models.Implementation.JsonModels.Cookie;
 using System.Text.Json;
 
-namespace Implemantation.Services
+namespace Backend.Implemantation.Services
 {
     public class HandlerConveyor : IHandlerConveyor
     {

@@ -1,13 +1,12 @@
-﻿using DBInfrastructure;
-using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using System.Linq;
 using System.Threading.Tasks;
-using TarantoolDB.Repositories;
-using static TarantoolDB.Repositories.AccountRepository;
-using Models.ImplementationModels.Enums;
+using Backend.TarantoolDB.Repositories;
+using static Backend.TarantoolDB.Repositories.AccountRepository;
+using Backend.Models.Implementation.Enums;
 
-namespace Implemantation.Services
+namespace Backend.Implemantation.Services
 {
     public class AccountService : IAccountService
     {

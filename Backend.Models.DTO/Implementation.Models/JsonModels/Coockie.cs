@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Models.ImplementationModels.JsonModels
+namespace Backend.Models.Implementation.JsonModels
 {
     public class Cookie
     {

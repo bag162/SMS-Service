@@ -1,7 +1,7 @@
-﻿using Models.DTO.DTOModels;
+﻿using Backend.Models.DB;
 using System.Threading.Tasks;
 
-namespace Implemantation.IServices
+namespace Backend.Implemantation.IServices
 {
     public interface IUserService
     {

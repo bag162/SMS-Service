@@ -1,9 +1,9 @@
-﻿using Models.DTO.DTOModels;
-using Models.ImplementationModels;
+﻿using Backend.Models.DB;
+using Backend.Models.Implementation;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Implemantation.Services
+namespace Backend.Implemantation.Services
 {
     public interface IHandlerConveyor
     {

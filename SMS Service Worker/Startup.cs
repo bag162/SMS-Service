@@ -1,3 +1,4 @@
+using Backend.DI;
 using Backend.TaskMonitor;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
@@ -23,8 +24,10 @@ namespace SMS_Service_Worker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
             DependencyInjectionConf.ConfigureTarantool(services, Configuration);
-            DependencyInjectionConf.Configure(services, Configuration);
+            DependencyInjectionConf.ConfigureServices(services, Configuration);
+            DependencyInjectionConf.ConfigureHangFire(services, Configuration);
         }
          
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,12 +1,11 @@
-﻿using DBInfrastructure;
-using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using System.Linq;
 using System.Threading.Tasks;
-using TarantoolDB.Repositories;
-using static TarantoolDB.Repositories.UserRepository;
+using Backend.TarantoolDB.Repositories;
+using static Backend.TarantoolDB.Repositories.UserRepository;
 
-namespace Implemantation.Services
+namespace Backend.Implemantation.Services
 {
     public class UserService : IUserService
     {

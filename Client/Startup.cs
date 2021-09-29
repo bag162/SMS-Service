@@ -12,6 +12,7 @@ using Client.Database.Data.Services;
 using Client.DataBase.Data.Contexts;
 using Client.DataBase.Data.IServices;
 using Client.DataBase.Data.Services;
+using AutoMapper;
 
 namespace Client
 {
@@ -27,25 +28,15 @@ namespace Client
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetValue<string>("ConnectionString");
+
+            DIConfigure.ConfigureDB(services, Configuration, connectionString);
+            DIConfigure.ConfigureService(services, Configuration);
+
             services.Configure<ConfigurationClass>(Configuration);
 
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
-            services.AddDbContext<RoleContext>(options => options.UseSqlServer(connectionString));
-
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IAuthenticateService, AuthenticateService>();
-            services.AddScoped<IRoleService, RoleService>();
-
-
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp"; });
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
-                });
-
-            services.AddMvc();
+            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MapperConfig()); });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

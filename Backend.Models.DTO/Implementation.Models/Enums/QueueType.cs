@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backend.Models.Implementation.Models.Enums
+namespace Backend.Models.Implementation.Enums
 {
     public enum QueueType
     {

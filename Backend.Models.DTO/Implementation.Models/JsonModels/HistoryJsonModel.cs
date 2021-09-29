@@ -1,7 +1,7 @@
 ﻿
-using Models.DTO.DTOModels;
+using Backend.Models.DB;
 
-namespace Backend.Models.Implementation.Models.HistoryInputModels
+namespace Backend.Models.Implementation.HistoryInputModels
 {
     public class HistoryJsonModel
     {

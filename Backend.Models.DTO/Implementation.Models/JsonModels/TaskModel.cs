@@ -1,11 +1,11 @@
-﻿using Models.DTO.DTOModels;
+﻿using Backend.Models.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backend.Models.Implementation.Models.JsonModels
+namespace Backend.Models.Implementation.JsonModels
 {
     public class TaskModel
     {

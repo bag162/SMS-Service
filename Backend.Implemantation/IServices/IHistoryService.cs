@@ -1,8 +1,8 @@
-﻿using Backend.Models.Implementation.Models.HistoryInputModels;
-using Models.ImplementationModels.Enums;
+﻿using Backend.Models.Implementation.HistoryInputModels;
+using Backend.Models.Implementation.Enums;
 using System.Threading.Tasks;
 
-namespace Implemantation.IServices
+namespace Backend.Implemantation.IServices
 {
     public interface IHistoryService
     {

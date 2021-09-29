@@ -1,14 +1,13 @@
-﻿using DBInfrastructure;
-using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TarantoolDB.Repositories;
-using Models.ImplementationModels;
+using Backend.TarantoolDB.Repositories;
+using Backend.Models.Implementation;
 using System.Linq;
 
-namespace Implemantation.Services
+namespace Backend.Implemantation.Services
 {
     public class ServicePricesService : IServicePricesService
     {

@@ -1,10 +1,10 @@
-﻿using Models.DTO.DTOModels;
-using Models.ImplementationModels;
-using Models.ImplementationModels.Enums;
+﻿using Backend.Models.DB;
+using Backend.Models.Implementation;
+using Backend.Models.Implementation.Enums;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Implemantation.IServices
+namespace Backend.Implemantation.IServices
 {
     public interface IOrderService
     {

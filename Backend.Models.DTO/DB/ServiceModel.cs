@@ -4,21 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Models.DTO.DTOModels
+namespace Backend.Models.DB
 {
-    public class HistoryModel
+    [MsgPackArray]
+    public class ServiceModel
     {
         [MsgPackArrayElement(0)]
-        public string Id { get; set; }
+        public long Id { get; set; }
         [MsgPackArrayElement(1)]
-        public int TypeRequest { get; set; }
+        public double Price { get; set; }
         [MsgPackArrayElement(2)]
-        public string UserId { get; set; }
+        public string RegularExpressions { get; set; }
         [MsgPackArrayElement(3)]
-        public int RequestTime { get; set; }
+        public string ServicePrefix { get; set; }
         [MsgPackArrayElement(4)]
-        public string Message { get; set; }
-        [MsgPackArrayElement(5)]
         public long Bucket { get; set; }
     }
 }

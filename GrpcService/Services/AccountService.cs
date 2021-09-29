@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using gRPCAccount;
 using Grpc.Core;
-using GrpcAccount;
-using Implemantation.IServices;
+using Backend.Implemantation.IServices;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace GrpcService.Services
             this.mapper = mapper;
         }
 
-        public override Task<AccountList> GetAccounts(GetAccountsRequest requestData, ServerCallContext context)
+        public override Task<AccountArray> GetAccounts(GetAccountsRequest requestData, ServerCallContext context)
         {
             var accounts = accountService.GetAllAccounts().OrderBy(x => x.Id).Take(requestData.Count);
 
@@ -33,7 +33,7 @@ namespace GrpcService.Services
                 accountModels.Add(mapper.Map<AccountModel>(account));
             }
 
-            var returnedAccounts = new AccountList();
+            var returnedAccounts = new AccountArray();
             returnedAccounts.Accounts.AddRange(accountModels);
 
             return Task.FromResult(returnedAccounts);

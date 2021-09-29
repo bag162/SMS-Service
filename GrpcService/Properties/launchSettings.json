@@ -3,10 +3,11 @@
     "GrpcService": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_URLS": "https://*:6520"
       },
       "dotnetRunMessages": "true",
-      "applicationUrl": "http://localhost:6520"
+      "applicationUrl": "https://localhost:6520"
     },
     "Docker": {
       "commandName": "Docker",

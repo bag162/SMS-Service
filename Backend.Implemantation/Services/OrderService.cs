@@ -1,17 +1,16 @@
-﻿using DBInfrastructure;
-using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TarantoolDB.Repositories;
-using Models.ImplementationModels;
-using Models.ImplementationModels.Enums;
+using Backend.TarantoolDB.Repositories;
+using Backend.Models.Implementation;
+using Backend.Models.Implementation.Enums;
 using System.Collections.Generic;
 using ProGaudi.Tarantool.Client;
-using static TarantoolDB.Repositories.OrderRepository;
+using static Backend.TarantoolDB.Repositories.OrderRepository;
 
-namespace Implemantation.Services
+namespace Backend.Implemantation.Services
 {
     public class OrderService : IOrderService
     {

@@ -1,15 +1,15 @@
-﻿using Models.DTO.DTOModels;
-using Implemantation.IServices;
-using Models.ImplementationModels;
-using Models.ImplementationModels.Enums;
-using Models.ImplementationModels.JsonModels;
-using Implemantation.Services;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
+using Backend.Models.Implementation;
+using Backend.Models.Implementation.Enums;
+using Backend.Models.Implementation.JsonModels;
+using Backend.Implemantation.Services;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using SMS_Service_Worker.Common.Services.Configuration;
+using Backend.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Backend.Models.Implementation.Models.HistoryInputModels;
+using Backend.Models.Implementation.HistoryInputModels;
 using System;
 
 namespace SMS_Service_Worker.Workers.CheckerDBWorker

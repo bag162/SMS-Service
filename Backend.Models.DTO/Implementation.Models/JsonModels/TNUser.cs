@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.ImplementationModels.JsonModels
+namespace Backend.Models.Implementation.JsonModels
 {
     public class Credential
     {

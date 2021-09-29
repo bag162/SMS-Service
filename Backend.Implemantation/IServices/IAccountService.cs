@@ -1,8 +1,8 @@
-﻿using Models.DTO.DTOModels;
-using Models.ImplementationModels.Enums;
+﻿using Backend.Models.DB;
+using Backend.Models.Implementation.Enums;
 using System.Threading.Tasks;
 
-namespace Implemantation.IServices
+namespace Backend.Implemantation.IServices
 {
     public interface IAccountService
     {

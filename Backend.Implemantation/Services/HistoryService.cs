@@ -1,14 +1,13 @@
-﻿using DBInfrastructure;
-using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using System;
 using System.Threading.Tasks;
-using TarantoolDB.Repositories;
-using Models.ImplementationModels.Enums;
-using Backend.Models.Implementation.Models.HistoryInputModels;
+using Backend.TarantoolDB.Repositories;
+using Backend.Models.Implementation.Enums;
+using Backend.Models.Implementation.HistoryInputModels;
 using System.Text.Json;
 
-namespace Implemantation.Services
+namespace Backend.Implemantation.Services
 {
     public class HistoryService : IHistoryService
     {

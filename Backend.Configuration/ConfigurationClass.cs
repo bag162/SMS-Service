@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SMS_Service_Worker.Common.Services.Configuration
+namespace Backend.Configuration
 {
     public class ConfigurationClass
     {

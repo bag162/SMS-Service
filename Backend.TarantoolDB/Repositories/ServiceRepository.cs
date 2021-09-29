@@ -1,10 +1,10 @@
-﻿using Models.DTO.DTOModels;
+﻿using Backend.Models.DB;
 using ProGaudi.Tarantool.Client;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TarantoolDB.Repositories
+namespace Backend.TarantoolDB.Repositories
 {
     public class ServiceRepository : TRepository<ServiceModel>
     {

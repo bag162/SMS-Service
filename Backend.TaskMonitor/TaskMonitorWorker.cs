@@ -1,5 +1,5 @@
-﻿using Backend.Implemantation.IServices;
-using Backend.Models.Implementation.Models.JsonModels;
+﻿using Backend.Backend.Implemantation.IServices;
+using Backend.Models.Implementation.JsonModels;
 using DalSoft.Hosting.BackgroundQueue;
 using SMS_Service_Worker.Workers.CheckerDBWorker;
 using SMS_Service_Worker.Workers.CheckProxyValid;

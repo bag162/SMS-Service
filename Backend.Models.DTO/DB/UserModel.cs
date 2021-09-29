@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Models.DTO.DTOModels
+namespace Backend.Models.DB
 {
-    [MsgPackArray]
-    public class ServiceModel
+    public class UserModel
     {
         [MsgPackArrayElement(0)]
-        public long Id { get; set; }
+        public string Id { get; set; }
         [MsgPackArrayElement(1)]
-        public double Price { get; set; }
+        public string Login { get; set; }
         [MsgPackArrayElement(2)]
-        public string RegularExpressions { get; set; }
+        public double Balance { get; set; }
         [MsgPackArrayElement(3)]
-        public string ServicePrefix { get; set; }
+        public string ApiKey { get; set; }
         [MsgPackArrayElement(4)]
         public long Bucket { get; set; }
     }

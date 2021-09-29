@@ -1,13 +1,13 @@
 ﻿using Backend.DBInfrastructure;
 using Backend.DBInfrastructure.Models;
-using Models.DTO.DTOModels;
+using Backend.Models.DB;
 using ProGaudi.Tarantool.Client;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace TarantoolDB.Repositories
+namespace Backend.TarantoolDB.Repositories
 {
     public class OrderRepository : TRepository<OrderModel>
     {

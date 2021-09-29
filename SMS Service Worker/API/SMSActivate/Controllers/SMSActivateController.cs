@@ -1,11 +1,11 @@
-﻿using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Models.ImplementationModels.Enums;
+using Backend.Models.Implementation.Enums;
 using System.Linq;
 using System;
-using Backend.Models.Implementation.Models.JsonModels;
+using Backend.Models.Implementation.JsonModels;
 using System.Text.Json;
 
 namespace SMS_Service_Worker.API.PrivateWEB

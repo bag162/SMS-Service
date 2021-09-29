@@ -1,12 +1,12 @@
 ﻿using Backend.Models.DB.Models;
-using Backend.Models.Implementation.Models.JsonModels;
+using Backend.Models.Implementation.JsonModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backend.Implemantation.IServices
+namespace Backend.Backend.Implemantation.IServices
 {
     public interface IQueueService
     {

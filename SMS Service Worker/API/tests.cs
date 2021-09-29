@@ -1,5 +1,5 @@
-﻿using Models.DTO.DTOModels;
-using Implemantation.IServices;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Text.Json;
@@ -9,11 +9,11 @@ using Backend.TarantoolDB.Repositories;
 using System.Collections.Generic;
 using Backend.DBInfrastructure;
 using Backend.DBInfrastructure.Models;
-using TarantoolDB.Repositories;
+using Backend.TarantoolDB.Repositories;
 using System.Linq;
-using static TarantoolDB.Repositories.ServiceRepository;
+using static Backend.TarantoolDB.Repositories.ServiceRepository;
 using Backend.Models.DB.Models;
-using Backend.Models.Implementation.Models.Enums;
+using Backend.Models.Implementation.Enums;
 using static Backend.TarantoolDB.Repositories.QueueRepository;
 
 namespace SMS_Service_Worker.API.PrivateWEB

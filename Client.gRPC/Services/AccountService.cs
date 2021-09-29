@@ -1,26 +1,25 @@
 ﻿using AutoMapper;
-using Models.DTO.DTOModels;
+using Backend.Models.DB;
 using System.Collections.Generic;
-
 namespace Client.gRPC.Services
 {
     public class AccountService
     {
         private readonly gRPCClient Client;
         private readonly IMapper mapper;
-        private readonly GrpcServiceAccount.Account.AccountClient accountClient;
+        private readonly gRPCAccount.Account.AccountClient accountClient;
 
         public AccountService(gRPCClient client,
             IMapper mapper)
         {
             this.Client = client;
             this.mapper = mapper;
-            this.accountClient = new GrpcServiceAccount.Account.AccountClient(Client.channel);
+            this.accountClient = new gRPCAccount.Account.AccountClient(Client.channel);
         }
 
         public IEnumerable<AccountModel> GetAccounts(int count)
         {
-            var response = accountClient.GetAccounts(new GrpcServiceAccount.GetAccountsRequest() { Count = count} );
+            var response = accountClient.GetAccounts(new gRPCAccount.GetAccountsRequest() { Count = count} );
             var accountsList = new List<AccountModel>();
 
             foreach (var account in response.Accounts)

@@ -1,18 +1,16 @@
 syntax = "proto3";
-
-option csharp_namespace = "GrpcAccount";
-
+option csharp_namespace = "gRPCAccount";
 package account;
 
 
 
 service Account {
-  rpc GetAccounts (GetAccountsRequest) returns (AccountList);
+  rpc GetAccounts (GetAccountsRequest) returns (AccountArray);
 }
 
 
 
-message AccountList{
+message AccountArray{
 	repeated AccountModel accounts = 1;
 }
 message AccountModel {
@@ -21,15 +19,9 @@ message AccountModel {
 	string Password = 3;
 	string Number = 4; 
 	string Cookie = 5;
-	Status Status = 6;
+	int32 Status = 6;
+	string Bucket = 7;
 }
-enum Status{
-	Active = 0;
-	Inactive = 1;
-	NoNumber = 2;
-}
-
-
 
 message GetAccountsRequest{
 	int32 count = 1;

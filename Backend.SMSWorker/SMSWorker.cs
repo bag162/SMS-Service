@@ -1,20 +1,20 @@
-﻿using Implemantation.IServices;
-using Models.ImplementationModels;
-using Models.ImplementationModels.Enums;
-using Implemantation.Services;
+﻿using Backend.Implemantation.IServices;
+using Backend.Models.Implementation;
+using Backend.Models.Implementation.Enums;
+using Backend.Implemantation.Services;
 using Microsoft.Extensions.Options;
-using Models.DTO.DTOModels;
-using SMS_Service_Worker.Common.Services.Configuration;
+using Backend.Models.DB;
+using Backend.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static Models.ImplementationModels.JsonModels.TNMessages;
-using Backend.Models.Implementation.Models.JsonModels;
+using static Backend.Models.Implementation.JsonModels.TNMessages;
+using Backend.Models.Implementation.JsonModels;
 using System.Text.Json;
-using Backend.Models.Implementation.Models.HistoryInputModels;
+using Backend.Models.Implementation.HistoryInputModels;
 
 namespace SMS_Service_Worker.Workers.SMSWorker
 {

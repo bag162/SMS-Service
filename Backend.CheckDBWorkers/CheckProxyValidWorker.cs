@@ -1,8 +1,8 @@
-﻿using Models.DTO.DTOModels;
-using Implemantation.IServices;
-using Implemantation.Services;
+﻿using Backend.Models.DB;
+using Backend.Implemantation.IServices;
+using Backend.Implemantation.Services;
 using Microsoft.Extensions.Options;
-using SMS_Service_Worker.Common.Services.Configuration;
+using Backend.Configuration;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;

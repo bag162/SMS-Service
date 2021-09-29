@@ -1,7 +1,7 @@
-﻿using Models.ImplementationModels.Enums;
+﻿using Backend.Models.Implementation.Enums;
 using System.Net.Http;
 
-namespace Models.ImplementationModels
+namespace Backend.Models.Implementation
 {
     public class HandlerConveerModel
     {
