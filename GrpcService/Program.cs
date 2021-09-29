@@ -26,8 +26,7 @@ namespace GrpcService1
                     webBuilder.UseUrls("https://localhost:6520");
                     webBuilder.ConfigureKestrel(options =>
                     {
-                        options.ListenLocalhost(6520, o => o.Protocols =
-                            HttpProtocols.Http2);
+                        options.ListenAnyIP(6520);
                     });
                 });
     }
