@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,11 @@ namespace GrpcService1
                 {
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseUrls("https://localhost:6520");
+                    webBuilder.ConfigureKestrel(options =>
+                    {
+                        options.ListenLocalhost(6520, o => o.Protocols =
+                            HttpProtocols.Http2);
+                    });
                 });
     }
 }
