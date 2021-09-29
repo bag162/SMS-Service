@@ -43,6 +43,7 @@ namespace GrpcService1
             }
 
             app.UseRouting();
+            app.UseHttpsRedirection();
 
             app.UseEndpoints(endpoints =>
             {
