@@ -25,7 +25,7 @@ namespace GrpcService1
                     webBuilder.UseStartup<Startup>();
                     webBuilder.ConfigureKestrel(options =>
                     {
-                        options.ListenAnyIP(6520);
+                        options.ListenLocalhost(6520);
                     });
                 });
     }
