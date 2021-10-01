@@ -23,6 +23,7 @@ namespace GrpcService1
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("https://*:6520");
                 });
     }
 }
