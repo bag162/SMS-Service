@@ -1,5 +1,4 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
-
 WORKDIR /app
 EXPOSE 6520
 
@@ -16,9 +15,10 @@ COPY ["Backend.DBInfrastructure/Backend.DBInfrastructure.csproj", "Backend.DBInf
 COPY ["Backend.DI/Backend.DI.csproj", "Backend.DI/"]
 COPY ["Backend.CheckDBWorkers/Backend.CheckDBWorkers.csproj", "Backend.CheckDBWorkers/"]
 COPY ["Backend.SMSWorker/Backend.SMSWorker.csproj", "Backend.SMSWorker/"]
-RUN dotnet dev-certs https
-RUN dotnet dev-certs https --trust
-RUN dotnet user-secrets -p GrpcService/GrpcService.csproj set "Kestrel:Certificates:Development:Password" "bag162"
+RUN apt install libnss3-tools
+RUN dotnet dev-certs https -ep GrpcService/server1.crt --format PEM
+RUN certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i GrpcService/server1.crt
+RUN certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost -i GrpcService/server1.crt
 RUN dotnet restore "GrpcService/GrpcService.csproj"
 COPY . .
 WORKDIR "/src/GrpcService"
