@@ -26,7 +26,8 @@ RUN dotnet publish "GrpcService.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN sudo apt-get install -y libnss3-tools
+RUN sudo apt update
+RUN sudo apt install -y libnss3-tools
 RUN dotnet dev-certs https -ep GrpcService/server1.crt --format PEM
 RUN certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i GrpcService/server1.crt
 RUN certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost -i GrpcService/server1.crt
