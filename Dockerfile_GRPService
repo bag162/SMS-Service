@@ -16,9 +16,9 @@ COPY ["Backend.DBInfrastructure/Backend.DBInfrastructure.csproj", "Backend.DBInf
 COPY ["Backend.DI/Backend.DI.csproj", "Backend.DI/"]
 COPY ["Backend.CheckDBWorkers/Backend.CheckDBWorkers.csproj", "Backend.CheckDBWorkers/"]
 COPY ["Backend.SMSWorker/Backend.SMSWorker.csproj", "Backend.SMSWorker/"]
-RUN dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\GrpcService.pfx -p bag162
-RUN dotnet dev-certs https --trust
-RUN dotnet user-secrets -p GrpcService/GrpcService.csproj set "Kestrel:Certificates:Development:Password" "bag162"
+# RUN dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\GrpcService.pfx -p bag162
+# RUN dotnet dev-certs https --trust
+# RUN dotnet user-secrets -p GrpcService/GrpcService.csproj set "Kestrel:Certificates:Development:Password" "bag162"
 RUN dotnet restore "GrpcService/GrpcService.csproj"
 COPY . .
 WORKDIR "/src/GrpcService"
