@@ -1,10 +1,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 6520
-RUN apt install libnss3-tools
-RUN dotnet dev-certs https -ep GrpcService/server1.crt --format PEM
-RUN certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i GrpcService/server1.crt
-RUN certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost -i GrpcService/server1.crt
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
@@ -30,4 +26,8 @@ RUN dotnet publish "GrpcService.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+RUN sudo apt-get install -y libnss3-tools
+RUN dotnet dev-certs https -ep GrpcService/server1.crt --format PEM
+RUN certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i GrpcService/server1.crt
+RUN certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost -i GrpcService/server1.crt
 ENTRYPOINT ["dotnet", "GrpcService.dll"]
