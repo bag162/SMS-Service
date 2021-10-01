@@ -29,5 +29,5 @@ COPY --from=publish /app/publish .
 
 WORKDIR /
 RUN apt update
-RUN apt install libnss3-tools
+RUN apt install -y libnss3-tools
 ENTRYPOINT ["dotnet", "GrpcService.dll"]
