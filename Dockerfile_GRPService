@@ -15,16 +15,16 @@ COPY ["Backend.DBInfrastructure/Backend.DBInfrastructure.csproj", "Backend.DBInf
 COPY ["Backend.DI/Backend.DI.csproj", "Backend.DI/"]
 COPY ["Backend.CheckDBWorkers/Backend.CheckDBWorkers.csproj", "Backend.CheckDBWorkers/"]
 COPY ["Backend.SMSWorker/Backend.SMSWorker.csproj", "Backend.SMSWorker/"]
-RUN apt install libnss3-tools
-RUN dotnet dev-certs https -ep GrpcService/server1.crt --format PEM
-RUN certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i GrpcService/server1.crt
-RUN certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost -i GrpcService/server1.crt
 RUN dotnet restore "GrpcService/GrpcService.csproj"
 COPY . .
 WORKDIR "/src/GrpcService"
 RUN dotnet build "GrpcService.csproj" -c Release -o /app/build
 
 FROM build AS publish
+RUN apt install libnss3-tools
+RUN dotnet dev-certs https -ep GrpcService/server1.crt --format PEM
+RUN certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i GrpcService/server1.crt
+RUN certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost -i GrpcService/server1.crt
 RUN dotnet publish "GrpcService.csproj" -c Release -o /app/publish
 
 FROM base AS final
