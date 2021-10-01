@@ -29,7 +29,7 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 WORKDIR /
-RUN mkdir home/.pki/nssdb
+RUN mkdir -p home/.pki/nssdb
 RUN apt update
 RUN apt install -y libnss3-tools
 RUN dotnet dev-certs https -ep /src/GrpcService/server1.crt --format PEM
