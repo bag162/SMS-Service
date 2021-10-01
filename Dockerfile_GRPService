@@ -29,12 +29,12 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 WORKDIR /
-RUN mkdir $HOME/.pki/nssdb
+RUN mkdir ${HOME}/.pki/nssdb
 RUN apt update
 RUN apt install -y libnss3-tools
 RUN dotnet dev-certs https -ep /src/GrpcService/server1.crt --format PEM
-RUN ertutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i /src/GrpcService/server1.crt
-RUN certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n localhost -i /src/GrpcService/server1.crt
+RUN ertutil -d sql:${HOME}/.pki/nssdb -A -t "P,," -n localhost -i /src/GrpcService/server1.crt
+RUN certutil -d sql:${HOME}/.pki/nssdb -A -t "C,," -n localhost -i /src/GrpcService/server1.crt
 
 WORKDIR "/src/GrpcService"
 ENTRYPOINT ["dotnet", "GrpcService.dll"]
