@@ -18,12 +18,10 @@ COPY ["Backend.DBInfrastructure/Backend.DBInfrastructure.csproj", "Backend.DBInf
 COPY ["Backend.DI/Backend.DI.csproj", "Backend.DI/"]
 COPY ["Backend.CheckDBWorkers/Backend.CheckDBWorkers.csproj", "Backend.CheckDBWorkers/"]
 COPY ["Backend.SMSWorker/Backend.SMSWorker.csproj", "Backend.SMSWorker/"]
-RUN dotnet restore "GrpcService/GrpcService.csproj"
-COPY . .
-
-WORKDIR /
 RUN dotnet dev-certs https --clean
 RUN dotnet dev-certs https -t
+RUN dotnet restore "GrpcService/GrpcService.csproj"
+COPY . .
 
 WORKDIR "/src/GrpcService"
 RUN dotnet build "GrpcService.csproj" -c Release -o /app/build
