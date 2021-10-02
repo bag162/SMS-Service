@@ -14,10 +14,7 @@ namespace Client.gRPC
         public gRPCClient(IOptions<ConfigurationClass> config)
         {
             this.Config = config;
-            this.channel = GrpcChannel.ForAddress(Config.Value.gRPC, new GrpcChannelOptions { 
-                HttpHandler = new HttpClientHandler() { 
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                }});
+            this.channel = GrpcChannel.ForAddress(Config.Value.gRPC);
         }
     }
 }

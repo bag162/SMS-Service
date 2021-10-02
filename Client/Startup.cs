@@ -1,17 +1,10 @@
 using Client.Configuration;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Client.Database.Data.Repository;
-using Client.Database.Data.Services;
-using Client.DataBase.Data.Contexts;
-using Client.DataBase.Data.IServices;
-using Client.DataBase.Data.Services;
 using AutoMapper;
 
 namespace Client
