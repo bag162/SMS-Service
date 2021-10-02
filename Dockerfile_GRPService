@@ -22,15 +22,8 @@ RUN dotnet restore "GrpcService/GrpcService.csproj"
 COPY . .
 
 WORKDIR /
-RUN mkdir -p /home/.pki/nssdb
-RUN apt update
-RUN apt install libssl-dev
-RUN apt install -y libnss3-tools
-RUN dotnet dev-certs https -ep /src/GrpcService/server1.crt --format PEM
-RUN update-ca-certificates
-RUN certutil -d sql:/home/.pki/nssdb -A -t "P,," -n localhost -i /src/GrpcService/server1.crt
-RUN certutil -d sql:/home/.pki/nssdb -A -t "C,," -n localhost -i /src/GrpcService/server1.crt
-RUN dotnet dev-certs https --trust
+RUN dotnet dev-certs https --clean
+RUN dotnet dev-certs https -t
 
 WORKDIR "/src/GrpcService"
 RUN dotnet build "GrpcService.csproj" -c Release -o /app/build
