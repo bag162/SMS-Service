@@ -14,7 +14,7 @@ namespace Client.gRPC
         public gRPCClient(IOptions<ConfigurationClass> config)
         {
             this.Config = config;
-            this.channel = GrpcChannel.ForAddress(Config.Value.gRPC);
+            this.channel = GrpcChannel.ForAddress(new Uri(Config.Value.gRPC));
         }
     }
 }
