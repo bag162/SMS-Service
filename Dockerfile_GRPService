@@ -33,8 +33,8 @@ WORKDIR /
 RUN mkdir -p home/.pki/nssdb
 RUN apt update
 RUN apt install -y libnss3-tools
-RUN certutil -d sql:home/.pki/nssdb -A -t "P,," -n localhost -i /src/GrpcService/server1.crt
-RUN certutil -d sql:home/.pki/nssdb -A -t "C,," -n localhost -i /src/GrpcService/server1.crt
+RUN certutil -d sql:home/.pki/nssdb -A -t "P,," -n localhost -i src/GrpcService/server1.crt
+RUN certutil -d sql:home/.pki/nssdb -A -t "C,," -n localhost -i src/GrpcService/server1.crt
 
 WORKDIR "/src/GrpcService"
 ENTRYPOINT ["dotnet", "GrpcService.dll"]
