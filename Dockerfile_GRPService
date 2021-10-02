@@ -18,8 +18,6 @@ COPY ["Backend.DBInfrastructure/Backend.DBInfrastructure.csproj", "Backend.DBInf
 COPY ["Backend.DI/Backend.DI.csproj", "Backend.DI/"]
 COPY ["Backend.CheckDBWorkers/Backend.CheckDBWorkers.csproj", "Backend.CheckDBWorkers/"]
 COPY ["Backend.SMSWorker/Backend.SMSWorker.csproj", "Backend.SMSWorker/"]
-RUN dotnet dev-certs https --clean
-RUN dotnet dev-certs https -t
 RUN dotnet restore "GrpcService/GrpcService.csproj"
 COPY . .
 
