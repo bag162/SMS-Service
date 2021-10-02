@@ -19,6 +19,13 @@ RUN dotnet dev-certs https -ep GrpcService/server1.crt --format PEM
 RUN dotnet restore "GrpcService/GrpcService.csproj"
 COPY . .
 
+WORKDIR /
+RUN mkdir -p /home/.pki/nssdb
+RUN apt update
+RUN apt install -y libnss3-tools
+RUN certutil -d sql:/home/.pki/nssdb -A -t "P,," -n localhost -i /src/GrpcService/server1.crt
+RUN certutil -d sql:/home/.pki/nssdb -A -t "C,," -n localhost -i /src/GrpcService/server1.crt
+
 WORKDIR "/src/GrpcService"
 RUN dotnet build "GrpcService.csproj" -c Release -o /app/build
 
@@ -29,12 +36,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-WORKDIR /
-RUN mkdir -p home/.pki/nssdb
-RUN apt update
-RUN apt install -y libnss3-tools
-RUN certutil -d sql:home/.pki/nssdb -A -t "P,," -n localhost -i src/GrpcService/server1.crt
-RUN certutil -d sql:home/.pki/nssdb -A -t "C,," -n localhost -i src/GrpcService/server1.crt
+
 
 WORKDIR "/src/GrpcService"
 ENTRYPOINT ["dotnet", "GrpcService.dll"]
