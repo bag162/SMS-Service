@@ -18,16 +18,16 @@ COPY ["Backend.SMSWorker/Backend.SMSWorker.csproj", "Backend.SMSWorker/"]
 RUN dotnet restore "GrpcService/GrpcService.csproj"
 COPY . .
 
-WORKDIR /
-RUN mkdir -p /home/.pki/nssdb
-RUN apt update
-RUN apt install libssl-dev
-RUN apt install -y libnss3-tools
-RUN dotnet dev-certs https -ep /src/GrpcService/server1.crt --format PEM
-RUN update-ca-certificates
-# RUN dotnet dev-certs https --trust
-RUN certutil -d sql:/home/.pki/nssdb -A -t "P,," -n localhost -i /src/GrpcService/server1.crt
-RUN certutil -d sql:/home/.pki/nssdb -A -t "C,," -n localhost -i /src/GrpcService/server1.crt
+# WORKDIR /
+# RUN mkdir -p /home/.pki/nssdb
+# RUN apt update
+# RUN apt install libssl-dev
+# RUN apt install -y libnss3-tools
+# RUN dotnet dev-certs https -ep /src/GrpcService/server1.crt --format PEM
+# RUN update-ca-certificates
+# # RUN dotnet dev-certs https --trust
+# RUN certutil -d sql:/home/.pki/nssdb -A -t "P,," -n localhost -i /src/GrpcService/server1.crt
+# RUN certutil -d sql:/home/.pki/nssdb -A -t "C,," -n localhost -i /src/GrpcService/server1.crt
 
 WORKDIR "/src/GrpcService"
 RUN dotnet build "GrpcService.csproj" -c Release -o /app/build
