@@ -20,13 +20,13 @@ COPY . .
 
 WORKDIR /
 RUN apt update
-RUN apt install -y nodejs
 RUN apt install -y npm
 RUN npm install -g @angular/cli
 
 WORKDIR "/src/Client/ClientApp"
-RUN npm install -g 9.1.269.36
-RUN n 9.1.269.36
+RUN sudo npm cache clean -f
+RUN sudo npm install -g n
+RUN sudo n 9.1.269.36
 
 WORKDIR "/src/Client"
 RUN dotnet build "Client.csproj" -c Release -o /app/build
