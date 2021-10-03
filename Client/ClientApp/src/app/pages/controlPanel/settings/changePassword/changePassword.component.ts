@@ -1,4 +1,4 @@
-import { SettingUserService } from "src/app/services/user/settings.service";
+import { SettingUserService } from "../../../../../../src/app/services/user/settings.service";
 import { Component } from '@angular/core';
 
 @Component({
