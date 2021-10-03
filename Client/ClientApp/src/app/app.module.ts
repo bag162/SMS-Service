@@ -9,7 +9,6 @@ import { AuthenticateGuard } from './services/authenticate.guardService';
 import { DataHomeService, UserInfoService } from './services/user/data.service';
 import { SharedComponentsModule } from "./sharedComponents/sharedComponents.module";
 import { HttpClientModule } from "@angular/common/http";
-import { NotDeveloped } from "./sharedComponents/noDeveloped/notDeveloped.component";
 
 @NgModule({
 

@@ -22,6 +22,7 @@ WORKDIR /
 RUN apt update
 RUN apt install -y npm
 RUN npm install -g @angular/cli
+RUN npm install -g @types/angular
 
 WORKDIR "/src/Client/ClientApp"
 RUN npm cache clean -f

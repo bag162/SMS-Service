@@ -16,6 +16,8 @@
     "@angular/platform-browser": "~12.0.0",
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
+    "@types/angular": "1.6.5",
+    "@types/jquery": "2.0.40",
     "bootstrap": "^5.0.2",
     "jquery": "^3.6.0",
     "rxjs": "~6.6.0",
