@@ -17,6 +17,16 @@ COPY ["Client.DBInfrastructure/Client.DBInfrastructure.csproj", "Client.DBInfras
 COPY ["Client.DBMigrations/Client.DBMigrations.csproj", "Client.DBMigrations/"]
 RUN dotnet restore "Client/Client.csproj"
 COPY . .
+
+WORKDIR /
+RUN apt update
+RUN apt install nodejs
+RUN apt install npm 
+RUN npm install -g @angular/cli
+
+WORKDIR "/src/Client/ClientApp"
+RUN npm install
+
 WORKDIR "/src/Client"
 RUN dotnet build "Client.csproj" -c Release -o /app/build
 
