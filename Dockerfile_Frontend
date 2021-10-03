@@ -25,7 +25,8 @@ RUN apt install -y npm
 RUN npm install -g @angular/cli
 
 WORKDIR "/src/Client/ClientApp"
-RUN npm install
+RUN npm install -g n /
+RUN n 0.9
 
 WORKDIR "/src/Client"
 RUN dotnet build "Client.csproj" -c Release -o /app/build
