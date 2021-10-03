@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { DataHomeService } from "src/app/services/user/data.service";
+import { DataHomeService } from "../../../../../src/app/services/user/data.service";
 import { Router } from "@angular/router";
 
 

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 declare var $: any;
 
-import { MessageResponse } from "src/app/Infrastructure/Models/Response/message.model";
+import { MessageResponse } from "../../../src/app/Infrastructure/Models/Response/message.model";
 
 @Injectable()
 export class AutorizationService {

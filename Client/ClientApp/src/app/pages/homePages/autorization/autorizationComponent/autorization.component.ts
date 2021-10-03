@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AutorizationService } from "src/app/services/authentication.service";
-import { UserInfoService } from 'src/app/services/user/data.service';
+import { AutorizationService } from "../../../../../../src/app/services/authentication.service";
+import { UserInfoService } from '../../../../../../src/app/services/user/data.service';
 import { Router } from "@angular/router";
 declare var $: any;
 

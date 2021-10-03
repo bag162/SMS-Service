@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { UserInfoService } from "src/app/services/user/data.service";
-import { SettingUserService, UpdatedUserInfo } from "src/app/services/user/settings.service";
+import { UserInfoService } from "../../../../../../src/app/services/user/data.service";
+import { SettingUserService, UpdatedUserInfo } from "../../../../../app/services/user/settings.service";
 
 
 @Component({

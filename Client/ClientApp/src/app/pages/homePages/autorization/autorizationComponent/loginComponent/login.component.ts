@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutorizationService, UserLogin } from "src/app/services/authentication.service";
-import { UserInfoService } from 'src/app/services/user/data.service';
-import { MessageResponse } from "src/app/Infrastructure/Models/Response/message.model";
+import { AutorizationService, UserLogin } from "../../../../../../../src/app/services/authentication.service";
+import { UserInfoService } from '../../../../../../../src/app/services/user/data.service';
+import { MessageResponse } from "../../../../../../../src/app/Infrastructure/Models/Response/message.model";
 declare var $: any;
 
 @Component({

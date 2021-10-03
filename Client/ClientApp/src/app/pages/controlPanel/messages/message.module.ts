@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MessagesComponent } from './messages.component';
-import { NotDevelopedModule } from 'src/app/sharedComponents/noDeveloped/notDeveloped.module';
+import { NotDevelopedModule } from '../../../../app/sharedComponents/noDeveloped/notDeveloped.module';
 import { Router, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
