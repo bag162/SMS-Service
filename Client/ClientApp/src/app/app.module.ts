@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { AppComponent }   from './app.component';
 import { LayoutModule } from "./pages/layout/layoutModule";
-import { NotFoundComponent } from "src/app/pages/notFound/notfound.component";
+import { NotFoundComponent } from "../app/pages/notFound/notfound.component";
 import { RoutingModule } from "./routing.module";
 import { AuthenticateGuard } from './services/authenticate.guardService';
 import { DataHomeService, UserInfoService } from './services/user/data.service';
