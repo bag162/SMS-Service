@@ -20,8 +20,8 @@ COPY . .
 
 WORKDIR /
 RUN apt update
-RUN apt install nodejs
-RUN apt install npm 
+RUN apt install -y nodejs
+RUN apt install -y npm
 RUN npm install -g @angular/cli
 
 WORKDIR "/src/Client/ClientApp"
