@@ -2,35 +2,41 @@
   "cli": {
     "analytics": "b42caa14-d508-4766-91af-34de05289ae7"
   },
-"version": 1,
-"projects": {
-  "AofASMSService": {
-    "projectType": "application",
-    "root": "",
-    "sourceRoot": "src",
-    "architect": {
-      "build": {
-        "builder": "@angular-devkit/build-angular:browser",
-        "options": {
-          "styles": [
-            "node_modules/bootstrap/dist/css/bootstrap.min.css",
-            "font-awesome/css/font-awesome.min.css"
-          ],
-          "outputPath": "dist/AofASMSService",
-          "index": "src/index.html",
-          "main": "src/main.ts",
-          "polyfills": "src/polyfills.ts",
-          "tsConfig": "tsconfig.json",
-          "aot": true
-        }
-      },
-      "serve": {
-        "builder": "@angular-devkit/build-angular:dev-server",
-        "options": {
-          "browserTarget": "AofASMSService:build"
+  "version": 1,
+  "projects": {
+    "aofasmsservice": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "font-awesome/css/font-awesome.min.css"
+            ],
+            "outputPath": "dist/aofasmsservice",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.json",
+            "aot": true
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "aofasmsservice:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "aofasmsservice:build"
+            }
+          }
         }
       }
     }
-  }},
-"defaultProject": "AofASMSService"
+  },
+  "defaultProject": "aofasmsservice"
 }
