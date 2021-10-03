@@ -25,7 +25,7 @@ RUN npm install -g @angular/cli
 
 WORKDIR "/src/Client/ClientApp"
 RUN npm cache clean -f
-RUN npm install -g n
+RUN npm install
 RUN n 14.17.3
 
 WORKDIR "/src/Client"
