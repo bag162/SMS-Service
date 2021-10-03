@@ -26,7 +26,7 @@ RUN npm install -g @angular/cli
 WORKDIR "/src/Client/ClientApp"
 RUN npm cache clean -f
 RUN npm install -g n
-RUN n 9.1.269.36
+RUN n 9.1
 
 WORKDIR "/src/Client"
 RUN dotnet build "Client.csproj" -c Release -o /app/build
