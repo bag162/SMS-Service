@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { AppComponent }   from './app.component';
 import { LayoutModule } from "./pages/layout/layoutModule";
-import { NotFoundComponent } from "../app/pages/notFound/notfound.component";
+import { NotFoundComponent } from "../../src/app/pages/notFound/notfound.component";
 import { RoutingModule } from "./routing.module";
 import { AuthenticateGuard } from '../app/services/authenticate.guardService';
-import { DataHomeService, UserInfoService } from '../app/services/user/data.service';
+import { DataHomeService, UserInfoService } from '../../src/app/services/user/data.service';
 import { SharedComponentsModule } from "./sharedComponents/sharedComponents.module";
 import { HttpClientModule } from "@angular/common/http";
 
