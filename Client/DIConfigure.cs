@@ -32,7 +32,7 @@ namespace Client
             services.AddScoped<IRoleService, RoleService>();
 
             // Angular Configure
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp"; });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login"); });
             services.AddMvc();
         }
