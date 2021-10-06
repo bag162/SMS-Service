@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.DBMigrations.Migrations._07_2021
 {
-    [Migration(220720212344)]
+    [Migration(202107222344)]
     public class AddNewColumb_In_User_Table : Migration
     {
         public override void Up()

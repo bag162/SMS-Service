@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { UserGlobalInfo } from "./data.service";
-import { MessageResponse } from "../../Infrastructure/Models/Response/message.model";
+import { MessageResponse } from "app/Infrastructure/Models/Response/message.model";
 @Injectable()
 export class SettingUserService {
     private readonly changePasswordUri: string = "/settings/setting/ChangePassword";
@@ -46,9 +45,4 @@ export class UpdatedUserInfo {
     public Telegram: string;
     public Username: string;
 
-}
-
-class changePasswordModel {
-    constructor(public oldPassword: string, public ewPassword: string) {
-    }
 }

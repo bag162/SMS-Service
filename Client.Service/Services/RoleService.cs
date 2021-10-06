@@ -7,16 +7,16 @@ namespace Client.DataBase.Data.Services
 {
     public class RoleService : IRoleService
     {
-        private readonly RoleContext roleContext;
+        private readonly UserContext userContext;
 
-        public RoleService (RoleContext roleContext)
+        public RoleService (UserContext userContext)
         {
-            this.roleContext = roleContext;
+            this.userContext = userContext;
         }
 
         public bool isAdmin(long idUser)
         {
-            return roleContext.Roles
+            return userContext.Roles
                 .AsQueryable()
                 .Contains(new Entities.RoleEntity { id = idUser, role = "admin" });
         }

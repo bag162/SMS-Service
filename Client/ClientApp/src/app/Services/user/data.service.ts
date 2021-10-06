@@ -50,7 +50,7 @@ export class UserInfoService {
         var result;
         $.ajax({
             type: "GET",
-            url: window.location.origin + "/controlPanel/Home/getUserInfo",
+            url: window.location.origin + "/cp/user",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             async: false

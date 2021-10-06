@@ -39,9 +39,7 @@ namespace Client
 
         public static void ConfigureDB(IServiceCollection services, IConfiguration Configuration, string connectionString)
         {
-            // DB Configure
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
-            services.AddDbContext<RoleContext>(options => options.UseSqlServer(connectionString));
         }
     }
 }

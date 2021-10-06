@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AutorizationService, UserRegistration } from "../../../../../../../src/app/services/authentication.service";
+import { AutorizationService, UserRegistration } from "app/Services/user/authentication.service";
 import { Router } from '@angular/router';
-import { UserInfoService } from '../../../../../../../src/app/services/user/data.service';
-import { MessageResponse } from "../../../../../../../src/app/Infrastructure/Models/Response/message.model";
+import { UserInfoService } from 'app/services/user/data.service';
+import { MessageResponse } from "app/Infrastructure/Models/Response/message.model";
 declare var $: any;
 
 @Component({
@@ -31,7 +31,7 @@ export class RegistrationComponent {
         if (requestResult.success) {
             this.userInfoService.authorized = true;
             setTimeout(() => {
-                this.router.navigate(['controlpanel']);
+                this.router.navigate(['cp']);
             }, 3000);
         }
     }

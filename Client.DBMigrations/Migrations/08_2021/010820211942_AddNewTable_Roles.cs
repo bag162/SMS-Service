@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.DBMigrations.Migrations._08_2021
 {
-    [Migration(010820211942)]
+    [Migration(202108011942)]
     public class AddNewTable_Roles : Migration
     {
         public override void Up()
@@ -15,9 +15,9 @@ namespace Client.DBMigrations.Migrations._08_2021
                 .WithColumn("id").AsInt64().NotNullable().PrimaryKey()
                 .WithColumn("role").AsString().NotNullable();
 
-            Insert.IntoTable("Roles")
+            /*Insert.IntoTable("Roles")
                 .Row(new { id = 1, role = "user" })
-                .Row(new { id = 2, role = "admin" });
+                .Row(new { id = 2, role = "admin" });*/
         }
 
         public override void Down()

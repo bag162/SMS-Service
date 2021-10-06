@@ -1,9 +1,13 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { PublicLayoutComponent } from "./public-layout/layout.component";
-import { PublicFooterLayoutComponent } from "./public-layout/public-footer/footer.component";
-import { PublicHeaderLayoutComponent } from "./public-layout/public-header/header.component";
+import { FooterComponent } from "./public-layout/public-footer/footer.component";
+import { HeaderComponent } from "./public-layout/public-header/header.component";
+import { NavbarFooterComponent } from "./private-layout/footer/footer.component";
+import { NavbarHeaderComponent } from "./private-layout/header/header.component";
+import { PrivateNavbarComponent } from "./private-layout/private-navbar.component";
 import { FormsModule } from "@angular/forms";
+
 @NgModule({
 
     imports:      [
@@ -13,12 +17,17 @@ import { FormsModule } from "@angular/forms";
 
     declarations: [
         PublicLayoutComponent,
-        PublicHeaderLayoutComponent,
-        PublicFooterLayoutComponent
+        HeaderComponent,
+        FooterComponent,
+
+        PrivateNavbarComponent,
+        NavbarFooterComponent,
+        NavbarHeaderComponent
     ],
 
     exports: [
         PublicLayoutComponent,
+        PrivateNavbarComponent
     ],
 
     providers: [

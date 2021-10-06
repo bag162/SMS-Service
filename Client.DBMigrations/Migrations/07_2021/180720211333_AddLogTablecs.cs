@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.DBMigrations.Migrations._07_2021
 {
-    [Migration(180720211333)]
+    [Migration(202107181333)]
     public class AddLogTable : Migration
     {
         public override void Up()

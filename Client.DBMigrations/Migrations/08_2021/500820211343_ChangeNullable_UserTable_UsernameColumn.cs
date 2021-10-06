@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.DBMigrations.Migrations._08_2021
 {
-    [Migration(500820211343)]
+    [Migration(202108051343)]
     public class ChangeNullable_UserTable_UsernameColomhb : Migration
     {
         public override void Up()

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AutorizationService } from "../../../../../../src/app/services/authentication.service";
-import { UserInfoService } from '../../../../../../src/app/services/user/data.service';
+import { UserInfoService } from 'app/services/user/data.service';
 import { Router } from "@angular/router";
 declare var $: any;
 
@@ -14,7 +13,7 @@ export class AutorizationComponent{
         private userInfoService: UserInfoService,
         private router: Router){
         if (userInfoService.authorized) {
-            router.navigate(['controlpanel']);
+            router.navigate(['cp']);
         }
     }
     changeHideOnLogin()

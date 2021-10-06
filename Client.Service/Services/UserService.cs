@@ -111,6 +111,7 @@ namespace Client.DataBase.Data.Services
                 .AsQueryable()
                 .Where(x => x.Login == user.Login && x.Password == user.Password)
                 .FirstOrDefault();
+
             if (checkUser != null)
             {
                 if (httpContext != null)

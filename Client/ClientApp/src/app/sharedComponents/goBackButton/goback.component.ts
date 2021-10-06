@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 
 export class GoBackButtonComponent {
-    @Input() link: string = "controlpanel";
+    @Input() link: string = "cp";
 
     constructor(public router: Router){}
 

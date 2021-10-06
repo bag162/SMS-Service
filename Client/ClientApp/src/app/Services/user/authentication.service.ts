@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 declare var $: any;
 
-import { MessageResponse } from "../../../src/app/Infrastructure/Models/Response/message.model";
+import { MessageResponse } from "app/Infrastructure/Models/Response/message.model";
 
 @Injectable()
 export class AutorizationService {
-    private readonly registerUri: string = window.location.origin + "/authorization/registration/newUserRegistration";
-    private readonly loginUri: string = window.location.origin + "/authorization/login/loginUser";
+    private readonly registerUri: string = window.location.origin + "/auth/register";
+    private readonly loginUri: string = window.location.origin + "/auth/login";
 
     public registerNewUser(user: UserRegistration): MessageResponse {
         let returnedData: MessageResponse;

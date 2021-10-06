@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 
 @Input()
-export class PublicHeaderLayoutComponent {
+export class HeaderComponent {
 }

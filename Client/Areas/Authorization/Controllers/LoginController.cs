@@ -5,7 +5,7 @@ using Client.Database.Data.Repository;
 
 namespace Client.Areas.Authorization.Controllers
 {
-    [Area("authorization")]
+    [Area("auth")]
     public class LoginController : Controller
     {
         public readonly IUserService userService;
@@ -15,11 +15,21 @@ namespace Client.Areas.Authorization.Controllers
         }
 
         [HttpPost]
+        [Route("auth/login")]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public JsonResult LoginUser([FromBody] LoginUserModel user)
+        public JsonResult Login([FromBody] LoginUserModel user)
         {
             return userService.LoginUser(user, HttpContext);
+        }
+
+        [HttpPost]
+        [Route("auth/register")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public JsonResult Register([FromBody] RegistrationUserModel user)
+        {
+            return userService.CreateNewUser(user, HttpContext);
         }
     }
 }

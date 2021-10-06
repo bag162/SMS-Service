@@ -5,8 +5,5 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: 'layout.component.html'
 })
 
-export class PublicLayoutComponent implements OnInit {
-    constructor() { }
-
-    ngOnInit() { }
+export class PublicLayoutComponent {
 }

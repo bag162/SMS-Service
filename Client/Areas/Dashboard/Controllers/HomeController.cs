@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client.Areas.Home.Controllers
 {
-    [Area("controlPanel")]
+    [Area("cp")]
     public class HomeController : Controller
     {
         private readonly IUserService userService;
@@ -18,7 +18,8 @@ namespace Client.Areas.Home.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetUserInfo()
+        [Route("cp/user")]
+        public JsonResult UserInfo()
         {
             return userService.GetUser(User.Identity.Name);
         }

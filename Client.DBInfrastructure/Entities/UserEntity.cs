@@ -12,7 +12,6 @@ namespace Client.DataBase.Contexts
         public string Username { get; set; }
         public string Password { get; set; }
         public string EmailAddress { get; set; }
-        public string ApiKey { get; set; }
         public string Telegram { get; set; }
         public long IdRole { get; set; }
     }
