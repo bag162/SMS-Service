@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { DataHomeService } from "app/services/user/data.service";
+import { UserInfoService } from "app/Services/user/userdata.service";
 import { Router } from "@angular/router";
 
 
@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 
 export class DashboardPanelComponent {
     constructor ( 
-        public dataService: DataHomeService,
+        public userInfoService: UserInfoService,
         public router: Router){}
         
         public redirect(link: string)

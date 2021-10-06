@@ -6,7 +6,6 @@ import { LayoutModule } from "./pages/layout/layoutModule";
 import { NotFoundComponent } from "./pages/notFound/notfound.component";
 import { RoutingModule } from "./routing.module";
 import { AuthenticateGuard } from './services/authenticate.guardService';
-import { DataHomeService, UserInfoService } from './services/user/data.service';
 import { SharedComponentsModule } from "./sharedComponents/sharedComponents.module";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -30,9 +29,7 @@ import { HttpClientModule } from "@angular/common/http";
     ],
 
     providers: [
-        UserInfoService,
-        AuthenticateGuard,
-        DataHomeService
+        AuthenticateGuard
     ],
 
     bootstrap:    [ 

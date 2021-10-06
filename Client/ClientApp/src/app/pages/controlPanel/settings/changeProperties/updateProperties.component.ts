@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserInfoService } from "app/Services/user/data.service";
+import { UserInfoService } from "app/Services/user/userdata.service";
 import { SettingUserService, UpdatedUserInfo } from "app/services/user/settings.service";
 
 
@@ -17,9 +17,9 @@ export class UpdatePropertiesComponent {
     }
 
     ngOnInit() {
-        this.updatedUserInfo.EmailAddress = this.userInfo.emailAddress
-        this.updatedUserInfo.Telegram = this.userInfo.telegram
-        this.updatedUserInfo.Username = this.userInfo.username
+        this.updatedUserInfo.EmailAddress = this.userInfo.user.emailAddress
+        this.updatedUserInfo.Telegram = this.userInfo.user.telegram
+        this.updatedUserInfo.Username = this.userInfo.user.username
     }
 
     public updateUserInfo() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserInfoService } from 'app/services/user/data.service';
+import { UserInfoService } from 'app/Services/user/userdata.service';
 import { Router } from "@angular/router";
 declare var $: any;
 
@@ -12,7 +12,7 @@ export class AutorizationComponent{
     constructor(
         private userInfoService: UserInfoService,
         private router: Router){
-        if (userInfoService.authorized) {
+        if (userInfoService.user.authorized) {
             router.navigate(['cp']);
         }
     }

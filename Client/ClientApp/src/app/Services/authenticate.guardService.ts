@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
-import { UserInfoService } from "./user/data.service";
+import { UserInfoService } from "./user/userdata.service";
 
 @Injectable()
 export class AuthenticateGuard implements CanActivate{
@@ -11,6 +11,6 @@ export class AuthenticateGuard implements CanActivate{
 
     public canActivate() : boolean
     {
-        return this.userInfoService.authorized;
+        return this.userInfoService.user.authorized;
     }
 }

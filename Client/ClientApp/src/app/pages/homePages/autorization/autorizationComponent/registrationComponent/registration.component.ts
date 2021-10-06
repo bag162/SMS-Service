@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AutorizationService, UserRegistration } from "app/Services/user/authentication.service";
 import { Router } from '@angular/router';
-import { UserInfoService } from 'app/services/user/data.service';
+import { UserInfoService } from 'app/Services/user/userdata.service';
 import { MessageResponse } from "app/Infrastructure/Models/Response/message.model";
 declare var $: any;
 
@@ -29,7 +29,7 @@ export class RegistrationComponent {
         }
         $("#alert-submit").delay(5000).slideUp(300);
         if (requestResult.success) {
-            this.userInfoService.authorized = true;
+            this.userInfoService.user.authorized = true;
             setTimeout(() => {
                 this.router.navigate(['cp']);
             }, 3000);

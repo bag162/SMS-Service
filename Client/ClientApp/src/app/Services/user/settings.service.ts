@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MessageResponse } from "app/Infrastructure/Models/Response/message.model";
+
 @Injectable()
 export class SettingUserService {
     private readonly changePasswordUri: string = "/settings/setting/ChangePassword";
