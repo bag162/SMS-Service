@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
-import { SettingUserService } from "../../../../app/services/user/settings.service";
-import { SharedComponentsModule } from "../../../../../src/app/sharedComponents/sharedComponents.module";
+import { SettingUserService } from "app/services/user/settings.service";
+import { SharedComponentsModule } from "app/sharedComponents/sharedComponents.module";
 
 import { SettingsPanelComponent } from "./settings.component"
 import { ChangePasswordComponent } from "./changePassword/changePassword.component";
@@ -22,8 +22,10 @@ const routes: Routes = [
         UpdatePropertiesComponent,
         ChangePasswordComponent
     ],
+    
     exports: [
     ],
+
     providers:[
         SettingUserService
     ]

@@ -1,9 +1,10 @@
-import { SettingUserService } from "../../../../../../src/app/services/user/settings.service";
+import { SettingUserService } from "app/services/user/settings.service";
 import { Component } from '@angular/core';
 
 @Component({
     selector: 'changePassword-form',
-    templateUrl: 'changePassword.component.html'
+    templateUrl: 'changePassword.component.html',
+    providers: [SettingUserService]
 })
 
 export class ChangePasswordComponent {
