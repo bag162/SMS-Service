@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     component: PrivateNavbarComponent,
     children: [
       { path: "", loadChildren: () => import('./pages/controlPanel/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthenticateGuard] },
-      { path: "main", loadChildren: () => import('./pages/controlPanel/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthenticateGuard] },
+      { path: "main", redirectTo: "" },
       { path: "settings", loadChildren: () => import('./pages/controlPanel/settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthenticateGuard] },
       { path: "finance", loadChildren: () => import('./pages/controlPanel/finance/finance.module').then(m => m.FinanceModule), canActivate: [AuthenticateGuard] },
       { path: "support", loadChildren: () => import('./pages/controlPanel/messages/message.module').then(m => m.MessagesModule), canActivate: [AuthenticateGuard] },

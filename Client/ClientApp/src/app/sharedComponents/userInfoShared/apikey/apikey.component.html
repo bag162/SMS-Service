@@ -1,0 +1,14 @@
+<form action="apikey-data" class="border rounded">
+    <div>
+        <span class="text-center">
+            <h3>ApiKey</h3>
+        </span>
+        <div class="input-group px-2 pb-2">
+            <input [(ngModel)]="apiKey" type="text" class="form-control" id="copyInput" readonly>
+            <div class="input-group-append" id="button-addon4">
+                <button class="btn btn-primary" type="button" onclick="CopyTextInInputField('copyInput')">Copy</button>
+                <button class="btn btn-danger" type="button" disabled>Update</button>
+            </div>
+        </div>
+    </div>
+</form>

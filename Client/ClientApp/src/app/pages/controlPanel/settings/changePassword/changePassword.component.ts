@@ -13,7 +13,7 @@ export class ChangePasswordComponent {
     public repeatPassword: string;
     public oldPassword: string;
     public changePassword() {
-        //смотреть что бы пароли были равны
+        // TODO: смотреть что бы пароли были равны
         var requestResult = this.settingsService.changePassword(this.oldPassword, this.newPassword);
         
         if (requestResult.success) {

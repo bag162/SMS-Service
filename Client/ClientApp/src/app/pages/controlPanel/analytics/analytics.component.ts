@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'analytics-app',
+    selector: 'analytics-page',
     templateUrl: 'analytics.component.html',
     styleUrls: ['analytics.component.css']
 })

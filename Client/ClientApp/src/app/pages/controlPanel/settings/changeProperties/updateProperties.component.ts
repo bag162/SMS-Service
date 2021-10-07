@@ -6,7 +6,7 @@ import { SettingUserService, UpdatedUserInfo } from "app/services/user/settings.
 @Component({
     selector: 'updateProperties-form',
     templateUrl: 'updateProperties.component.html',
-    providers: [SettingUserService]
+    providers: [SettingUserService, UserInfoService]
 })
 
 export class UpdatePropertiesComponent {
