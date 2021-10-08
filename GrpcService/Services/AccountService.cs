@@ -12,14 +12,14 @@ namespace GrpcService.Services
     public class AccountService : Account.AccountBase
     {
         private IAccountService accountService { get; set; }
-        private readonly ILogger<AccountService> _logger;
+        private readonly ILogger<AccountService> logger;
         private readonly IMapper mapper;
         public AccountService(IAccountService accountService,
             ILogger<AccountService> logger,
             IMapper mapper)
         {
             this.accountService = accountService;
-            this._logger = logger;
+            this.logger = logger;
             this.mapper = mapper;
         }
 

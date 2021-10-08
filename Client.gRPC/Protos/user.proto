@@ -1,0 +1,25 @@
+syntax = "proto3";
+option csharp_namespace = "gRPCUser";
+package user;
+
+
+
+service User {
+  rpc CreateUser (UserModel) returns (UserModel);
+  rpc UpdateApiKey (UpdateApiKeyModel) returns (UserModel);
+}
+
+
+
+
+message UserModel {
+	string Id = 1;
+	string Login = 2;
+	double Balance = 3;
+	string ApiKey = 4;
+	string Bucket = 5;
+}
+
+message UpdateApiKeyModel{
+	string userId = 1;
+}

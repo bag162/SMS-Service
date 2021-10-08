@@ -3,15 +3,11 @@ import { UserInfoService } from 'app/services/user/userdata.service';
 
 @Component({
     selector: 'apikey-form',
-    templateUrl: 'apikey.component.html',
-    providers: [UserInfoService]
+    templateUrl: 'apikey.component.html'
 })
 
 export class UserApiKeyComponent {
-    constructor(public userData: UserInfoService) {}
-    public apiKey: string;
-
-    ngOnInit()
+    constructor(public userData: UserInfoService) 
     {
         if (this.userData.user.apiKey == null) {
             this.apiKey = "not assigned";
@@ -19,4 +15,5 @@ export class UserApiKeyComponent {
             this.apiKey = this.userData.user.apiKey;
         }
     }
+    public apiKey: string;
 }

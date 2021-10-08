@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Client.Infrastructure
 {
-    public class JsonResponse
+    public class JsonResponseDTO
     {
         public bool success { get; set; }
         public string message { get; set; }

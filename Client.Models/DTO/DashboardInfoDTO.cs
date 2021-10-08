@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Configuration
+namespace Client.Models.DTO
 {
-    public class ConfigurationClass
+    public class DashboardInfoDTO
     {
-        public string gRPC { get; set; }
+        public bool success { get; set; }
         public string BalancerAddress { get; set; }
     }
 }

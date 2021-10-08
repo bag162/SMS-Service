@@ -27,7 +27,7 @@ namespace Client.DataBase.Data.Services
             UserEntity user = userContext.Users.FirstOrDefault(x => x.Login == login);
             if (user.Password != oldpassword)
             {
-                return new JsonResult(new JsonResponse
+                return new JsonResult(new JsonResponseDTO
                 {
                     success = false,
                     message = "Old password is incorrect"
@@ -36,7 +36,7 @@ namespace Client.DataBase.Data.Services
             user.Password = newpassword;
             userContext.Users.Update(user);
             userContext.SaveChanges();
-            return new JsonResult(new JsonResponse
+            return new JsonResult(new JsonResponseDTO
             {
                 success = true,
                 message = "Password updated successfully"
@@ -47,7 +47,7 @@ namespace Client.DataBase.Data.Services
         {
             var checLogin = userContext.Users.AsQueryable().Where(u => u.Login == user.login).FirstOrDefault();
             if (checLogin != null) {
-                return new JsonResult(new JsonResponse
+                return new JsonResult(new JsonResponseDTO
                 {
                     success = false,
                     message = "This login is already registered in the system."
@@ -55,7 +55,7 @@ namespace Client.DataBase.Data.Services
             }
             var checkEmail = userContext.Users.AsQueryable().Where(u => u.EmailAddress == user.email).FirstOrDefault();
             if (checkEmail != null){
-                return new JsonResult(new JsonResponse
+                return new JsonResult(new JsonResponseDTO
                 {
                     success = false,
                     message = "This email is already registered in the system.",
@@ -78,7 +78,7 @@ namespace Client.DataBase.Data.Services
             {
                 authenticateService.Authenticate(user.login, httpContext);
             }
-            return new JsonResult(new JsonResponse
+            return new JsonResult(new JsonResponseDTO
             {
                 success = true,
                 message = "You have successfully registered. You will now be redirected to the control panel."
@@ -93,7 +93,7 @@ namespace Client.DataBase.Data.Services
                 .FirstOrDefault();
             if (user == null)
             {
-                return new JsonResult(new JsonResponse
+                return new JsonResult(new JsonResponseDTO
                 {
                     success = false
                 });
@@ -118,7 +118,7 @@ namespace Client.DataBase.Data.Services
                 {
                     authenticateService.Authenticate(user.Login, httpContext);
                 }
-                return new JsonResult(new JsonResponse
+                return new JsonResult(new JsonResponseDTO
                 {
                     success = true,
                     message = "The authorization was successful. You will now be redirected to the control panel."
@@ -126,7 +126,7 @@ namespace Client.DataBase.Data.Services
             }
             else
             {
-                return new JsonResult(new JsonResponse
+                return new JsonResult(new JsonResponseDTO
                 {
                     success = false,
                     message = "Wrong login or password."
@@ -143,7 +143,7 @@ namespace Client.DataBase.Data.Services
             newUser.Username = user.Username;
             userContext.Users.Update(newUser);
             userContext.SaveChanges();
-            return new JsonResult(new JsonResponse
+            return new JsonResult(new JsonResponseDTO
             {
                 success = true,
                 message = "Account data updated successfully"

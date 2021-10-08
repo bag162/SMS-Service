@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Backend.TarantoolDB.Repositories;
 using static Backend.TarantoolDB.Repositories.AccountRepository;
 using Backend.Models.Implementation.Enums;
+using System;
 
 namespace Backend.Implemantation.Services
 {
@@ -15,14 +16,6 @@ namespace Backend.Implemantation.Services
         public AccountService(AccountRepository accountRepository)
         {
             this.accountRepository = accountRepository;
-        }
-
-        public async Task DeactivateAccountAsync(AccountModel account, AccountStatus status)
-        {
-            var updatedAccount = account;
-            updatedAccount.Status = (int)status;
-            accountRepository.Update(updatedAccount, (int)updatedAccount.Bucket);
-            return;
         }
 
         public async Task<AccountModel> GetAccountByNumberAsync(string number, int bucket = 3000)
@@ -36,6 +29,14 @@ namespace Backend.Implemantation.Services
         public AccountModel[] GetAllActiveAccounts(int bucket = 3000)
         {
             return accountRepository.Find((int)AccountStatus.Active, (int)AccountTFields.status, bucket).Result.ToArray();
+        }
+
+        public async Task DeactivateAccountAsync(AccountModel account, AccountStatus status)
+        {
+            var updatedAccount = account;
+            updatedAccount.Status = (int)status;
+            accountRepository.Update(updatedAccount, (int)updatedAccount.Bucket);
+            return;
         }
     }
 }

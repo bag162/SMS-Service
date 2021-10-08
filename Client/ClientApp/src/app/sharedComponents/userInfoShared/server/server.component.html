@@ -1,0 +1,13 @@
+<form action="server-data" class="border rounded">
+    <div>
+        <span class="text-center">
+            <h3>Ip Address</h3>
+        </span>
+        <div class="input-group px-2 pb-2">
+            <input [(ngModel)]="ipAddress" type="text" class="form-control" id="copyInputServerIp" readonly>
+            <div class="input-group-append" id="button-addon4">
+                <button class="btn btn-primary" type="button" onclick="CopyTextInInputField('copyInputServerIp')">Copy</button>
+            </div>
+        </div>
+    </div>
+</form>

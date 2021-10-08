@@ -63,6 +63,12 @@
     <ProjectReference Include="..\Client.Service\Client.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Analytics\" />
+    <Folder Include="Areas\Finance\" />
+    <Folder Include="Areas\Support\" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

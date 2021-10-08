@@ -23,6 +23,10 @@ message AccountModel {
 	string Bucket = 7;
 }
 
+message UpdateApiKeyRequest{
+	string accountId = 1;
+}
+
 message GetAccountsRequest{
 	int32 count = 1;
 }

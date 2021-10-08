@@ -14,7 +14,7 @@ const appRoutes: Routes = [
       { path: "main", redirectTo: "" },
       { path: "settings", loadChildren: () => import('./pages/controlPanel/settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthenticateGuard] },
       { path: "finance", loadChildren: () => import('./pages/controlPanel/finance/finance.module').then(m => m.FinanceModule), canActivate: [AuthenticateGuard] },
-      { path: "support", loadChildren: () => import('./pages/controlPanel/messages/message.module').then(m => m.MessagesModule), canActivate: [AuthenticateGuard] },
+      { path: "support", loadChildren: () => import('./pages/controlPanel/support/message.module').then(m => m.MessagesModule), canActivate: [AuthenticateGuard] },
       { path: "analytics", loadChildren: () => import('./pages/controlPanel/analytics/analytics.module').then(m => m.AnalyticsModule), canActivate: [AuthenticateGuard] },
     ]
   },

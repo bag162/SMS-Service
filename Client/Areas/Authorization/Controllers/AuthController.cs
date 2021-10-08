@@ -6,10 +6,10 @@ using Client.Database.Data.Repository;
 namespace Client.Areas.Authorization.Controllers
 {
     [Area("auth")]
-    public class LoginController : Controller
+    public class AuthController : Controller
     {
         public readonly IUserService userService;
-        public LoginController(IUserService userService)
+        public AuthController(IUserService userService)
         {
             this.userService = userService;
         }
@@ -29,6 +29,7 @@ namespace Client.Areas.Authorization.Controllers
         [Produces("application/json")]
         public JsonResult Register([FromBody] RegistrationUserModel user)
         {
+            // TODO: Register user on tarantool
             return userService.CreateNewUser(user, HttpContext);
         }
     }

@@ -10,8 +10,7 @@ namespace Client.gRPC.Services
         private readonly gRPCAccount.Account.AccountClient accountClient;
 
         public AccountService(gRPCClient client,
-            IMapper mapper)
-        {
+            IMapper mapper) {
             this.Client = client;
             this.mapper = mapper;
             this.accountClient = new gRPCAccount.Account.AccountClient(Client.channel);
