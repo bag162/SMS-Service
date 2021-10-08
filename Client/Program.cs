@@ -1,5 +1,3 @@
-using Client.DBMigrations.Migrations._07_2021;
-using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,34 +27,11 @@ namespace Client
 
             return builder.Build();
         }
-        private static IServiceProvider CreateServices()
-        {
-            var connectionString = GetAppSettings()["ConnectionString"];
-            return new ServiceCollection()
-                .AddFluentMigratorCore()
-                .ConfigureRunner(rb => rb
-                    .AddSqlServer2016()
-                    .WithGlobalConnectionString(connectionString)
-                    .ScanIn(typeof(AddLogTable).Assembly).For.Migrations())
-                .AddLogging(lb => lb.AddFluentMigratorConsole())
-                .BuildServiceProvider(false);
-        }
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
-        {
-            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-            runner.MigrateUp();
-        }
 
         public static void Main(string[] args)
         {
-            var serviceProvider = CreateServices();
-            using (var scope = serviceProvider.CreateScope())
-            {
-                UpdateDatabase(scope.ServiceProvider);
-            }
             CreateHostBuilder(args).Build().Run();
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

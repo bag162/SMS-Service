@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Client.DataBase.Contexts;
+﻿using Client.DataBase.Contexts;
 using Client.DataBase.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Client.DataBase.Data.Contexts
 {
@@ -13,6 +13,11 @@ namespace Client.DataBase.Data.Contexts
             : base(options)
         {
             Database.EnsureCreated();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Backend.Configuration;
-using Client.Database.Data.Repository;
+﻿using Client.Database.Data.Repository;
 using Client.Database.Data.Services;
 using Client.DataBase.Data.Contexts;
 using Client.DataBase.Data.IServices;
@@ -11,10 +9,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Client
 {
@@ -27,7 +21,7 @@ namespace Client
             services.AddTransient<AccountService>();
 
             // Services
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, DataBase.Data.Services.UserService>();
             services.AddScoped<IAuthenticateService, AuthenticateService>();
             services.AddScoped<IRoleService, RoleService>();
 
@@ -39,7 +33,7 @@ namespace Client
 
         public static void ConfigureDB(IServiceCollection services, IConfiguration Configuration, string connectionString)
         {
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Client")));
         }
     }
 }
