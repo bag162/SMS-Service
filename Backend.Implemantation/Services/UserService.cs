@@ -24,7 +24,7 @@ namespace Backend.Implemantation.Services
         public async Task<UserModel> CreateUser(UserModel user, int bucket = 2000)
         {
             var createdUser = user;
-            createdUser.ApiKey = GenerateRandomString(20);
+            createdUser.ApiKey = GenerateRandomString(100);
             createdUser.Id = Guid.NewGuid().ToString();
             createdUser.Bucket = 2000;
             return await userRepository.Create(createdUser);
@@ -38,7 +38,7 @@ namespace Backend.Implemantation.Services
         public async Task<UserModel> UpdateApiKey(string userId)
         {
             var user = userRepository.Find(userId).Result.First();
-            user.ApiKey = GenerateRandomString(20);
+            user.ApiKey = GenerateRandomString(100);
             return await userRepository.Update(user);
         }
 
