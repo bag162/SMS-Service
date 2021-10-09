@@ -33,7 +33,7 @@ namespace GrpcService.Services
 
         public override async Task<UserModel> UpdateApiKey(UpdateApiKeyModel request, ServerCallContext context)
         {
-            var updatedUser = await userService.UpdateApiKey(request.UserId);
+            var updatedUser = await userService.UpdateApiKey(request.Login);
             return mapper.Map<UserModel>(updatedUser);
         }
 
