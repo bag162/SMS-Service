@@ -19,11 +19,14 @@ namespace Backend.Implemantation.Services
 
         private readonly UserRepository userRepository;
         private readonly IServicePricesService pricesService;
+        static Random randomGenerator = new Random();
 
         public async Task<UserModel> CreateUser(UserModel user, int bucket = 2000)
         {
             var createdUser = user;
-            createdUser.ApiKey = Guid.NewGuid().ToString();
+            createdUser.ApiKey = GenerateRandomString(20);
+            createdUser.Id = Guid.NewGuid().ToString();
+            createdUser.Bucket = 2000;
             return await userRepository.Create(createdUser);
         }
 
@@ -35,7 +38,7 @@ namespace Backend.Implemantation.Services
         public async Task<UserModel> UpdateApiKey(string userId)
         {
             var user = userRepository.Find(userId).Result.First();
-            user.ApiKey = Guid.NewGuid().ToString();
+            user.ApiKey = GenerateRandomString(20);
             return await userRepository.Update(user);
         }
 
@@ -56,8 +59,11 @@ namespace Backend.Implemantation.Services
             return;
         }
 
-        
-
-       
+        internal static string GenerateRandomString(int length)
+        {
+            byte[] randomBytes = new byte[randomGenerator.Next(length)];
+            randomGenerator.NextBytes(randomBytes);
+            return Convert.ToBase64String(randomBytes);
+        }
     }
 }

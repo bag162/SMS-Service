@@ -10,17 +10,9 @@ namespace Client.Areas
 {
     public class TestController : Controller
     {
-        private readonly AccountService accountService;
-        public TestController(AccountService accountService)
+        public TestController()
         {
-            this.accountService = accountService;
-        }
 
-        [HttpGet]
-        [Route("test")]
-        public ContentResult test()
-        {
-            return new ContentResult() { Content = JsonSerializer.Serialize(accountService.GetAccounts(1)), StatusCode = 200 };
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Client.Configuration
     {
         public string gRPC { get; set; }
         public string BalancerAddress { get; set; }
+        public string ConnectionString { get; set; }
     }
 }

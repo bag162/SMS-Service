@@ -14,24 +14,28 @@ namespace Client
 {
     public class DIConfigure
     {
-        public static void ConfigureService(IServiceCollection services, IConfiguration Configuration)
+        public static void ConfigureService(IServiceCollection services)
         {
             // gRPC Services
             services.AddTransient<gRPCClient>();
-            services.AddTransient<AccountService>();
+            services.AddTransient<gRPCAccountService>();
+            services.AddTransient<gRPCUserService>();
 
             // Services
-            services.AddScoped<IUserService, DataBase.Data.Services.UserService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthenticateService, AuthenticateService>();
             services.AddScoped<IRoleService, RoleService>();
 
             // Angular Configure
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login"); });
+
             services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                   .AddCookie(options => { options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login"); });
+            services.AddHealthChecks();
         }
 
-        public static void ConfigureDB(IServiceCollection services, IConfiguration Configuration, string connectionString)
+        public static void ConfigureDB(IServiceCollection services, string connectionString)
         {
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Client")));
         }

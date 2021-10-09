@@ -17,11 +17,6 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +45,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Backend.Models.DTO\Backend.Models.csproj" />
     <ProjectReference Include="..\Client.Configuration\Client.Configuration.csproj" />
+    <ProjectReference Include="..\Client.DBInfrastructure\Client.DBInfrastructure.csproj" />
     <ProjectReference Include="..\Client.gRPC\Client.gRPC.csproj" />
     <ProjectReference Include="..\Client.Models\Client.Models.csproj" />
     <ProjectReference Include="..\Client.Service\Client.Service.csproj" />
@@ -72,11 +68,11 @@
   </Target>
 
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
-    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+	  <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build --" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr --" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
-
+	  
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />

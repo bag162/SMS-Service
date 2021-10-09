@@ -8,24 +8,21 @@ using System.Threading.Tasks;
 
 namespace Client.gRPC.Services
 {
-    public class UserService
+    public class gRPCUserService
     {
-        private readonly gRPCClient client;
         private readonly IMapper mapper;
         private readonly gRPCUser.User.UserClient userClient;
 
-        public UserService(gRPCClient client,
-            IMapper mapper,
-            gRPCUser.User.UserClient userClient) {
-            this.client = client;
+        public gRPCUserService(gRPCClient Client, IMapper mapper) 
+        {
             this.mapper = mapper;
-            this.userClient = userClient;
+            userClient = new gRPCUser.User.UserClient(Client.channel);
         }
 
         public async Task<UserModel> CreateUser(UserModel user)
         {
             var response = await userClient.CreateUserAsync(mapper.Map<gRPCUser.UserModel>(user));
-            return mapper.Map<UserModel>(user);
+            return mapper.Map<UserModel>(response);
         }
 
         public async Task<UserModel> UpdateApikey(string idUser)

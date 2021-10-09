@@ -3,13 +3,13 @@ using Backend.Models.DB;
 using System.Collections.Generic;
 namespace Client.gRPC.Services
 {
-    public class AccountService
+    public class gRPCAccountService
     {
         private readonly gRPCClient Client;
         private readonly IMapper mapper;
         private readonly gRPCAccount.Account.AccountClient accountClient;
 
-        public AccountService(gRPCClient client,
+        public gRPCAccountService(gRPCClient client,
             IMapper mapper) {
             this.Client = client;
             this.mapper = mapper;

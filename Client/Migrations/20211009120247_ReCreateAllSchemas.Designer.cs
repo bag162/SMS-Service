@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Client.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20211008224011_ReCreateAllSchemas")]
+    [Migration("20211009120247_ReCreateAllSchemas")]
     partial class ReCreateAllSchemas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -43,23 +43,23 @@ namespace Client.DataBase.Data.Services
             });
         }
 
-        public JsonResult CreateNewUser(RegistrationUserModel user, HttpContext httpContext)
+        public JsonResponseDTO CreateNewUser(RegistrationUserModel user, HttpContext httpContext)
         {
             var checLogin = userContext.Users.AsQueryable().Where(u => u.Login == user.login).FirstOrDefault();
             if (checLogin != null) {
-                return new JsonResult(new JsonResponseDTO
+                return new JsonResponseDTO
                 {
                     success = false,
                     message = "This login is already registered in the system."
-                });
+                };
             }
             var checkEmail = userContext.Users.AsQueryable().Where(u => u.EmailAddress == user.email).FirstOrDefault();
             if (checkEmail != null){
-                return new JsonResult(new JsonResponseDTO
+                return new JsonResponseDTO
                 {
                     success = false,
                     message = "This email is already registered in the system.",
-                });
+                };
             }
 
             // mapper
@@ -78,11 +78,11 @@ namespace Client.DataBase.Data.Services
             {
                 authenticateService.Authenticate(user.login, httpContext);
             }
-            return new JsonResult(new JsonResponseDTO
+            return new JsonResponseDTO
             {
                 success = true,
                 message = "You have successfully registered. You will now be redirected to the control panel."
-            });
+            };
         }
 
         public JsonResult GetUser(string userLogin)

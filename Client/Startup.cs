@@ -22,8 +22,8 @@ namespace Client
         {
             var connectionString = Configuration.GetValue<string>("ConnectionString");
 
-            DIConfigure.ConfigureDB(services, Configuration, connectionString);
-            DIConfigure.ConfigureService(services, Configuration);
+            DIConfigure.ConfigureDB(services, connectionString);
+            DIConfigure.ConfigureService(services);
 
             services.Configure<ConfigurationClass>(Configuration);
 
