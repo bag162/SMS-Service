@@ -39,7 +39,7 @@ namespace Client.Areas.Authorization.Controllers
             var result = userService.CreateNewUser(user, HttpContext);
             if (result.success == true)
             {
-                await gRPCUserService.CreateUser(new Backend.Models.DB.UserModel() { Balance = 0, Login = user.login });
+                await gRPCUserService.CreateUser(new Backend.Models.DB.UserModel() { Balance = 0, Login = user.login, ApiKey = "no", Id = "no" });
             }
             // TODO: Register user on tarantool
             return new JsonResult(result);
