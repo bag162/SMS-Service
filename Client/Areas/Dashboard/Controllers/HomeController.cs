@@ -10,6 +10,7 @@ using System.Text.Json;
 using Client.Infrastructure;
 using Client.Models.DTO;
 using Client.gRPC.Services;
+using AutoMapper;
 
 namespace Client.Areas.Home.Controllers
 {
@@ -19,19 +20,33 @@ namespace Client.Areas.Home.Controllers
         private readonly IUserService userService;
         private readonly IOptions<ConfigurationClass> config;
         private readonly gRPCUserService gRPCUserService;
+        private readonly IMapper mapper;
+
         public HomeController(IUserService userRepository,
             IOptions<ConfigurationClass> config,
-            gRPCUserService gRPCUserService) {
+            gRPCUserService gRPCUserService,
+            IMapper mapper) 
+        {
             userService = userRepository;
             this.config = config;
             this.gRPCUserService = gRPCUserService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         [Route("cp/user")]
         public async Task<JsonResult> UserInfo()
         {
-            return userService.GetUser(User.Identity.Name);
+            var userClient = userService.GetUser(User.Identity.Name);
+            if (userClient == null)
+            {
+                return new JsonResult(new JsonResponseDTO() { success = false });
+            }
+
+            var userBackend = gRPCUserService.GetUserByLogin(User.Identity.Name);
+
+            await mapper.Map(userClient, userBackend);
+            return new JsonResult(userBackend);
         }
 
         [HttpGet]
@@ -42,7 +57,7 @@ namespace Client.Areas.Home.Controllers
             return new JsonResult(response);
         }
 
-        [HttpPut]
+        [HttpGet]
         [Route("cp/apikey")]
         public async Task<JsonResult> UpdateApiKey()
         {

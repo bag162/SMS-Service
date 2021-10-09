@@ -7,7 +7,7 @@
             <input [(ngModel)]="apiKey" type="text" class="form-control" id="copyInputApiKey" readonly>
             <div class="input-group-append" id="button-addon4">
                 <button class="btn btn-primary" type="button" onclick="CopyTextInInputField('copyInputApiKey')">Copy</button>
-                <button class="btn btn-danger" type="button" disabled>Update</button>
+                <button class="btn btn-danger" type="button" (click)="UpdateApiKey()">Update</button>
             </div>
         </div>
     </div>

@@ -7,19 +7,23 @@ using Client.DataBase.Data.Contexts;
 using Client.Infrastructure;
 using System.Linq;
 using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
+using Client.Models.DTO;
 
 namespace Client.DataBase.Data.Services
 {
     public class UserService : IUserService
     {
         private readonly UserContext userContext;
+        private readonly IMapper mapper;
         private readonly IAuthenticateService authenticateService;
         public UserService(
             UserContext context, 
-            IAuthenticateService authenticateRepository)
+            IAuthenticateService authenticateRepository,
+            IMapper mapper)
         {
             this.userContext = context;
             this.authenticateService = authenticateRepository;
+            this.mapper = mapper;
         }
 
         public JsonResult ChangePassword(string oldpassword, string newpassword, string login)
@@ -85,24 +89,14 @@ namespace Client.DataBase.Data.Services
             };
         }
 
-        public JsonResult GetUser(string userLogin)
+        public UserInfoDTO GetUser(string userLogin)
         {
             UserEntity user = userContext.Users
                 .AsQueryable()
                 .Where(u => u.Login == userLogin)
                 .FirstOrDefault();
-            if (user == null)
-            {
-                return new JsonResult(new JsonResponseDTO
-                {
-                    success = false
-                });
-            }
-            return new JsonResult(new
-            {
-                success = true,
-                data = user
-            });
+
+            return mapper.Map<UserInfoDTO>(user);
         }
 
         public JsonResult LoginUser(LoginUserModel user, HttpContext httpContext)

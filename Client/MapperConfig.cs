@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Client.DataBase.Contexts;
+using Client.Models.DTO;
 using gRPCAccount;
 using gRPCUser;
 
@@ -13,6 +15,9 @@ namespace Client
 
             CreateMap<Backend.Models.DB.UserModel, UserModel>();
             CreateMap<UserModel, Backend.Models.DB.UserModel>();
+
+            CreateMap<UserInfoDTO, UserEntity>();
+            CreateMap<UserEntity, UserInfoDTO>();
         }
     }
 }

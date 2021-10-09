@@ -34,6 +34,10 @@ namespace Backend.Implemantation.Services
         {
             return userRepository.Find(apiKey, (int)UserTFields.apikey, bucket).Result.FirstOrDefault();
         }
+        public UserModel GetUserByLogin(string login, int bucket = 2000)
+        {
+            return userRepository.Find(login, (int)UserTFields.login, bucket).Result.First();
+        }
 
         public async Task<UserModel> UpdateApiKey(string login, int bucket = 2000)
         {

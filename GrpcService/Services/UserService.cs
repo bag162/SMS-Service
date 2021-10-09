@@ -37,5 +37,10 @@ namespace GrpcService.Services
             return mapper.Map<UserModel>(updatedUser);
         }
 
+        public override async Task<UserModel> GetUserByLogin(ReqUserByLoginModel request, ServerCallContext context)
+        {
+            var user = userService.GetUserByLogin(request.Login);
+            return mapper.Map<UserModel>(user);
+        }
     }
 }

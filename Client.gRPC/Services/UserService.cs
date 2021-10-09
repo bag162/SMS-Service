@@ -30,5 +30,11 @@ namespace Client.gRPC.Services
             var response = await userClient.UpdateApiKeyAsync(new gRPCUser.UpdateApiKeyModel() { Login = login });
             return mapper.Map<UserModel>(response);
         }
+
+        public async Task<UserModel> GetUserByLogin(string login)
+        {
+            var response = await userClient.GetUserByLoginAsync(new gRPCUser.ReqUserByLoginModel() { Login = login });
+            return mapper.Map<UserModel>(response);
+        }
     }
 }

@@ -7,6 +7,7 @@ package user;
 service User {
   rpc CreateUser (UserModel) returns (UserModel);
   rpc UpdateApiKey (UpdateApiKeyModel) returns (UserModel);
+  rpc GetUserByLogin (ReqUserByLoginModel) returns (UserModel);
 }
 
 
@@ -21,5 +22,9 @@ message UserModel {
 }
 
 message UpdateApiKeyModel{
+	string Login = 1;
+}
+
+message ReqUserByLoginModel{
 	string Login = 1;
 }
