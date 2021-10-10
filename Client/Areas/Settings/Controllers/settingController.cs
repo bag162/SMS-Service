@@ -32,7 +32,7 @@ namespace Client.Areas.Settings.Controllers
         [Produces("application/json")]
         public JsonResult UpdateUserInfo([FromBody] UpdateUserInfoModel user)
         {
-            UserEntity userEntiy = new UserEntity() { EmailAddress = user.EmailAddress, Telegram = user.Telegram, Username = user.Username, Login = User.Identity.Name };
+            UserEntity userEntiy = new UserEntity() { EmailAddress = user.EmailAddress, Telegram = user.Telegram, Name = user.Name, Login = User.Identity.Name };
             return userService.UpdateUserInfo(userEntiy);
         }
     }

@@ -37,16 +37,17 @@ namespace Client.Areas.Home.Controllers
         [Route("cp/user")]
         public async Task<JsonResult> UserInfo()
         {
-            var userClient = userService.GetUser(User.Identity.Name);
-            if (userClient == null)
+            var userInfo = userService.GetUser(User.Identity.Name);
+            if (userInfo == null)
             {
                 return new JsonResult(new JsonResponseDTO() { success = false });
             }
 
-            var userBackend = gRPCUserService.GetUserByLogin(User.Identity.Name);
+            var userBackend = await gRPCUserService.GetUserByLogin(User.Identity.Name);
+            userInfo.ApiKey = userBackend.ApiKey;
+            userInfo.Balance = userBackend.Balance;
 
-            await mapper.Map(userClient, userBackend);
-            return new JsonResult(userBackend);
+            return new JsonResult(new {success = true, data = userInfo }); // TODO: данные не совмещаются
         }
 
         [HttpGet]

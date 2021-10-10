@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Client.Areas.Authorization.Models
 {
-    public class RegistrationUserModel
+    public class RegUserDTO
     {
         public string login { get; set; }
         public string email { get; set; }

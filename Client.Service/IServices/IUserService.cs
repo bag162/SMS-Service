@@ -9,7 +9,7 @@ namespace Client.Database.Data.Repository
 {
     public interface IUserService
     {
-        public JsonResponseDTO CreateNewUser(RegistrationUserModel user, HttpContext httpContext);
+        public JsonResponseDTO CreateNewUser(RegUserDTO user, HttpContext httpContext);
         public JsonResult LoginUser(LoginUserModel user, HttpContext httpContext);
         public UserInfoDTO GetUser(string userLogin);
         public JsonResult ChangePassword(string oldpassword, string newpassword, string login);

@@ -19,7 +19,7 @@ export class UpdatePropertiesComponent {
     ngOnInit() {
         this.updatedUserInfo.EmailAddress = this.userInfo.user.emailAddress
         this.updatedUserInfo.Telegram = this.userInfo.user.telegram
-        this.updatedUserInfo.Username = this.userInfo.user.username
+        this.updatedUserInfo.Name = this.userInfo.user.name
     }
 
     public updateUserInfo() {

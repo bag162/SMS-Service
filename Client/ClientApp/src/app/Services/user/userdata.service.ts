@@ -25,11 +25,13 @@ export class UserInfoService {
                     userInfo.authorized = true;
                     userInfo.id = Data.data.id;
                     userInfo.login = Data.data.login;
-                    userInfo.username = Data.data.username;
+                    userInfo.name = Data.data.name;
                     userInfo.password = Data.data.password;
                     userInfo.emailAddress = Data.data.emailAddress;
                     userInfo.telegram = Data.data.telegram;
                     userInfo.idrole = Data.data.idRole;
+                    
+                    
                 }
             });
         return userInfo;
@@ -37,9 +39,9 @@ export class UserInfoService {
 }
 
 export class UserInfoModel {
-    public id: number
+    public id: string
     public login: string
-    public username: string
+    public name: string
     public password: string
     public emailAddress: string
     public apiKey: string

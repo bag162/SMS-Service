@@ -47,7 +47,7 @@ namespace Client.DataBase.Data.Services
             });
         }
 
-        public JsonResponseDTO CreateNewUser(RegistrationUserModel user, HttpContext httpContext)
+        public JsonResponseDTO CreateNewUser(RegUserDTO user, HttpContext httpContext)
         {
             var checLogin = userContext.Users.AsQueryable().Where(u => u.Login == user.login).FirstOrDefault();
             if (checLogin != null) {
@@ -65,15 +65,7 @@ namespace Client.DataBase.Data.Services
                     message = "This email is already registered in the system.",
                 };
             }
-
-            // mapper
-            var registraionUserMapConfig = new MapperConfiguration(cfg => cfg.CreateMap<RegistrationUserModel, UserEntity>()
-            .ForMember("EmailAddress", opt => opt.MapFrom(c => c.email))
-            .ForMember("Username", opt => opt.MapFrom(c => c.name))
-            );
-            var registrationUserMapper = new Mapper(registraionUserMapConfig);
-            UserEntity addedUser = registrationUserMapper.Map<UserEntity>(user);
-            // end mapper
+            UserEntity addedUser = mapper.Map<UserEntity>(user);
 
             addedUser.IdRole = 1;
             userContext.Users.Add(addedUser);
@@ -134,7 +126,7 @@ namespace Client.DataBase.Data.Services
             UserEntity newUser = userContext.Users.FirstOrDefault(x => x.Login == user.Login);
             newUser.EmailAddress = user.EmailAddress;
             newUser.Telegram = user.Telegram;
-            newUser.Username = user.Username;
+            newUser.Name = user.Name;
             userContext.Users.Update(newUser);
             userContext.SaveChanges();
             return new JsonResult(new JsonResponseDTO

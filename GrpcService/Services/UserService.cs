@@ -12,14 +12,12 @@ namespace GrpcService.Services
 {
     public class UserService : User.UserBase
     {
-        private readonly ILogger<UserService> logger;
         private readonly IMapper mapper;
         private readonly IUserService userService;
 
-        public UserService(ILogger<UserService> logger,
+        public UserService(
             IMapper mapper,
             IUserService userService) {
-            this.logger = logger;
             this.mapper = mapper;
             this.userService = userService;
         }
@@ -34,12 +32,20 @@ namespace GrpcService.Services
         public override async Task<UserModel> UpdateApiKey(UpdateApiKeyModel request, ServerCallContext context)
         {
             var updatedUser = await userService.UpdateApiKey(request.Login);
+            if (updatedUser == null)
+            {
+                return null;
+            }
             return mapper.Map<UserModel>(updatedUser);
         }
 
         public override async Task<UserModel> GetUserByLogin(ReqUserByLoginModel request, ServerCallContext context)
         {
             var user = userService.GetUserByLogin(request.Login);
+            if (user == null)
+            {
+                return null;
+            }
             return mapper.Map<UserModel>(user);
         }
     }

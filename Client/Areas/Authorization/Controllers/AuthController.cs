@@ -34,7 +34,7 @@ namespace Client.Areas.Authorization.Controllers
         [Route("auth/register")]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<JsonResult> Register([FromBody] RegistrationUserModel user)
+        public async Task<JsonResult> Register([FromBody] RegUserDTO user)
         {
             var result = userService.CreateNewUser(user, HttpContext);
             if (result.success == true)

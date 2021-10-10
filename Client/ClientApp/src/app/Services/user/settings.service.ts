@@ -44,6 +44,6 @@ export class SettingUserService {
 export class UpdatedUserInfo {
     public EmailAddress: string;
     public Telegram: string;
-    public Username: string;
+    public Name: string;
 
 }
