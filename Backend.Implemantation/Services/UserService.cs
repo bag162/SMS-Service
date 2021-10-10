@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Backend.TarantoolDB.Repositories;
 using static Backend.TarantoolDB.Repositories.UserRepository;
 using System;
+using System.Text;
 
 namespace Backend.Implemantation.Services
 {
@@ -19,12 +20,13 @@ namespace Backend.Implemantation.Services
 
         private readonly UserRepository userRepository;
         private readonly IServicePricesService pricesService;
-        static Random randomGenerator = new Random();
+        static Random random = new();
+        const string accessSymbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
         public async Task<UserModel> CreateUser(UserModel user, int bucket = 2000)
         {
             var createdUser = user;
-            createdUser.ApiKey = GenerateRandomString(100);
+            createdUser.ApiKey = GenerateRandomString(30);
             createdUser.Id = Guid.NewGuid().ToString();
             createdUser.Bucket = 2000;
             return await userRepository.Create(createdUser);
@@ -52,7 +54,7 @@ namespace Backend.Implemantation.Services
         public async Task<UserModel> UpdateApiKey(string login, int bucket = 2000)
         {
             var user = userRepository.Find(login, (int)UserTFields.login, bucket).Result.First();
-            user.ApiKey = GenerateRandomString(100);
+            user.ApiKey = GenerateRandomString(30);
             return await userRepository.Update(user);
         }
 
@@ -69,15 +71,18 @@ namespace Backend.Implemantation.Services
         {
             UserModel user = userRepository.Find(userId, 1, bucket).Result.FirstOrDefault();
             user.Balance += price;
-            userRepository.Update(user);
+            await userRepository.Update(user);
             return;
         }
 
         internal static string GenerateRandomString(int length)
         {
-            byte[] randomBytes = new byte[randomGenerator.Next(length)];
-            randomGenerator.NextBytes(randomBytes);
-            return Convert.ToBase64String(randomBytes);
+            StringBuilder sb = new StringBuilder(length - 1);
+            for (int i = 0; i < length; i++)
+            {
+                sb.Append(accessSymbols[random.Next(0, accessSymbols.Length - 1)]);
+            }
+            return sb.ToString();
         }
     }
 }

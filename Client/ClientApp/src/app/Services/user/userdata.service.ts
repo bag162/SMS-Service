@@ -30,10 +30,11 @@ export class UserInfoService {
                     userInfo.emailAddress = Data.data.emailAddress;
                     userInfo.telegram = Data.data.telegram;
                     userInfo.idrole = Data.data.idRole;
-                    
-                    
+                    userInfo.apiKey = Data.data.apiKey
                 }
             });
+            console.log(userInfo.apiKey);
+            
         return userInfo;
     }
 }

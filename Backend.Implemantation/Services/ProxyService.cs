@@ -36,7 +36,7 @@ namespace Backend.Implemantation.Services
         {
             var updatedProxy = proxy;
             updatedProxy.Status = (int)ProxyStatus.InActive;
-            proxyRepository.Update(updatedProxy, (int)proxy.Bucket);
+            await proxyRepository.Update(updatedProxy, (int)proxy.Bucket);
             return;
         }
         public async Task SetValidProxyAsync(ProxyModel proxy, string externalIp)
@@ -48,7 +48,7 @@ namespace Backend.Implemantation.Services
             }
             newProxy.LasteTimeActive = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             newProxy.ExternalIp = externalIp;
-            proxyRepository.Update(newProxy, (int)proxy.Bucket);
+            await proxyRepository.Update(newProxy, (int)proxy.Bucket);
             return;
         }
     }
